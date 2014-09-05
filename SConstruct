@@ -40,15 +40,21 @@ env.Append(CPPPATH = ['../framework/'])
 
 #i can't find a better way to do this
 def copyanything(src, dst):
-	subprocess.check_call(['rsync','-r',src,dst])
-	
+	subprocess.check_call(['rsync','-r','-i',src,dst])
+
+print("Copying Files...")	
 copyanything(srcs,build+"program/")
 copyanything(libs+framework_name+srcs,build+"framework/")
 
+print("Building Library...")
 #build the library
 library_objects = SConscript(build+'framework/'+SConscript_name, exports = 'env')
 env.Library(bins + 'framework',library_objects)
 
+#build wiringPi
+SConscript(libs+"WiringPi/"+SConscript_name,exports='env')
+
+print("Building Program...")
 #actually build the program
 program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
 env.Program(target = 'robot_program',source=program_objects,libs=[bins +'framework'],variant_dir=build+"program")
