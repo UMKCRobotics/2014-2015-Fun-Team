@@ -18,16 +18,19 @@ Release Build:
 #Team Song
 
     (Speaking Part)
-    Spongebob:  It's not about winning, it's about fun!
-    Plankton:   What's that?
-    Spongebob:  Fun is when you...fun is...it' like...it's kinda...sorta like a...
-                What is fun?? HERE...Let me spell it for you!
+    Spongebob:  
+        It's not about winning, it's about fun!
+    Plankton:   
+        What's that?
+    Spongebob:  
+        Fun is when you...fun is...it' like...it's kinda...sorta like a...
+        What is fun?? HERE...Let me spell it for you!
     Spongebob: 
-                F is for Friends who do stuff together.
-                U is for You and me.
-                N is for Anywhere and anytime at all.
+        F is for Friends who do stuff together.
+        U is for You and me.
+        N is for Anywhere and anytime at all.
     Sea Creatures: 
-                Down here in the deep blue sea!
+        Down here in the deep blue sea!
     Plankton: 
         F is for Fire that burns down the whole town.
         U is for URANIUM...BOMBS!
