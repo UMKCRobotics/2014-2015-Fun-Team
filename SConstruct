@@ -22,19 +22,13 @@ env.Append(CCFLAGS=flags)
 env.VariantDir('build/','src/',duplicate=0) 
 
 
-#files for the framework library
-framework_files = "./2014-2015-Framework/lib/*.cpp"
-
-#build the library 
-env.Library('framework',Glob(framework_files))
-#files for the specific build.
-#NOTE: in order to use a different directory for the build ouput you 
-#actually have to specify the files are from there
-build_files = "./build/*.cpp"
-files = Glob(build_files)
-
 #add the cpp path
-env.Append(CPPPATH = ['./2014-2015-Framework/lib'])
+#env.Append(CPPPATH = ['./2014-2015-Framework/lib'])
+
+#build the library
+SConscript('lib/2014-2015-Framework/Sconscript',
+	exports = 'env')
 
 #actually build the program
-env.Program('robot_program',files,libs=['framework'])
+SConscript('src/SConscript',
+	exports = 'env')
