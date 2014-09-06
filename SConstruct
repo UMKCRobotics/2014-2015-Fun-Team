@@ -51,9 +51,6 @@ print("Building Library...")
 library_objects = SConscript(build+'framework/'+SConscript_name, exports = 'env')
 env.Library(bins + 'framework',library_objects)
 
-#build wiringPi
-SConscript(libs+"WiringPi/"+SConscript_name,exports='env')
-
 print("Building Program...")
 #actually build the program
 program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
