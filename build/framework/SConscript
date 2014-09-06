@@ -1,5 +1,6 @@
 import os
-Import ('env')
+
+Import('env')
 
 
 def recursiveGlob(dir,filter_predicate):
@@ -8,16 +9,22 @@ def recursiveGlob(dir,filter_predicate):
         dir should be a string of the directory you want to traverse
         ex: lambda a: a.endswith("*cpp")
         '''
-        matches = []
-        for root, dirnames, filenames in os.walk(dir):
-                filtered_matches = filter(filter_predicate,filenames)
-                for filename in filtered_matches:
-                        matches.append(Glob(os.path.join(root,filename)))
-	return matches
+	matches = []
+    	for root, dirnames, filenames in os.walk(dir):
+		filtered_names = filter(filter_predicate,filenames)
+       	 	for filename in filtered_names:
+            		matches.append(File(os.path.join(root, filename)))
+    		return matches		
 
+#recursively traverse this dir and find files with .cpp in them
 files = recursiveGlob('.', lambda a: ".cpp" in a)
-print("Files in framework")
+
+#uncomment these if the build system breaks
+print("Project files")
 print(files)
+
+#create objects from these
 objs = env.Object(files)
 
+#return those objecst
 Return('objs')

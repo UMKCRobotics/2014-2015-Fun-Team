@@ -19,3 +19,7 @@
 *.exe
 *.out
 *.app
+
+build/framework/*
+build/gpio/*
+build/program/*
