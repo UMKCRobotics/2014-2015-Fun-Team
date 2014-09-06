@@ -17,7 +17,7 @@ def recursiveGlob(dir,filter_predicate):
     		return matches		
 
 #recursively traverse this dir and find files with .cpp in them
-files = recursiveGlob('.', lambda a: ".cpp" in a)
+files = recursiveGlob('.', lambda a: ".cpp" in a or ".c" in a)
 
 #uncomment these if the build system breaks
 print("Project files")
