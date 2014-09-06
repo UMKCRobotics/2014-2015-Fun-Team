@@ -1,0 +1,5 @@
+Import('env')
+
+objs = env.Object('gpio.c')
+
+Return('objs')

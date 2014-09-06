@@ -15,6 +15,7 @@ libs = "lib/"
 build = "build/"
 SConscript_name = "SConscript"
 framework_name = "2014-2015-Framework/"
+gpio_lib_name = "BeagleBone-GPIO/"
 
 #the default flags for all builds
 flags = "-Wall "
@@ -25,33 +26,30 @@ if GetOption('r'):
 	flags += "-O3"
 env.Append(CCFLAGS=flags)
 
-#setting the output dir to be build instead, 
-#also making it so it doesn't copy the files
-#library_build_dir = build + 'framework/'
-#env.VariantDir(library_build_dir,libs+framework_name+srcs)
-
-#program_build_dir = build + 'program/'
-#env.VariantDir(program_build_dir,'src') 
-
-
 #add the cpp path
-env.Append(CPPPATH = ['../framework/'])
+env.Append(CPPPATH = ['../framework/','../gpio/'])
 
 
 #i can't find a better way to do this
 def copyanything(src, dst):
 	subprocess.check_call(['rsync','-r','-i',src,dst])
 
-print("Copying Files...")	
-copyanything(srcs,build+"program/")
-copyanything(libs+framework_name+srcs,build+"framework/")
+if not GetOption("clean"):
+	print("Copying Files...")	
+	copyanything(srcs,build+"program/")
+	copyanything(libs+framework_name+srcs,build+"framework/")
+	copyanything(libs+gpio_lib_name+srcs,build+"gpio/")
 
 print("Building Library...")
 #build the library
 library_objects = SConscript(build+'framework/'+SConscript_name, exports = 'env')
 env.Library(bins + 'framework',library_objects)
 
+print("Building GPIO library...")
+gpio_library_objects = SConscript(build+"gpio/"+SConscript_name,exports='env')
+env.Library(bins + "gpio", gpio_library_objects)
+
 print("Building Program...")
 #actually build the program
 program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
-env.Program(target = 'robot_program',source=program_objects,libs=[bins +'framework'],variant_dir=build+"program")
+env.Program(target = 'robot_program',source=program_objects,libs=[bins +'framework',bins+'gpio'],variant_dir=build+"program")
