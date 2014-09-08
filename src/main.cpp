@@ -1,6 +1,11 @@
 #include "Cardinal.h"
-#include <wiringPi.h>
+#include "ConfigManager.h"
+#include "RobotState.h"
+#include "gpio.h"
+
 int main(void){
-	Cardinal c = EAST;
+	Configuration* config = ConfigurationFactory::constructBlankConfig();
+	RobotState* robot = new RobotState(config);
+	init();
 	return 0;
 }

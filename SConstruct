@@ -16,6 +16,10 @@ build = "build/"
 SConscript_name = "SConscript"
 framework_name = "2014-2015-Framework/"
 gpio_lib_name = "BeagleBone-GPIO/"
+build_dirs 	= [build+"program/",build+"framework/",build+"gpio/"]
+src_dirs	= [srcs,libs+framework_name+srcs,libs+gpio_lib_name+srcs]
+
+zipped_dirs = zip(src_dirs,build_dirs)
 
 #the default flags for all builds
 flags = "-Wall "
@@ -34,22 +38,31 @@ env.Append(CPPPATH = ['../framework/','../gpio/'])
 def copyanything(src, dst):
 	subprocess.check_call(['rsync','-r','-i',src,dst])
 
+def deleteFilesOfType(dir,type):
+	subprocess.check_call(['find',dir,"-name","*"+type,"-delete"])
+
+def deleteRecursivelyUnderDir(dir):
+	subprocess.check_call(['rm','-rf',dir+"/*"])
+
 if not GetOption("clean"):
 	print("Copying Files...")	
-	copyanything(srcs,build+"program/")
-	copyanything(libs+framework_name+srcs,build+"framework/")
-	copyanything(libs+gpio_lib_name+srcs,build+"gpio/")
+	map(lambda zip: copyanything(*zip), zipped_dirs)
+	deleteFilesOfType("build",".swp")
+
+if GetOption("clean"):
+	map(deleteRecursivelyUnderDir,build_dirs)
+	
 
 print("Building Library...")
 #build the library
 library_objects = SConscript(build+'framework/'+SConscript_name, exports = 'env')
-env.Library(bins + 'framework',library_objects)
+env.Library(bins+'framework',library_objects)
 
 print("Building GPIO library...")
 gpio_library_objects = SConscript(build+"gpio/"+SConscript_name,exports='env')
-env.Library(bins + "gpio", gpio_library_objects)
+env.Library(bins+"gpio", gpio_library_objects)
 
 print("Building Program...")
 #actually build the program
 program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
-env.Program(target = 'robot_program',source=program_objects,libs=[bins +'framework',bins+'gpio'],variant_dir=build+"program")
+env.Program(target = 'robot_program',source=program_objects,libs=['framework','gpio'],variant_dir=build+"program",LIBPATH=bins)

@@ -1,3 +1,6 @@
+
+#ifndef CONFIGURATION_H 
+#define CONFIGURATION_H
 struct Configuration{
 	int phase;
 	int round;
@@ -11,5 +14,6 @@ struct Configuration{
 class ConfigurationFactory{
 	public:
 		virtual Configuration* createConfiguration() = 0;
-		Configuration* constructBlankConfig();
+		static Configuration* constructBlankConfig();
 };
+#endif
