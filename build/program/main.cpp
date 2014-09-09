@@ -1,11 +1,12 @@
 #include "Cardinal.h"
 #include "ConfigManager.h"
 #include "RobotState.h"
-#include "gpio.h"
+#include "GPIOManager.h"
+#include "GPIOConst.h"
 
 int main(void){
 	Configuration* config = ConfigurationFactory::constructBlankConfig();
 	RobotState* robot = new RobotState(config);
-	init();
+	GPIO::GPIOManager* gp = GPIO::GPIOManager::getInstance();
 	return 0;
 }

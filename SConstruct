@@ -15,7 +15,7 @@ libs = "lib/"
 build = "build/"
 SConscript_name = "SConscript"
 framework_name = "2014-2015-Framework/"
-gpio_lib_name = "BeagleBone-GPIO/"
+gpio_lib_name = "BeagleBoneBlack-GPIO/"
 build_dirs 	= [build+"program/",build+"framework/",build+"gpio/"]
 src_dirs	= [srcs,libs+framework_name+srcs,libs+gpio_lib_name+srcs]
 
@@ -65,4 +65,4 @@ env.Library(bins+"gpio", gpio_library_objects)
 print("Building Program...")
 #actually build the program
 program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
-env.Program(target = 'robot_program',source=program_objects,libs=['framework','gpio'],variant_dir=build+"program",LIBPATH=bins)
+env.Program(target = 'robot_program',source=program_objects,LIBS=['framework','gpio'],variant_dir=build+"program",LIBPATH=bins)

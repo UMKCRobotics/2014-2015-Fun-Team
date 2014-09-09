@@ -4,3 +4,6 @@
 [submodule "lib/BeagleBone-GPIO"]
 	path = lib/BeagleBone-GPIO
 	url = https://github.com/UMKCRobotics/BeagleBone-GPIO
+[submodule "lib/BeagleBoneBlack-GPIO"]
+	path = lib/BeagleBoneBlack-GPIO
+	url = https://github.com/UMKCRobotics/BeagleBoneBlack-GPIO
