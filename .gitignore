@@ -20,6 +20,9 @@
 *.out
 *.app
 
+#scons
+*.dblite
+
 build/framework/*
 build/gpio/*
 build/program/*

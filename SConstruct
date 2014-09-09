@@ -3,7 +3,11 @@ import subprocess
 #add debug and release builds
 AddOption('--d',action='store_true',help='build a debug build',default=False)
 AddOption('--r',action='store_true',help='build a release build',default=False)
+AddOption('--g',action='store_true',help='fetch newest from git and build that',default=False)
 
+if GetOption('g'):
+	subprocess.check_call(['git','fetch'])
+	subprocess.check_call(['git','submodule','foreach','git','fetch'])
 
 #Sets up an environment object
 env = Environment()
