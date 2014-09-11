@@ -18,10 +18,14 @@ srcs = "src/"
 libs = "lib/"
 build = "build/"
 SConscript_name = "SConscript"
+
+	
 framework_name = "2014-2015-Framework/"
 gpio_lib_name = "BeagleBoneBlack-GPIO/"
-build_dirs 	= [build+"program/",build+"framework/",build+"gpio/"]
-src_dirs	= [srcs,libs+framework_name+srcs,libs+gpio_lib_name+srcs]
+DMCC_lib_name = "DMCC_Library/"
+
+build_dirs 	= [build+"program/",build+"framework/",build+"gpio/",build+"dmcc/"]
+src_dirs	= [srcs,libs+framework_name+srcs,libs+gpio_lib_name+srcs,libs+DMCC_lib_name+srcs]
 
 zipped_dirs = zip(src_dirs,build_dirs)
 
@@ -35,7 +39,7 @@ if GetOption('r'):
 env.Append(CCFLAGS=flags)
 
 #add the cpp path
-env.Append(CPPPATH = ['../framework/','../gpio/'])
+env.Append(CPPPATH = ['../framework/','../gpio/','../dmcc'])
 
 
 #i can't find a better way to do this
@@ -66,7 +70,11 @@ print("Building GPIO library...")
 gpio_library_objects = SConscript(build+"gpio/"+SConscript_name,exports='env')
 env.Library(bins+"gpio", gpio_library_objects)
 
+print("Building DMCC library...")
+dmcc_objs = SConscript(build+'dmcc/'+SConscript_name,exports='env')
+env.Library(bins+"dmcc",dmcc_objs)
+
 print("Building Program...")
 #actually build the program
 program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
-env.Program(target = 'robot_program',source=program_objects,LIBS=['framework','gpio'],variant_dir=build+"program",LIBPATH=bins)
+env.Program(target = 'robot_program',source=program_objects,LIBS=['framework','gpio','dmcc'],LIBPATH=bins)

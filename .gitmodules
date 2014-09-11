@@ -7,3 +7,6 @@
 [submodule "lib/BeagleBoneBlack-GPIO"]
 	path = lib/BeagleBoneBlack-GPIO
 	url = https://github.com/UMKCRobotics/BeagleBoneBlack-GPIO
+[submodule "lib/DMCC_Library"]
+	path = lib/DMCC_Library
+	url = https://github.com/UMKCRobotics/DMCC_Library
