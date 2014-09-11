@@ -12,7 +12,6 @@ if GetOption('g'):
 	subprocess.check_call(['git','submodule','foreach','git','fetch'])
 
 
-
 ##SETTING UP COLORS
 colors = {}
 colors['cyan']   = '\033[96m'
@@ -97,7 +96,7 @@ env.Append(CPPPATH = ['../framework/','../gpio/','../dmcc'])
 
 
 #i can't find a better way to do this
-def copyanything(src, dst):
+def copyanytree(src, dst):
 	subprocess.check_call(['rsync','-r','-i',src,dst])
 
 def deleteFilesOfType(dir,type):
@@ -108,7 +107,7 @@ def deleteRecursivelyUnderDir(dir):
 
 if not GetOption("clean"):
 	print("Copying Files...")	
-	map(lambda zip: copyanything(*zip), zipped_dirs)
+	map(lambda zip: copyanytree(*zip), zipped_dirs)
 	deleteFilesOfType("build",".swp")
 
 if GetOption("clean"):
