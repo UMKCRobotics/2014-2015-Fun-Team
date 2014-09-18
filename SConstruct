@@ -62,7 +62,53 @@ env = Environment(
 )
 ##END COLORIZER
 
+class Buildable:
+	bins = "bins/"
+	srcs = "src/"
+	libs = "lib/"
+	build = "build/"
+	SConscript_name = "SConscript"
 
+	class Type:
+		Program = 1
+		Library = 2
+				
+
+	def __init__(self,name,src_dir,type,env):
+		self.name = name
+		self.src_dir = src_dir
+		self.type = type
+		self.env = env
+		self.build_dir = build+src_dir
+	
+	def build(self):
+		self.build_link([])
+
+	def build_link(self,link_with):
+		self.build_link_custom(self.build_dir+"/"+SConscript_name,link_with)
+
+	def build_link_custom(self,scons_file_name, link_with):
+		self._copy_to_build_dir()	
+		objs = SConscript(self.build_dir + scons_file_name,exports = 'env')
+		if self.type == Buildable.Type.Program:
+			self.build_output = bins+self.name
+			env.Program(self.name,source=objs,LIBS=link_with,LIBPATH=bins)
+		if self.type == Buildable.Type.Library:
+			self.build_output = bins+self.name
+			env.Library(self.build_output,source=objs)
+
+	def _copy_to_build_dir(self,):
+		def copyanytree(src, dst):
+			subprocess.check_call(['rsync','-r','-i',src,dst])
+		copyanytree(self.src_dir,self.build_dir)
+
+	def clean():
+		def deleteRecursivelyUnderDir(dir):
+			subprocess.check_call(['rm','-rf',dir+"/*"])
+		deleteRecursivelyUnderDir(self.build_dir)
+
+			
+	
 #Sets up an environment object
 
 #define some directories and common files
@@ -76,6 +122,9 @@ SConscript_name = "SConscript"
 framework_name = "2014-2015-Framework/"
 gpio_lib_name = "BeagleBoneBlack-GPIO/"
 DMCC_lib_name = "DMCC_Library/"
+
+framework = Buildable("2014-2015-Framework","lib/2014-2015-Framework/src",Buildable.Type.Program,env)
+framework.build()
 
 build_dirs 	= [build+"program/",build+"framework/",build+"gpio/",build+"dmcc/"]
 src_dirs	= [srcs,libs+framework_name+srcs,libs+gpio_lib_name+srcs,libs+DMCC_lib_name+srcs]
