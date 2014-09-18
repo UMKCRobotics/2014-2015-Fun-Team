@@ -1,0 +1,12 @@
+[submodule "lib/2014-2015-Framework"]
+	path = lib/2014-2015-Framework
+	url = https://github.com/UMKCRobotics/2014-2015-Framework
+[submodule "lib/BeagleBone-GPIO"]
+	path = lib/BeagleBone-GPIO
+	url = https://github.com/UMKCRobotics/BeagleBone-GPIO
+[submodule "lib/BeagleBoneBlack-GPIO"]
+	path = lib/BeagleBoneBlack-GPIO
+	url = https://github.com/UMKCRobotics/BeagleBoneBlack-GPIO
+[submodule "lib/DMCC_Library"]
+	path = lib/DMCC_Library
+	url = https://github.com/UMKCRobotics/DMCC_Library
