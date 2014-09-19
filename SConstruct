@@ -61,77 +61,62 @@ env = Environment(
   JAVACCOMSTR = compile_source_message
 )
 ##END COLORIZER
+bins = "bins/"
 
-class Buildable:
-	bins = "bins/"
-	srcs = "src/"
-	libs = "lib/"
-	build = "build/"
-	SConscript_name = "SConscript"
-
-	class Type:
-		Program = 1
-		Library = 2
-				
-
-	def __init__(self,name,src_dir,type,env):
+class ProgramBuilder:
+	def __init__(self, name, src_dir,env):
 		self.name = name
 		self.src_dir = src_dir
-		self.type = type
+		self.object_creator = ObjectCreator(src_dir)
 		self.env = env
-		self.build_dir = build+src_dir
-	
 	def build(self):
 		self.build_link([])
+	def build_link(self,libs):
+		self.env.Program(self.name,self.object_creator.get_objects(),LIBS=libs,LIBPATH=bins)
+	def clean(self):
+		self.object_creator.clean()
+class LibraryBuilder:
+	def __init__(self,name,src_dir,env):
+		self.name = name
+		self.src_dir =src_dir
+		self.object_creator = ObjectCreator(src_dir)
+		self.env = env
+	def build(self):
+		self.env.Append(CPPPATH = ['../'+self.src_dir])
+		self.env.Library(self.name,self.object_creator.get_objects())
+	def clean(self):
+		self.object_creator.clean()
 
-	def build_link(self,link_with):
-		self.build_link_custom(self.build_dir+"/"+SConscript_name,link_with)
 
-	def build_link_custom(self,scons_file_name, link_with):
-		self._copy_to_build_dir()	
-		objs = SConscript(self.build_dir + scons_file_name,exports = 'env')
-		if self.type == Buildable.Type.Program:
-			self.build_output = bins+self.name
-			env.Program(self.name,source=objs,LIBS=link_with,LIBPATH=bins)
-		if self.type == Buildable.Type.Library:
-			self.build_output = bins+self.name
-			env.Library(self.build_output,source=objs)
+class ObjectCreator:
+	build = "build/"
+	def __init__(self,src_dir):
+		self.src_dir = src_dir
+		self.build_dir = ObjectCreator.build + src_dir
+	
+	def get_objects(self):
+		return self.get_objects_alt_scons("SConscript")
 
-	def _copy_to_build_dir(self,):
+	def get_objects_alt_scons(self,scons_file):
+		self._copy_to_build_dir()
+		return SConscript(self.build_dir+scons_file,exports='env')
+
+	def _copy_to_build_dir(self):
+		def make_build_dir(dir):
+			subprocess.check_call(["mkdir","--parents",dir])
 		def copyanytree(src, dst):
-			subprocess.check_call(['rsync','-r','-i',src,dst])
-		copyanytree(self.src_dir,self.build_dir)
-
-	def clean():
+			subprocess.check_call(['rsync','-i','-r',src,dst])
+		make_build_dir(self.build_dir)
+		copyanytree(self.src_dir ,self.build_dir)
+	def clean(self):
 		def deleteRecursivelyUnderDir(dir):
 			subprocess.check_call(['rm','-rf',dir+"/*"])
 		deleteRecursivelyUnderDir(self.build_dir)
 
-			
-	
+
+
 #Sets up an environment object
 
-#define some directories and common files
-bins = "bins/"
-srcs = "src/"
-libs = "lib/"
-build = "build/"
-SConscript_name = "SConscript"
-
-	
-framework_name = "2014-2015-Framework/"
-gpio_lib_name = "BeagleBoneBlack-GPIO/"
-DMCC_lib_name = "DMCC_Library/"
-
-framework = Buildable("2014-2015-Framework","lib/2014-2015-Framework/src",Buildable.Type.Program,env)
-framework.build()
-
-build_dirs 	= [build+"program/",build+"framework/",build+"gpio/",build+"dmcc/"]
-src_dirs	= [srcs,libs+framework_name+srcs,libs+gpio_lib_name+srcs,libs+DMCC_lib_name+srcs]
-
-zipped_dirs = zip(src_dirs,build_dirs)
-
-#the default flags for all builds
 flags = "-Wall "
 #set up some differences between debug and release
 if GetOption('d'):
@@ -140,43 +125,30 @@ if GetOption('r'):
 	flags += "-O3"
 env.Append(CCFLAGS=flags)
 
-#add the cpp path
-env.Append(CPPPATH = ['../framework/','../gpio/','../dmcc'])
 
 
-#i can't find a better way to do this
-def copyanytree(src, dst):
-	subprocess.check_call(['rsync','-r','-i',src,dst])
 
-def deleteFilesOfType(dir,type):
-	subprocess.check_call(['find',dir,"-name","*"+type,"-delete"])
+framework = LibraryBuilder(bins+'framework',"lib/2014-2015-Framework/src/",env)
+gpio = LibraryBuilder(bins+'gpio',"lib/BeagleBoneBlack-GPIO/src/",env)
+dmcc = LibraryBuilder(bins+'dmcc','./lib/DMCC_Library/src/',env)
 
-def deleteRecursivelyUnderDir(dir):
-	subprocess.check_call(['rm','-rf',dir+"/*"])
+program = ProgramBuilder('robot_program','src/',env)
 
-if not GetOption("clean"):
-	print("Copying Files...")	
-	map(lambda zip: copyanytree(*zip), zipped_dirs)
-	deleteFilesOfType("build",".swp")
+
 
 if GetOption("clean"):
-	map(deleteRecursivelyUnderDir,build_dirs)
+	subprocess.check_call(['rm','-rf',bins])
+	subprocess.check_call(['rm','-rf',"build/"])
 	
 
-print("Building Library...")
-#build the library
-library_objects = SConscript(build+'framework/'+SConscript_name, exports = 'env')
-env.Library(bins+'framework',library_objects)
 
-print("Building GPIO library...")
-gpio_library_objects = SConscript(build+"gpio/"+SConscript_name,exports='env')
-env.Library(bins+"gpio", gpio_library_objects)
+if not GetOption("clean"):
+	print('Building FRAMEWORK...')
+	framework.build()
+	print('Building GPIO...')
+	gpio.build()
+	print('Building DMCC...')
+	dmcc.build()
+	print('Building PROGRAM...')
+	program.build_link(['framework','gpio','dmcc'])
 
-print("Building DMCC library...")
-dmcc_objs = SConscript(build+'dmcc/'+SConscript_name,exports='env')
-env.Library(bins+"dmcc",dmcc_objs)
-
-print("Building Program...")
-#actually build the program
-program_objects = SConscript(build+'program/'+SConscript_name, exports= 'env')
-env.Program(target = 'robot_program',source=program_objects,LIBS=['framework','gpio','dmcc'],LIBPATH=bins)
