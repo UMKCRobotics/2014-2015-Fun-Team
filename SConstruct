@@ -73,8 +73,6 @@ class ProgramBuilder:
 		self.build_link([])
 	def build_link(self,libs):
 		self.env.Program(self.name,self.object_creator.get_objects(),LIBS=libs,LIBPATH=bins)
-	def clean(self):
-		self.object_creator.clean()
 class LibraryBuilder:
 	def __init__(self,name,src_dir,env):
 		self.name = name
@@ -84,8 +82,6 @@ class LibraryBuilder:
 	def build(self):
 		self.env.Append(CPPPATH = ['../'+self.src_dir])
 		self.env.Library(self.name,self.object_creator.get_objects())
-	def clean(self):
-		self.object_creator.clean()
 
 
 class ObjectCreator:
@@ -108,10 +104,6 @@ class ObjectCreator:
 			subprocess.check_call(['rsync','-i','-r',src,dst])
 		make_build_dir(self.build_dir)
 		copyanytree(self.src_dir ,self.build_dir)
-	def clean(self):
-		def deleteRecursivelyUnderDir(dir):
-			subprocess.check_call(['rm','-rf',dir+"/*"])
-		deleteRecursivelyUnderDir(self.build_dir)
 
 
 
