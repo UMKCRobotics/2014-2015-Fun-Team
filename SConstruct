@@ -72,6 +72,7 @@ class ProgramBuilder:
 	def build(self):
 		self.build_link([])
 	def build_link(self,libs):
+		print(" I am " + self.name + " " + str(libs))
 		self.env.Program(self.name,self.object_creator.get_objects(),LIBS=libs,LIBPATH=bins)
 class LibraryBuilder:
 	def __init__(self,name,src_dir,env):
@@ -126,13 +127,21 @@ dmcc = LibraryBuilder(bins+'dmcc','./lib/DMCC_Library/src/',env)
 
 program = ProgramBuilder('robot_program','src/',env)
 
+#incoming hacky stuff to make openCV link
+OPENCV_FLAGS=subprocess.check_output(['pkg-config','--cflags','opencv'])
+OPENCV_LIBS=subprocess.check_output(['pkg-config','--libs-only-l','opencv'])
+OPENCV_LIBPATH=subprocess.check_output(['pkg-config','--libs-only-L','opencv'])
+env.Append(CCFLAGS=OPENCV_FLAGS)
+env.Append(LIBPATH=OPENCV_FLAGS)
 
+#this is a mess but it needs to be this way because i haev no better way for
+#string manipulation
+OPENCV_FORMATTED_LIBS = map(lambda a:  a[2:],OPENCV_LIBS.split(" ")[:-2])
+#openCV hacky linking over
 
 if GetOption("clean"):
 	subprocess.check_call(['rm','-rf',bins])
 	subprocess.check_call(['rm','-rf',"build/"])
-	
-
 
 if not GetOption("clean"):
 	print('Building FRAMEWORK...')
@@ -141,6 +150,8 @@ if not GetOption("clean"):
 	gpio.build()
 	print('Building DMCC...')
 	dmcc.build()
+	print('Building OPENCV...')
+	#env.SConscript("lib/openCV-sconsbuilder/SConscript",exports='env')
 	print('Building PROGRAM...')
-	program.build_link(['framework','gpio','dmcc'])
+	program.build_link(['framework','gpio','dmcc','tesseract']+OPENCV_FORMATTED_LIBS)
 
