@@ -4,9 +4,9 @@
 [submodule "lib/BeagleBone-GPIO"]
 	path = lib/BeagleBone-GPIO
 	url = https://github.com/UMKCRobotics/BeagleBone-GPIO
-[submodule "lib/BeagleBoneBlack-GPIO"]
-	path = lib/BeagleBoneBlack-GPIO
-	url = https://github.com/UMKCRobotics/BeagleBoneBlack-GPIO
 [submodule "lib/DMCC_Library"]
 	path = lib/DMCC_Library
 	url = https://github.com/UMKCRobotics/DMCC_Library
+[submodule "lib/BlackLib"]
+	path = lib/BlackLib
+	url = https://github.com/UMKCRobotics/BlackLib
