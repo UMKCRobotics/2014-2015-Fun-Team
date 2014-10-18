@@ -139,7 +139,7 @@ if GetOption('ocv'):
 
 	#this is a mess but it needs to be this way because i haev no better way for
 	#string manipulation
-	OPENCV_FORMATTED_LIBS = map(lambda a:  a[2:],OPENCV_LIBS.split(" ")[:-2]) + 'tesseract'
+	OPENCV_FORMATTED_LIBS = map(lambda a:  a[2:],OPENCV_LIBS.split(" ")[:-2]) + ['tesseract']
 	#openCV hacky linking over
 
 if GetOption("clean"):

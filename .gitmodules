@@ -10,3 +10,6 @@
 [submodule "lib/BlackLib"]
 	path = lib/BlackLib
 	url = https://github.com/UMKCRobotics/BlackLib
+[submodule "dummy/2014-2015-Fun-Team-Dummy"]
+	path = dummy/2014-2015-Fun-Team-Dummy
+	url = https://github.com/UMKCRobotics/2014-2015-Fun-Team-Dummy
