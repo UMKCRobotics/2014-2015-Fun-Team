@@ -6,6 +6,7 @@ import sys
 AddOption('--d',action='store_true',help='build a debug build',default=False)
 AddOption('--r',action='store_true',help='build a release build',default=False)
 AddOption('--g',action='store_true',help='fetch newest from git and build that',default=False)
+AddOption('--ocv',action='store_true',help='build with opencv',default=False)
 
 if GetOption('g'):
 	subprocess.check_call(['git','fetch'])
@@ -110,7 +111,7 @@ class ObjectCreator:
 
 #Sets up an environment object
 
-flags = "-Wall "
+flags = "-Wall -std=c++11"
 #set up some differences between debug and release
 if GetOption('d'):
 	flags += "-g"
@@ -122,22 +123,24 @@ env.Append(CCFLAGS=flags)
 
 
 framework = LibraryBuilder(bins+'framework',"lib/2014-2015-Framework/src/",env)
-gpio = LibraryBuilder(bins+'gpio',"lib/BeagleBoneBlack-GPIO/src/",env)
+blacklib = LibraryBuilder(bins+'blacklib',"lib/BlackLib/src/",env)
 dmcc = LibraryBuilder(bins+'dmcc','./lib/DMCC_Library/src/',env)
 
 program = ProgramBuilder('robot_program','src/',env)
 
-#incoming hacky stuff to make openCV link
-OPENCV_FLAGS=subprocess.check_output(['pkg-config','--cflags','opencv'])
-OPENCV_LIBS=subprocess.check_output(['pkg-config','--libs-only-l','opencv'])
-OPENCV_LIBPATH=subprocess.check_output(['pkg-config','--libs-only-L','opencv'])
-env.Append(CCFLAGS=OPENCV_FLAGS)
-env.Append(LIBPATH=OPENCV_FLAGS)
+OPENCV_FORMATTED_LIBS = []
+if GetOption('ocv'):
+	#incoming hacky stuff to make openCV link
+	OPENCV_FLAGS=subprocess.check_output(['pkg-config','--cflags','opencv'])
+	OPENCV_LIBS=subprocess.check_output(['pkg-config','--libs-only-l','opencv'])
+	OPENCV_LIBPATH=subprocess.check_output(['pkg-config','--libs-only-L','opencv'])
+	env.Append(CCFLAGS=OPENCV_FLAGS)
+	env.Append(LIBPATH=OPENCV_FLAGS)
 
-#this is a mess but it needs to be this way because i haev no better way for
-#string manipulation
-OPENCV_FORMATTED_LIBS = map(lambda a:  a[2:],OPENCV_LIBS.split(" ")[:-2])
-#openCV hacky linking over
+	#this is a mess but it needs to be this way because i haev no better way for
+	#string manipulation
+	OPENCV_FORMATTED_LIBS = map(lambda a:  a[2:],OPENCV_LIBS.split(" ")[:-2]) + 'tesseract'
+	#openCV hacky linking over
 
 if GetOption("clean"):
 	subprocess.check_call(['rm','-rf',bins])
@@ -146,12 +149,10 @@ if GetOption("clean"):
 if not GetOption("clean"):
 	print('Building FRAMEWORK...')
 	framework.build()
-	print('Building GPIO...')
-	gpio.build()
+	print('Building BLACKLIB...')
+	blacklib.build()
 	print('Building DMCC...')
 	dmcc.build()
-	print('Building OPENCV...')
-	#env.SConscript("lib/openCV-sconsbuilder/SConscript",exports='env')
 	print('Building PROGRAM...')
-	program.build_link(['framework','gpio','dmcc','tesseract']+OPENCV_FORMATTED_LIBS)
+	program.build_link(['framework','blacklib','dmcc']+OPENCV_FORMATTED_LIBS)
 
