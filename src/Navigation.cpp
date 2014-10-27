@@ -1,8 +1,8 @@
 #include "Navigation.h"
 
-Navigation::Navigation()
+Navigation::Navigation(Configuration* config) : config(config)
 {
-	;
+	//TODO: Check if filelocation is readable?
 }
 
 void Navigation::updateMap(RobotState current_state, Cardinal dir)
@@ -15,16 +15,15 @@ Cardinal Navigation::getCardinalToNextNode(RobotState current_state)
 	return map[current_state.currentNode];
 }
 
-void storeCriticalPath()
+void Navigation::storeCriticalPath()
 {
 	
 }
 
-bool inFinalNode()
+bool Navigation::inFinalNode(RobotState* state)
 {
-	
+	return state->currentNode == config->endNode;
 }
-
 
 
 
