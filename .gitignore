@@ -26,3 +26,7 @@
 build/framework/*
 build/gpio/*
 build/program/*
+
+*.pyc
+
+arduino/*/.build/*
