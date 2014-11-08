@@ -16,7 +16,7 @@ class Navigation
 	void updateMap(RobotState current_state, Cardinal dir);
 	void loadPath();
 	Cardinal getCardinalToNextNode(RobotState current_state);
-	void storeCriticalPath();
+	void storePath();
 	bool inFinalNode(RobotState* state);
 	
 	private:
