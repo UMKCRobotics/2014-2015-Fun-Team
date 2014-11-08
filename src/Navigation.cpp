@@ -19,32 +19,59 @@ Cardinal Navigation::getCardinalToNextNode(RobotState current_state)
 
 void Navigation::storePath()
 {
+	applyToFileStream([&](fstream& file){
+				for(int i=0; i<50; ++i){
+					file << indexToChar(i);
+				}
+			});
 }
 
 void Navigation::loadPath(){
-	applyToFileStream([&](fstream file){
+	applyToFileStream([&](fstream& file){
 				for(int i = 0; i < 50; ++i){
-					Cardinal tmp;
+					char tmp;
 					file >> tmp;
-					map[i] = tmp;
+					map[i] = charToCardinal(tmp);
 				}
-			}
+			});
 }
 
-
-
-
-void applyToFileStream(void f(fstream file)){
+template<typename Func>
+void Navigation::applyToFileStream(Func f){
 	fstream file(fileLocation);
 	if(!file){
 		Logger::logError("Navigation couldn't open file!");
 	}
 	f(file);
+}
 
 bool Navigation::inFinalNode(RobotState* state)
 {
 	return state->currentNode == config->endNode;
 }
-
+char Navigation::indexToChar(int i){
+	switch(map[i]){
+		case NORTH:
+			return 'n';
+		case SOUTH:
+			return 's';
+		case WEST:	
+			return 'w';
+		case EAST:
+			return 'e';
+	}
+}
+Cardinal Navigation::charToCardinal(char c){
+	switch(c){
+		case 'n':
+			return Cardinal::NORTH;
+		case 's':
+			return Cardinal::SOUTH;
+		case 'e':
+			return Cardinal::EAST;
+		case 'w':
+			return Cardinal::WEST;
+	}
+}
 
 

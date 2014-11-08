@@ -23,8 +23,11 @@ class Navigation
 	Cardinal map[50];
 	const string fileLocation = "/tmp/robot/navigation.txt";
 	Configuration* config;
-	
-	
+	char indexToChar(int i);
+	Cardinal charToCardinal(char c);
+
+	template<typename Func>
+	void applyToFileStream(Func f);
 	
 };
 
