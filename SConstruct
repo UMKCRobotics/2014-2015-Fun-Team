@@ -1,6 +1,7 @@
 import subprocess
 import os
 import sys
+from SConsExtensions import *
 
 #add debug and release builds
 AddOption('--d',action='store_true',help='build a debug build',default=False)
@@ -11,57 +12,39 @@ AddOption('--ocv',action='store_true',help='build with opencv',default=False)
 if GetOption('g'):
 	subprocess.check_call(['git','fetch'])
 	subprocess.check_call(['git','submodule','foreach','git','fetch'])
+env = Environment()
+getColorEnvironment(env)
 
+#Sets up an environment object
 
-##SETTING UP COLORS
-colors = {}
-colors['cyan']   = '\033[96m'
-colors['purple'] = '\033[95m'
-colors['blue']   = '\033[94m'
-colors['green']  = '\033[92m'
-colors['yellow'] = '\033[93m'
-colors['red']    = '\033[91m'
-colors['end']    = '\033[0m'
+flags = "-Wall -std=c++11"
+#set up some differences between debug and release
+if GetOption('d'):
+	flags += "-g"
+if GetOption('r'):
+	flags += "-O3"
+env.Append(CCFLAGS=flags)
 
-#If the output is not a terminal, remove the colors
-if not sys.stdout.isatty():
-   for key, value in colors.iteritems():
-      colors[key] = ''
+class ObjectCreator:
+	build = "build/"
+	def __init__(self,src_dir):
+		self.src_dir = src_dir
+		self.build_dir = ObjectCreator.build + src_dir
+	
+	def get_objects(self):
+		return self.get_objects_alt_scons("SConscript")
 
-compile_source_message = '%sCompiling %s \t\t\t ==> %s$SOURCE%s' % \
-   (colors['blue'], colors['purple'], colors['yellow'], colors['end'])
+	def get_objects_alt_scons(self,scons_file):
+		self._copy_to_build_dir()
+		return SConscript(self.build_dir+scons_file,exports='env')
 
-compile_shared_source_message = '%sCompiling shared %s \t==> %s$SOURCE%s' % \
-   (colors['blue'], colors['purple'], colors['yellow'], colors['end'])
-
-link_program_message = '%sLinking Program %s \t\t ==> %s$TARGET%s' % \
-   (colors['red'], colors['purple'], colors['yellow'], colors['end'])
-
-link_library_message = '%sLinking Static Library %s \t ==> %s$TARGET%s' % \
-   (colors['red'], colors['purple'], colors['yellow'], colors['end'])
-
-ranlib_library_message = '%sRanlib Library %s \t\t ==> %s$TARGET%s' % \
-   (colors['red'], colors['purple'], colors['yellow'], colors['end'])
-
-link_shared_library_message = '%sLinking Shared Library %s \t ==> %s$TARGET%s' % \
-   (colors['red'], colors['purple'], colors['yellow'], colors['end'])
-
-java_library_message = '%sCreating Java Archive %s \t ==> %s$TARGET%s' % \
-   (colors['red'], colors['purple'], colors['yellow'], colors['end'])
-
-env = Environment(
-  CXXCOMSTR = compile_source_message,
-  CCCOMSTR = compile_source_message,
-  SHCCCOMSTR = compile_shared_source_message,
-  SHCXXCOMSTR = compile_shared_source_message,
-  ARCOMSTR = link_library_message,
-  RANLIBCOMSTR = ranlib_library_message,
-  SHLINKCOMSTR = link_shared_library_message,
-  LINKCOMSTR = link_program_message,
-  JARCOMSTR = java_library_message,
-  JAVACCOMSTR = compile_source_message
-)
-##END COLORIZER
+	def _copy_to_build_dir(self):
+		def make_build_dir(dir):
+			subprocess.check_call(["mkdir","--parents",dir])
+		def copyanytree(src, dst):
+			subprocess.check_call(['rsync','-i','-r',src,dst])
+		make_build_dir(self.build_dir)
+		copyanytree(self.src_dir ,self.build_dir)
 bins = "bins/"
 
 class ProgramBuilder:
@@ -84,41 +67,6 @@ class LibraryBuilder:
 	def build(self):
 		self.env.Append(CPPPATH = ['../'+self.src_dir])
 		self.env.Library(self.name,self.object_creator.get_objects())
-
-
-class ObjectCreator:
-	build = "build/"
-	def __init__(self,src_dir):
-		self.src_dir = src_dir
-		self.build_dir = ObjectCreator.build + src_dir
-	
-	def get_objects(self):
-		return self.get_objects_alt_scons("SConscript")
-
-	def get_objects_alt_scons(self,scons_file):
-		self._copy_to_build_dir()
-		return SConscript(self.build_dir+scons_file,exports='env')
-
-	def _copy_to_build_dir(self):
-		def make_build_dir(dir):
-			subprocess.check_call(["mkdir","--parents",dir])
-		def copyanytree(src, dst):
-			subprocess.check_call(['rsync','-i','-r',src,dst])
-		make_build_dir(self.build_dir)
-		copyanytree(self.src_dir ,self.build_dir)
-
-
-
-#Sets up an environment object
-
-flags = "-Wall -std=c++11"
-#set up some differences between debug and release
-if GetOption('d'):
-	flags += "-g"
-if GetOption('r'):
-	flags += "-O3"
-env.Append(CCFLAGS=flags)
-
 
 
 
@@ -155,4 +103,7 @@ if not GetOption("clean"):
 	dmcc.build()
 	print('Building PROGRAM...')
 	program.build_link(['framework','blacklib','dmcc']+OPENCV_FORMATTED_LIBS)
+
+
+
 
