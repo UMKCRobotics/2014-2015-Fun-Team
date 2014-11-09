@@ -6,6 +6,9 @@
 #include "Cardinal.h"
 #include "ConfigManager.h"
 
+#ifndef ROBOT_STATE_H
+#define ROBOT_STATE_H
+
 struct RobotState{
 	Cardinal currentDirection;
 	int currentNode;
@@ -14,8 +17,5 @@ struct RobotState{
 		currentDirection = NORTH;
 
 	}
-	RobotState(Configuration* config){
-		currentNode = config->startNode;
-		currentDirection = NORTH;
-	}
 };
+#endif

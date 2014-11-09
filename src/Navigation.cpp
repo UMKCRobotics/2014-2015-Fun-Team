@@ -1,14 +1,20 @@
 #include "Navigation.h"
 #include "Logger.h"
+#include <sstream>
 #include <fstream>
 
 Navigation::Navigation(Configuration* config) : config(config)
 {
+	map[config->startNode] = Cardinal::NORTH;
+
 	//TODO: Check if filelocation is readable?
 }
 
 void Navigation::updateMap(RobotState current_state, Cardinal dir)
 {
+	stringstream ss;
+	ss << "Navigation updated " << current_state.currentNode << " to " << dir;
+	Logger::logMessage(ss.str());
 	map[current_state.currentNode] = dir;
 }
 
@@ -17,8 +23,7 @@ Cardinal Navigation::getCardinalToNextNode(RobotState current_state)
 	return map[current_state.currentNode];
 }
 
-void Navigation::storePath()
-{
+void Navigation::storePath(){
 	applyToFileStream([&](fstream& file){
 				for(int i=0; i<50; ++i){
 					file << indexToChar(i);
@@ -74,4 +79,11 @@ Cardinal Navigation::charToCardinal(char c){
 	}
 }
 
+string Navigation::toString(){
+	stringstream ss;
+	for(int i = 0; i < 50; ++i){
+		ss << map[i] << " ";
+	}
+	return ss.str();
+}
 

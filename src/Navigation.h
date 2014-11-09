@@ -18,6 +18,7 @@ class Navigation
 	Cardinal getCardinalToNextNode(RobotState current_state);
 	void storePath();
 	bool inFinalNode(RobotState* state);
+	string toString();
 	
 	private:
 	Cardinal map[50];
