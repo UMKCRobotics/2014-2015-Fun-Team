@@ -8,7 +8,7 @@ INET_IFACE=tun0
 BB_IFACE=enp0s29u1u2
 
 # Enable DHCP client if not already -- may not be necessary for you.
-dhcp_procs=`ps aux | grep dchp`
+dhcp_procs=`ps aux | grep dhcp`
 if [[ $dhcp_procs != *$BB_IFACE* ]]; then
     dhcpcd $BB_IFACE
 fi
