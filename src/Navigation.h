@@ -27,6 +27,9 @@ class Navigation
 	char indexToChar(int i);
 	Cardinal charToCardinal(char c);
 
+	void logNavigationMessage(string m);
+	void logNavigationError(string m);
+
 	template<typename Func>
 	void applyToFileStream(Func f);
 	

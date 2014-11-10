@@ -13,13 +13,15 @@ Navigation::Navigation(Configuration* config) : config(config)
 void Navigation::updateMap(RobotState current_state, Cardinal dir)
 {
 	stringstream ss;
-	ss << "Navigation updated " << current_state.currentNode << " to " << dir;
+	ss << "Navigation: updated " << current_state.currentNode << " to " << dir;
 	Logger::logMessage(ss.str());
 	map[current_state.currentNode] = dir;
 }
 
 Cardinal Navigation::getCardinalToNextNode(RobotState current_state)
 {
+	stringstream ss;
+	ss << "Navigation: Cardinal to next node " << map[current_state.currentNode];
 	return map[current_state.currentNode];
 }
 
@@ -77,6 +79,7 @@ Cardinal Navigation::charToCardinal(char c){
 		case 'w':
 			return Cardinal::WEST;
 	}
+	Logger::logError("Navigation charToCardinal fed incorrect char");
 }
 
 string Navigation::toString(){
@@ -86,4 +89,9 @@ string Navigation::toString(){
 	}
 	return ss.str();
 }
-
+void Navigation::logNavigationError(string s){
+	Logger::logError("Navigation: " + s);
+}
+void Navigation::logNavigationMessage(string s){
+	Logger::logMessage("Navigation: " + s);
+}

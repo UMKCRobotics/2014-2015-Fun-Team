@@ -7,6 +7,7 @@ using std::cout;
 
 
 int main(void){
+	Logger::standardInit();
 
 	Configuration* config = ConfigurationFactory::constructBlankConfig();
 	config->startNode = 45;
