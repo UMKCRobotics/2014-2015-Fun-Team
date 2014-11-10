@@ -1,3 +1,5 @@
+#ifndef NAVIGATION_h
+#define NAVIGATION_h
 #include "RobotState.h"
 #include "Cardinal.h"
 #include "ConfigManager.h"
@@ -5,8 +7,7 @@
 
 using std::string;
 
-#ifndef NAVIGATION_h
-#define NAVIGATION_h
+
 
 class Navigation
 {
@@ -18,13 +19,15 @@ class Navigation
 	Cardinal getCardinalToNextNode(RobotState current_state);
 	void storePath();
 	bool inFinalNode(RobotState* state);
+	string toString();
 	
 	private:
 	Cardinal map[50];
 	const string fileLocation = "/tmp/robot/navigation.txt";
 	Configuration* config;
-	char indexToChar(int i);
-	Cardinal charToCardinal(char c);
+
+	void logNavigationMessage(string);
+	void logNavigationError(string);
 
 	template<typename Func>
 	void applyToFileStream(Func f);
