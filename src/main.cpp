@@ -4,6 +4,7 @@
 #include "RobotState.h"
 #include "Cardinal.h"
 using std::cout;
+using std::endl;
 
 
 int main(void){
@@ -28,7 +29,7 @@ int main(void){
 	r.currentNode = 48;
 	nav.updateMap(r,Cardinal::SOUTH);
 	
-	cout << nav.toString();
+	cout << nav.toString() << endl;
 	
 
 }
