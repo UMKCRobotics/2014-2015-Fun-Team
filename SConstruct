@@ -17,7 +17,7 @@ getColorEnvironment(env)
 
 #Sets up an environment object
 
-flags = "-Wall -std=c++11"
+flags = "-Wall -std=c++11 "
 #set up some differences between debug and release
 if GetOption('d'):
 	flags += "-g"
