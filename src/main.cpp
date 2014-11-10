@@ -4,9 +4,11 @@
 #include "RobotState.h"
 #include "Cardinal.h"
 using std::cout;
+using std::endl;
 
 
 int main(void){
+	Logger::standardInit();
 
 	Configuration* config = ConfigurationFactory::constructBlankConfig();
 	config->startNode = 45;
@@ -27,7 +29,7 @@ int main(void){
 	r.currentNode = 48;
 	nav.updateMap(r,Cardinal::SOUTH);
 	
-	cout << nav.toString();
+	cout << nav.toString() << endl;
 	
 
 }
