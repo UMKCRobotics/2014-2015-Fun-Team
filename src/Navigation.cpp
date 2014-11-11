@@ -10,7 +10,9 @@ Navigation::Navigation(Configuration* config) : config(config)
 	}
 	map[config->startNode] = Cardinal::NORTH;
 
-	//TODO: Check if filelocation is readable?
+	
+	fstream f(fileLocation);	
+	(f.good())? logNavigationMessage("File at " + fileLocation + " is readable") : logNavigationError("File at " + fileLocation + " is not readable");
 }
 
 void Navigation::updateMap(RobotState current_state, Cardinal dir)
