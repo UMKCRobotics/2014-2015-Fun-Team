@@ -11,7 +11,8 @@ inotifywait --monitor --recursive --event modify,close_write,move,create,delete 
     while read file; do
         echo "Copying and recompiling..."
         rsync -av $LOCAL_DIR $IP:$REMOTE_DIR
-        ssh $IP "cd $REMOTE_DIR/2014-2015-Fun-Team && scons"
+        # ssh $IP "cd $REMOTE_DIR/2014-2015-Fun-Team && scons"
+        ssh $IP "cd $REMOTE_DIR/2014-2015-Fun-Team"
         echo "Done"
         echo ""
     done
