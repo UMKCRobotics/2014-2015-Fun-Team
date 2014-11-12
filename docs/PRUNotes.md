@@ -16,23 +16,30 @@
     * Also `git clone https://github.com/beagleboard/am335x_pru_package.git` for
       `example_apps` folder if wanted.
 * Enable PRU
-    * `echo BB-BONE-PRU-01 > /sys/devices/bone_capemgr.9/slots` **every boot**
+    * **Every boot**: `echo BB-BONE-PRU-01 > /sys/devices/bone_capemgr.9/slots`
     * Persistent alternative: edit `/boot/uboot/dtbs/am335x-boneblack.dtb`.
       Change `status = "disabled";` to `status = "okay";` under `pruss@4a300000`
       line (see element14 link for how-to use `dtc` command).
     * Make sure `lsmod` shows `uio_pruss` is loaded.
 * Test that PRU is setup properly
-    * [download
-      this](http://mythopoeic.org/source-download/pru-helloworld.tar.gz)
+    * [download](http://mythopoeic.org/source-download/pru-helloworld.tar.gz)
     * Remove `pruss/` prefix from include lines in example.c
     * `make`
     * run with `./example`, wait ~5 seconds and it should complete.
 * [Overlay
   setup/usage](http://stackoverflow.com/questions/25388487/beagle-bone-black-pru-device-overlay-for-fast-io-does-not-work)
     * Use kilobaser.com link to generate overlay
-    * **On every boot**: enable in slot i.e. `echo bspm_P8_12_16 >
+    * **Every boot**: enable in slot i.e. `echo bspm_P8_12_16 >
       /sys/devices/bone_capemgr.?/slots`
+    * (NOT WORKING) Alternative: add e.g. `cape_enable=capemgr.enable_partno=bspm_P8_12_16` to
+      `/boot/uboot/uEnv.txt`
     * Verify exported by checking slots file
+* Disable HDMI to free up GPIO pins on P8_27-P8_46 that support fast mode for
+  PRU
+    * (NOT WORKING) Uncomment
+      `cape_disable=capemgr.disable_partno=BB-BONELT-HDMI,BB-BONELT-HDMI` in
+      `/boot/uboot/uEnv.txt`
+    * Alternative: remove HDMI capes from `am335x-boneblack.dtb` (see above).
 
 ## General
 * Pins in regular GPIO mode can be controlled at around 25 mhz max, pins set to

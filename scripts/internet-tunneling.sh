@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Made by Caleb Chase.
 # Purpose: Create a connection over usb for SSH access and bridge to the internet as well.
@@ -23,5 +24,5 @@ iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 # Update beaglebone config.
 route="ip route add default via 192.168.7.1"
 dns="echo nameserver 8.8.8.8 > /etc/resolv.conf"
-set_time="ntpdate pool.ntp.org"
+set_time="ntpdate pool.ntp.org; hwclock --systohc"
 ssh root@192.168.7.2 "$route;$dns;$set_time"
