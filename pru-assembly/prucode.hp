@@ -34,15 +34,6 @@
     SBBO TEMP2_REG, TEMP_REG, 0, 4  // Write to ram (apply change)
 .endm
 
-.macro gpio_dir_in
-.mparam pin, bank
-    MOV TEMP_REG, bank | GPIO_OE_OFFSET  // GPIO_OE address
-    LBBO TEMP2_REG, TEMP_REG, 0, 4  // Load GPIO_OE contents into TEMP2_REG
-    CLR TEMP2_REG, pin  // Set to output by clearing bit
-    SBBO TEMP2_REG, TEMP_REG, 0, 4  // Write to ram (apply change)
-.endm
-
-
 .macro set_gpio
 // Pins: 32-bit value of pins to set for GPIO bank stored at GPIO_ADDR_REG.
 // E.G. GPIO_ADDR_REG set to GPIO2 and pins = (1 << 16) | (1 << 14) sets
