@@ -41,6 +41,20 @@
       `/boot/uboot/uEnv.txt`
     * Alternative: remove HDMI capes from `am335x-boneblack.dtb` (see above).
 
+## Controlling GPIO via memory
+* [Reference](http://vabi-robotics.blogspot.com/2013/10/register-access-to-gpios-of-beaglebone.html)
+* Base GPIO addresses: `0x44E07000` (GPIO0), `0x4804C000` (GPIO1), `0x481AC000`
+  (GPIO2), `0x481AF000` (GPIO3)
+* GPIO_OE register controls assignment between input or output. Offset (from
+  base address) is `0x134`
+    * 1 = Input, 0 = Output
+    * Example: Setting 28th bit of `0x4804C134` to 0 makes GPIO1_28 (P9_12) an
+      output.
+* **Important:** GPIO0, 2, and 3 clocks must be enabled in order to work. Export
+  any pin on that bank within Linux to do so.
+    * E.G. `echo 65 > /sys/class/gpio/export` for GPIO2.
+    * Tip: add that line to `/etc/rc.local`.
+
 ## General
 * Pins in regular GPIO mode can be controlled at around 25 mhz max, pins set to
   PRU GPI or PRU GPO can be controlled at the full 200 mhz speed of the PRU's.
