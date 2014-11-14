@@ -1,0 +1,59 @@
+#define LOOP_REG r0
+#define TEMP_REG r1
+#define TEMP2_REG r2
+
+#define RAM_ADDR_REG r29
+#define GPIO_ADDR_REG r28
+#define OE_REG r27
+#define GPIO_DATA_REG r26
+
+#define PRU0_ARM_INTERRUPT 19
+#define PRU1_ARM_INTERRUPT 20
+
+#define GPIO0_ADDR 0x44E07000
+#define GPIO1_ADDR 0x4804C000
+#define GPIO2_ADDR 0x481AC000
+#define GPIO3_ADDR 0x481AF000
+#define GPIO_OE_OFFSET 0x134
+#define GPIO_DATAOUT_OFFSET 0x13C
+#define GPIO_DATAIN_OFFSET 0x138
+
+#define P8_36 16  // AKA gpio2_16
+#define P8_37 14  // AKA gpio2_14
+#define P8_38 15  // AKA gpio2_15
+
+// ***********
+// MACROS
+// ***********
+// Set GPIO pin to output, i.e. gpio_dir_out 16 GPIO2_ADDR would set gpio2_16 out.
+.macro gpio_dir_out
+.mparam pin, bank
+    MOV TEMP_REG, bank | GPIO_OE_OFFSET  // GPIO_OE address
+    LBBO TEMP2_REG, TEMP_REG, 0, 4  // Load GPIO_OE contents into TEMP2_REG
+    CLR TEMP2_REG, pin  // Set to output by clearing bit
+    SBBO TEMP2_REG, TEMP_REG, 0, 4  // Write to ram (apply change)
+.endm
+
+.macro set_gpio
+// Pins: 32-bit value of pins to set for GPIO bank stored at GPIO_ADDR_REG.
+// E.G. GPIO_ADDR_REG set to GPIO2 and pins = (1 << 16) | (1 << 14) sets
+// GPIO2_16 (P8_36) and GPIO2_14 (P8_37) high, all others in GPIO2 low.
+.mparam pins
+    MOV GPIO_DATA_REG, pins
+    SBBO GPIO_DATA_REG, GPIO_ADDR_REG, 0, 4
+.endm
+
+.macro delay_micros
+.mparam microseconds
+    // 2 cycle loop at 5 nanos/cycle each = 100 iterations per microsecond, but
+    // these 2 instructions take up time too.
+    MOV TEMP_REG, 99
+    MOV TEMP2_REG, microseconds
+    MICROS:
+        SUB TEMP_REG, TEMP_REG, 1
+        QBNE MICROS, TEMP_REG, 0
+    VAR:  // Loop for passed number of microseconds.
+        MOV TEMP_REG, 99  // Should be 98.5, but close enough.
+        SUB TEMP2_REG, TEMP2_REG, 1
+        QBNE MICROS, TEMP2_REG, 0
+.endm
