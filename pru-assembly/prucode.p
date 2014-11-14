@@ -7,7 +7,7 @@
 // CHARGE: set all high, wait, set all low
 // Set outputs to high
 // Loop: wait 10 micros
-// Set outputs low
+// DON'T set low
 //
 // READ: (reset counts/loop), read pins, incr. each counter if high, loop until all low
 // Read inputs
@@ -27,12 +27,22 @@ INIT:
     MOV GPIO_ADDR_REG, GPIO2_ADDR | GPIO_DATAOUT_OFFSET
     MOV LOOP_REG, 100000000
 
+    set_gpio (1 << P8_38)
+
 LOOP_TOGGLE_OUT:
     // Set high
     set_gpio (1 << P8_38)
 
     // Set low
     set_gpio 0
+
+    gpio_dir_out P8_38, GPIO2_ADDR
+
+    // Set input
+    MOV GPIO_ADDR_REG, GPIO2_ADDR | GPIO_OE_OFFSET
+    LBBO OE_REG, GPIO_ADDR_REG, 0, 4
+    SET OE_REG, P8_38
+    SBBO OE_REG, GPIO_ADDR_REG, 0, 4
 
     // Loop
     SUB LOOP_REG, LOOP_REG, 1
@@ -42,10 +52,7 @@ INIT_READ:
     MOV R31.b0, PRU1_ARM_INTERRUPT+16
 
     // Set pin to input.
-    MOV GPIO_ADDR_REG, GPIO2_ADDR | GPIO_OE_OFFSET
-    LBBO OE_REG, GPIO_ADDR_REG, 0, 4
-    SET OE_REG, P8_38
-    SBBO OE_REG, GPIO_ADDR_REG, 0, 4
+    gpio_dir_in P8_38, GPIO2_ADDR
 
     MOV GPIO_ADDR_REG, GPIO2_ADDR | GPIO_DATAIN_OFFSET  // Store GPIO input address.
     MOV RAM_ADDR_REG, 0  // Store data ram address (0) for communication with host.
