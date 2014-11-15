@@ -14,18 +14,18 @@ class FunMotorController{
 		void turnLeft();
 		void turnRight();
 		void turnAround();
+		/*
+		 * Given a current direction and a direction in which to
+		 * turn, phsyically turn the robot 
+		 *
+		 * @param: current - The current direction of the robot
+		 * @param: toFace - The direction which the robot should turn to face
+		 */
+		void turn(Cardinal current,Cardinal toFace);
 	public:
 		FunMotorController();
 		~FunMotorController();
-		/*
-		 * Given a robot state with a current direction and a direction in which to
-		 * turn, phsyically turn the robot and return a new robotstate which has the robot turned that way
-		 *
-		 * @param: Robotstate - The current state of the robot
-		 * @param: Cardinal - The direction which the robot should turn to face
-		 * @return A robot state representing the robot after the turn
-		 */
-		RobotState turn(RobotState,Cardinal);
+
 		/**
 		 * Given a robot state with a current position and a direction which to move in
 		 * phsyically move the robot and return the updated robot state
