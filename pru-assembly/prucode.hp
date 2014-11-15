@@ -21,6 +21,8 @@
 #define P8_36 16  // AKA gpio2_16
 #define P8_37 14  // AKA gpio2_14
 #define P8_38 15  // AKA gpio2_15
+#define P9_12 28 // gpio1
+#define P9_15 16 // gpio1
 
 // ***********
 // MACROS
