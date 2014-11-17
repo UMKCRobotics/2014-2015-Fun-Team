@@ -22,6 +22,13 @@ class FunMotorController{
 		 * @param: toFace - The direction which the robot should turn to face
 		 */
 		void turn(Cardinal current,Cardinal toFace);
+		/*
+		 * Applys function Func until Predicate returns true.
+		 *
+		 * Usage is to do something like move forward until all three sensors read true
+		 */
+		template<typename Predicate, typename Func>
+		void applyFuncUntilPredicate(Predicate p, Func f);
 	public:
 		FunMotorController();
 		~FunMotorController();
