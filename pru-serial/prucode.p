@@ -3,18 +3,22 @@
 
 #include "prucode.hp"
 
-// *** LINE SENSOR ALGORITHM ***
-// CHARGE: set all high, wait, set all low
-// Set outputs to high
-// Loop: wait 10 micros
-// DON'T set low
-//
-// READ: (reset counts/loop), read pins, incr. each counter if high, loop until all low
-// Read inputs
-// if input i(n) is high, increment counter c(n), set doLoop to 1
-// repeat read if doLoop == 1 (QBGT doLoop 0)
-//
-// SEND: write all read counters to ram
+// UART serial protocol:
+// - 1 start bit (low)
+// - 8 data bits
+// - 1 stop bit (high)
+// Falling edge of stop bit = beginning of start bit.
+// At 115200 baud, 1 bit = 8681 nanoseconds = 1736 clock cycles at 200 mhz.
+
+// Wait for end of stop/beginning of start bit (high -> low edge)
+// Delay 1.5x bit rate
+// Loop 8x:
+//      Read data pin
+//      Shift into register
+// Store newly read byte -- to second pru or directly to ram?
+
+// Note: RAM writes (SBBO) should be 2-8 cycles depending on saturation,
+// Read (LBBO) is around 33 cycles... I think.
 
 INIT:
     // Enable OCP socket for communication with host/DDRAM
@@ -22,42 +26,29 @@ INIT:
     CLR  r0, r0, 4
     SBCO r0, C4, 4, 4
 
-    MOV RAM_ADDR_REG, 0  // Store data ram address (0) for communication with host.
-    // Flush ram value
-    MOV LOOP_REG, 1337
-    SBBO LOOP_REG, RAM_ADDR_REG, 0, 4
-    // gpio_dir_out P8_38, GPIO2_ADDR
-    // set_gpio 0
+    // Store data ram address (0) for communication with host.
+    MOV RAM_ADDR_REG, 0
 
+MAIN_LOOP:
+    MOV LOOP_REG, 0  // Initialize data loop counter.
+    MOV DATA_REG, 0  // Reset byte storage.
 
-CHARGE:
-    MOV GPIO_ADDR_REG, GPIO2_ADDR | GPIO_DATAOUT_OFFSET
-    gpio_dir_out P8_38, GPIO2_ADDR
-    set_gpio (1 << P8_38)  // Set high
-    delay_micros 30  // Wait for capacitor to charge
-    // set_gpio 0
+START_BIT:
+    QBBS START_BIT, r31.RX_PIN  // Wait for beginning of start bit (high -> low).
+    delay DELAY_AFTER_START  // Delay until middle of first data bit.
 
-// WAIT_HIGH:  // Temporary use for testing
-    // LBBO GPIO_DATA_REG, GPIO_ADDR_REG, 0, 4
-    // QBBC WAIT_HIGH,  GPIO_DATA_REG, P8_38
+DATA_BIT:
+    // Only set DATA_REG bit if DATA_PIN is high.
+    QBBC DATA_BIT_2, r31.RX_PIN
+    SET DATA_REG, LOOP_REG
 
-INIT_READ:
-    MOV LOOP_REG, 0  // For input time counting
-    MOV GPIO_ADDR_REG, GPIO2_ADDR | GPIO_DATAIN_OFFSET  // Store GPIO input address.
-    gpio_dir_in P8_38, GPIO2_ADDR  // Set to input
-
-LOOP_READ_IN:
+DATA_BIT_2:
+    // Delay and loop while more data bits remain.
+    // Reminder: delay still happens after final data bit (before stop bit).
+    delay DELAY_PER_BIT
     ADD LOOP_REG, LOOP_REG, 1
-    LBBO GPIO_DATA_REG, GPIO_ADDR_REG, 0, 4  // Read inputs into local register.
-    // SBBO LOOP_REG, RAM_ADDR_REG, 0, 4
-    QBBS LOOP_READ_IN, GPIO_DATA_REG, P8_38
+    QBNE DATA_BIT, LOOP_REG, 8
 
-    QBGT CHARGE, LOOP_REG, 10
-    SBBO LOOP_REG, RAM_ADDR_REG, 0, 4
-    // QBA INIT_READ
-    QBA CHARGE
-
-
-// Send event interrupt to main CPU and stop.
-// MOV R31.b0, PRU1_ARM_INTERRUPT+16
-// HALT
+WRITE:
+    SBBO DATA_REG, RAM_ADDR_REG, 0, 4  // Write byte to ram.
+    QBA MAIN_LOOP
