@@ -15,14 +15,8 @@ counter = 0
 if ser.isOpen():
     print("Serial opened")
     while True:
-        for i in range(0, 10):
+        for i in range(1111, 9999):
             ser.write(str(i))
-            time.sleep(0.25)
-        for i in ['a', 'b', 'c', 'd', 'e', 'f']:
-            ser.write(i)
-            time.sleep(0.25)
-        for i in ['A', 'B', 'C', 'D', 'E', 'F']:
-            ser.write(i)
-            time.sleep(0.25)
+            time.sleep(0.1)
 
 ser.close()

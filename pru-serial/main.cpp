@@ -35,7 +35,7 @@ int main () {
         prussdrv_pru_wait_event(PRU_EVTOUT_1);
         prussdrv_pru_clear_event(PRU_EVTOUT_1, PRU1_ARM_INTERRUPT);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 3; i >= 0; i--) {
             std::cout << (char)pruData[i] << ' ';
         }
         std::cout << '\n';
