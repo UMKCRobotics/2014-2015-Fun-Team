@@ -1,6 +1,8 @@
-#define LOOP_REG r0
-#define DELAY_REG r1
-#define READ_REG r2
+#define MAIN_COUNT r0
+#define READ_LOOP r1
+#define TEMP_REG r2
+#define DELAY_REG r3
+#define READ_REG r4
 
 #define RAM_ADDR_REG r29
 #define DATA_REG r28
@@ -16,6 +18,24 @@
 // ***********
 // MACROS
 // ***********
+.macro readByte
+    MOV READ_LOOP, 0  // Initialize data loop counter.
+    MOV TEMP_REG, 0  // Reset byte storage.
+    START_BIT:
+        QBBS START_BIT, r31.RX_PIN  // Wait for beginning of start bit (high -> low).
+        delay DELAY_AFTER_START  // Delay until middle of first data bit.
+    DATA_BIT:
+        // Only set TEMP_REG bit if DATA_PIN is high.
+        QBBC DATA_BIT_2, r31.RX_PIN
+        SET TEMP_REG, READ_LOOP
+    DATA_BIT_2:
+        // Delay and loop while more data bits remain.
+        // Reminder: delay still happens after final data bit (before stop bit).
+        delay DELAY_PER_BIT
+        ADD READ_LOOP, READ_LOOP, 1
+        QBNE DATA_BIT, READ_LOOP, 8
+.endm
+
 .macro delay
 .mparam cycles
     MOV DELAY_REG, cycles

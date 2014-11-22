@@ -30,25 +30,17 @@ INIT:
     MOV RAM_ADDR_REG, 0
 
 MAIN_LOOP:
-    MOV LOOP_REG, 0  // Initialize data loop counter.
-    MOV DATA_REG, 0  // Reset byte storage.
+    MOV MAIN_COUNT, 4
 
-START_BIT:
-    QBBS START_BIT, r31.RX_PIN  // Wait for beginning of start bit (high -> low).
-    delay DELAY_AFTER_START  // Delay until middle of first data bit.
+READ:
+    readByte
+    LSL DATA_REG, DATA_REG, 8  // Shift data.
+    MOV DATA_REG.b0, TEMP_REG.b0  // Store new.
 
-DATA_BIT:
-    // Only set DATA_REG bit if DATA_PIN is high.
-    QBBC DATA_BIT_2, r31.RX_PIN
-    SET DATA_REG, LOOP_REG
-
-DATA_BIT_2:
-    // Delay and loop while more data bits remain.
-    // Reminder: delay still happens after final data bit (before stop bit).
-    delay DELAY_PER_BIT
-    ADD LOOP_REG, LOOP_REG, 1
-    QBNE DATA_BIT, LOOP_REG, 8
+    SUB MAIN_COUNT, MAIN_COUNT, 1
+    QBNE READ, MAIN_COUNT, 0
 
 WRITE:
     SBBO DATA_REG, RAM_ADDR_REG, 0, 4  // Write byte to ram.
+    MOV r31.b0, PRU1_ARM_INTERRUPT+16  // Notify CPU.
     QBA MAIN_LOOP
