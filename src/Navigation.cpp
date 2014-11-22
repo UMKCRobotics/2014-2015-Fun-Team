@@ -16,7 +16,7 @@ Navigation::Navigation(Configuration* config) : config(config)
 void Navigation::updateMap(RobotState current_state, Cardinal dir)
 {
 	stringstream ss;
-	ss << "Updated " << current_state.currentNode << " to " << dir;
+	ss << "Updated " << current_state.currentNode << " to " << cardinalToString(dir);
 	logNavigationMessage(ss.str());
 	map[current_state.currentNode] = dir;
 }
