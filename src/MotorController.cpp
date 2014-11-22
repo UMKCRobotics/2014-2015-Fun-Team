@@ -96,3 +96,9 @@ void FunMotorController::turnLeft(){
 void FunMotorController::turnRight(){
 }
 void FunMotorController::moveForwardOneSquare(){}
+
+template<typename Predicate, typename Func>
+void FunMotorController::applyFuncUntilPredicate(Predicate p, Func f){
+	while(!p()) f();
+}
+
