@@ -12,7 +12,7 @@ FunMotorController::~FunMotorController(){
 RobotState FunMotorController::move(RobotState state, Cardinal c){
 	RobotState s = state;
 	if(state.currentDirection != c){
-	       	turn(state,c);	
+	       	turn(state.currentDirection,c);	
 		s.currentDirection = c;
 	}
 	switch(c){
@@ -32,11 +32,10 @@ RobotState FunMotorController::move(RobotState state, Cardinal c){
 	moveForwardOneSquare();
 	return s;
 }
-RobotState FunMotorController::turn(RobotState state, Cardinal c){
-	RobotState s = state;
-	switch(state.currentDirection){
+void FunMotorController::turn(Cardinal current, Cardinal toFace){
+	switch(current){
 		case NORTH:
-			switch(c){
+			switch(toFace){
 				case NORTH: break;
 				case SOUTH:
 					turnAround();
@@ -49,7 +48,7 @@ RobotState FunMotorController::turn(RobotState state, Cardinal c){
 					break;
 			} break;
 		case SOUTH:
-			switch(c){
+			switch(toFace){
 				case SOUTH: break;
 				case NORTH:
 					turnAround();
@@ -62,7 +61,7 @@ RobotState FunMotorController::turn(RobotState state, Cardinal c){
 					break;
 			} break;
 		case EAST:
-			switch(c){
+			switch(toFace){
 				case EAST: break;
 				case WEST:
 					turnAround();
@@ -75,7 +74,7 @@ RobotState FunMotorController::turn(RobotState state, Cardinal c){
 					break;
 			} break;
 		case WEST:
-			switch(c){
+			switch(toFace){
 				case WEST: break;
 				case EAST:
 					turnAround();
@@ -88,8 +87,6 @@ RobotState FunMotorController::turn(RobotState state, Cardinal c){
 					break;
 			} break;
 	}
-	s.currentDirection = c;
-	return s;
 }
 
 void FunMotorController::turnAround(){
