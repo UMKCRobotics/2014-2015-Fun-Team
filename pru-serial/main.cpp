@@ -7,7 +7,7 @@
 
 #define PRU_NUM 1
 
-uint8_t *getAddr();
+uint16_t *getAddr();
 
 int main () {
     /* Initialize structure used by prussdrv_pruintc_intc   */
@@ -21,7 +21,7 @@ int main () {
     prussdrv_pruintc_init(&pruss_intc_initdata);
 
     // Get address and flush part of memory
-    uint8_t *pruData = getAddr();
+    uint16_t *pruData = getAddr();
     pruData[0] = 0;
     pruData[1] = 0;
 
@@ -35,7 +35,7 @@ int main () {
         prussdrv_pru_clear_event(PRU_EVTOUT_1, PRU1_ARM_INTERRUPT);
 
         for (int i = 3; i >= 0; i--) {
-            std::cout << (int)pruData[i] << ' ';
+            std::cout << pruData[i] << ' ';
         }
         std::cout << '\n';
     }
@@ -47,8 +47,8 @@ int main () {
     return 0;
 }
 
-uint8_t *getAddr() {
+uint16_t *getAddr() {
     void *addr;
     prussdrv_map_prumem(PRUSS0_PRU1_DATARAM, &addr);
-    return (uint8_t *)addr;
+    return (uint16_t *)addr;
 }

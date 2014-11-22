@@ -29,21 +29,33 @@ INIT:
     // Store data ram address (0) for communication with host.
     MOV RAM_ADDR_REG, 0
 
-WAIT_UNTIL_EOL:  // Wait until serial '\n' before starting main loop.
-    readByte
-    QBNE WAIT_UNTIL_EOL, TEMP_REG, EOL_CHAR
+    MOV MAIN_COUNT, 4
+
+START:
+    // Initialize serial data registers.
+    MOV DATA_REG_1, 0
+    MOV DATA_REG_2, 0
+
+    // Wait for sync/start pulse from Arduino.
+    WBS r31.SYNC_PIN
+    WBC r31.SYNC_PIN
+
+    MOV MAIN_COUNT, 8  // Read 8 bits from serial.
 
 READ:
     readByte
 
-    QBEQ WRITE, TEMP_REG, EOL_CHAR  // If EOL_CHAR, go to WRITE.
+    // Shift data one byte over across both registers.
+    LSL DATA_REG_2, DATA_REG_2, 8
+    MOV DATA_REG_2.b0, DATA_REG_1.b3
+    LSL DATA_REG_1, DATA_REG_1, 8
+    // Store new byte.
+    MOV DATA_REG_1.b0, TEMP_REG.b0
 
-    LSL DATA_REG, DATA_REG, 8  // Shift data.
-    MOV DATA_REG.b0, TEMP_REG.b0  // Store new.
-
-    QBA READ  // Not EOL, so keep looping through more values.
+    SUB MAIN_COUNT, MAIN_COUNT, 1
+    QBNE READ, MAIN_COUNT, 0
 
 WRITE:
-    SBBO DATA_REG, RAM_ADDR_REG, 0, 4  // Write byte to ram.
+    SBBO DATA_REG_1, RAM_ADDR_REG, 0, 8  // Write byte to ram.
     MOV r31.b0, PRU1_ARM_INTERRUPT+16  // Notify CPU.
-    QBA READ
+    QBA START
