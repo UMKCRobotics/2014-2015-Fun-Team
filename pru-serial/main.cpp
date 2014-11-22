@@ -28,7 +28,6 @@ int main () {
     /* Load and execute binary on PRU */
     prussdrv_exec_program(PRU_NUM, "./prucode.bin");
 
-    char current;
     while (true) {
         prussdrv_pru_wait_event(PRU_EVTOUT_1);
         prussdrv_pru_clear_event(PRU_EVTOUT_1, PRU1_ARM_INTERRUPT);
@@ -36,7 +35,7 @@ int main () {
         prussdrv_pru_clear_event(PRU_EVTOUT_1, PRU1_ARM_INTERRUPT);
 
         for (int i = 3; i >= 0; i--) {
-            std::cout << (char)pruData[i] << ' ';
+            std::cout << (int)pruData[i] << ' ';
         }
         std::cout << '\n';
     }

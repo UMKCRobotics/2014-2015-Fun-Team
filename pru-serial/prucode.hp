@@ -12,6 +12,8 @@
 #define DELAY_PER_BIT 10416 // For baudrate of 9600
 #define DELAY_AFTER_START 15625
 
+#define EOL_CHAR 10 // == ascii '\n'
+
 #define PRU0_ARM_INTERRUPT 19
 #define PRU1_ARM_INTERRUPT 20
 

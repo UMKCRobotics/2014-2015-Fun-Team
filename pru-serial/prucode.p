@@ -29,18 +29,21 @@ INIT:
     // Store data ram address (0) for communication with host.
     MOV RAM_ADDR_REG, 0
 
-MAIN_LOOP:
-    MOV MAIN_COUNT, 4
+WAIT_UNTIL_EOL:  // Wait until serial '\n' before starting main loop.
+    readByte
+    QBNE WAIT_UNTIL_EOL, TEMP_REG, EOL_CHAR
 
 READ:
     readByte
+
+    QBEQ WRITE, TEMP_REG, EOL_CHAR  // If EOL_CHAR, go to WRITE.
+
     LSL DATA_REG, DATA_REG, 8  // Shift data.
     MOV DATA_REG.b0, TEMP_REG.b0  // Store new.
 
-    SUB MAIN_COUNT, MAIN_COUNT, 1
-    QBNE READ, MAIN_COUNT, 0
+    QBA READ  // Not EOL, so keep looping through more values.
 
 WRITE:
     SBBO DATA_REG, RAM_ADDR_REG, 0, 4  // Write byte to ram.
     MOV r31.b0, PRU1_ARM_INTERRUPT+16  // Notify CPU.
-    QBA MAIN_LOOP
+    QBA READ

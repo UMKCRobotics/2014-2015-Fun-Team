@@ -8,8 +8,9 @@ void setup()
 
 void loop()
 {
-    for (int i = 1111; i < 9999; i++) {
-        bbSerial.print(String(i));
+    for (int i = 0; i < 255; i++) {
+        bbSerial.write(i);
+        if (i % 4 == 0) bbSerial.write('\n');
         delay(100);
     }
 }
