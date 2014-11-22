@@ -13,3 +13,6 @@
 [submodule "dummy/2014-2015-Fun-Team-Dummy"]
 	path = dummy/2014-2015-Fun-Team-Dummy
 	url = https://github.com/UMKCRobotics/2014-2015-Fun-Team-Dummy
+[submodule "lib/BeagleBoneBlack-GPIO"]
+	path = lib/BeagleBoneBlack-GPIO
+	url = https://github.com/UMKCRobotics/BeagleBoneBlack-GPIO
