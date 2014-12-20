@@ -1,0 +1,48 @@
+#define MAIN_COUNT r0
+#define BIT_COUNT r1
+#define TEMP_REG r2
+#define DELAY_REG r3
+#define READ_REG r4
+
+#define RAM_ADDR_REG r29
+#define DATA_REG_2 r28
+#define DATA_REG_1 r27
+
+#define RX_PIN t0
+#define SYNC_PIN t2
+
+#define DELAY_PER_BIT 10416 // For baudrate of 9600
+#define DELAY_AFTER_START 15625
+
+#define PRU0_ARM_INTERRUPT 19
+#define PRU1_ARM_INTERRUPT 20
+
+// ***********
+// MACROS
+// ***********
+.macro readByte
+    MOV BIT_COUNT, 0  // Initialize data loop counter.
+    MOV TEMP_REG, 0  // Reset byte storage.
+    START_BIT:
+        QBBS START_BIT, r31.RX_PIN  // Wait for beginning of start bit (high -> low).
+        delay DELAY_AFTER_START  // Delay until middle of first data bit.
+    DATA_BIT:
+        // Only set TEMP_REG bit if DATA_PIN is high.
+        QBBC DATA_BIT_2, r31.RX_PIN
+        SET TEMP_REG, BIT_COUNT
+    DATA_BIT_2:
+        // Delay and loop while more data bits remain.
+        // Reminder: delay still happens after final data bit (before stop bit).
+        delay DELAY_PER_BIT
+        ADD BIT_COUNT, BIT_COUNT, 1
+        QBNE DATA_BIT, BIT_COUNT, 8
+.endm
+
+.macro delay
+.mparam cycles
+    MOV DELAY_REG, cycles
+    SUB DELAY_REG, DELAY_REG, 1  // Account for this + previous instruction.
+    DELAY_LOOP:
+        SUB DELAY_REG, DELAY_REG, 1  // Each loop has 2 cycles.
+        QBNE DELAY_LOOP, DELAY_REG, 0
+.endm
