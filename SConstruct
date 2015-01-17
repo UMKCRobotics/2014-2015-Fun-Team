@@ -17,13 +17,13 @@ getColorEnvironment(env)
 
 #Sets up an environment object
 
-flags = "-Wall -std=c++11 "
+flags = "-Wall -std=c++0x "
 #set up some differences between debug and release
 if GetOption('d'):
 	flags += "-g"
 if GetOption('r'):
 	flags += "-O3"
-env.Append(CCFLAGS=flags)
+env.Append(CXXFLAGS=flags)
 
 class ObjectCreator:
 	build = "build/"
