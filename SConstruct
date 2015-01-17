@@ -42,7 +42,7 @@ class ObjectCreator:
 		def make_build_dir(dir):
 			subprocess.check_call(["mkdir","--parents",dir])
 		def copyanytree(src, dst):
-			subprocess.check_call(['rsync','-i','-r',src,dst])
+			subprocess.check_call(['rsync','-r',src,dst])
 		make_build_dir(self.build_dir)
 		copyanytree(self.src_dir ,self.build_dir)
 bins = "bins/"
@@ -71,8 +71,8 @@ class LibraryBuilder:
 
 
 framework = LibraryBuilder(bins+'framework',"lib/2014-2015-Framework/src/",env)
-blacklib = LibraryBuilder(bins+'blacklib',"lib/BlackLib/src/",env)
-dmcc = LibraryBuilder(bins+'dmcc','./lib/DMCC_Library/src/',env)
+gpio = LibraryBuilder(bins+'gpio',"lib/BeagleBoneBlack-GPIO/src/",env)
+dmcc = LibraryBuilder(bins+'dmcc',"lib/DMCC_Library/src/",env)
 
 program = ProgramBuilder('robot_program','src/',env)
 
@@ -97,8 +97,8 @@ if GetOption("clean"):
 if not GetOption("clean"):
 	print('Building FRAMEWORK...')
 	framework.build()
-	print('Building BLACKLIB...')
-	blacklib.build()
+	print('Building GPIO...')
+	gpio.build()
 	print('Building DMCC...')
 	dmcc.build()
 	print('Building PROGRAM...')
