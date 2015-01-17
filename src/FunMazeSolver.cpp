@@ -11,7 +11,7 @@ void logMazeSolverMessage(string s){
 bool openingsContains(set<Cardinal> openings, Cardinal value){
 	return openings.find(value) != openings.end();
 }
-Cardinal FunMazeSolver::computeOpenings(RobotState r,set<Cardinal> openings){
+Cardinal FunMazeSolver::doRightHand(RobotState r,set<Cardinal> openings){
 	if(openings.empty()) logMazeSolverError("Passed an empty set!");
 	Cardinal direction;
 	switch(r.currentDirection){

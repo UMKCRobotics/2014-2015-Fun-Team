@@ -10,7 +10,7 @@ namespace FunMazeSolver{
 	 * return what direction the robot should turn to face.
 	 * Should always turn to the right.
 	 */
-	Cardinal computeOpenings(RobotState r,set<Cardinal> openings);
+	Cardinal doRightHand(RobotState r,set<Cardinal> openings);
 }
 
 #endif

@@ -55,12 +55,7 @@ class Notifier
 		Notifier::getInstance().gp.setValue(39, GPIO::LOW);
 		Logger::logMessage("turned off yellow LED");
 	}
-		
-
-	
-	
-	
-	
+	void mazeComplete(){}
 	
 };
 
