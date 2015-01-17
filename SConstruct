@@ -102,7 +102,7 @@ if not GetOption("clean"):
 	print('Building DMCC...')
 	dmcc.build()
 	print('Building PROGRAM...')
-	program.build_link(['framework','blacklib','dmcc']+OPENCV_FORMATTED_LIBS)
+	program.build_link(['framework','gpio','dmcc']+OPENCV_FORMATTED_LIBS)
 
 
 
