@@ -22,19 +22,22 @@ int main () {
 
     // Get address and flush part of memory
     uint16_t *pruData = getAddr();
-    pruData[0] = 0;
-    pruData[1] = 0;
+    for (int i = 0; i < 8; i++) {
+        pruData[i] = 0;
+    }
 
     /* Load and execute binary on PRU */
     prussdrv_exec_program(PRU_NUM, "./prucode.bin");
 
     while (true) {
+        // There's a bug where events are duplicated.
+        // A patch exists somewhere on the internet, but... whatever.
         prussdrv_pru_wait_event(PRU_EVTOUT_1);
         prussdrv_pru_clear_event(PRU_EVTOUT_1, PRU1_ARM_INTERRUPT);
         prussdrv_pru_wait_event(PRU_EVTOUT_1);
         prussdrv_pru_clear_event(PRU_EVTOUT_1, PRU1_ARM_INTERRUPT);
 
-        for (int i = 3; i >= 0; i--) {
+        for (int i = 7; i >= 0; i--) {
             std::cout << pruData[i] << ' ';
         }
         std::cout << '\n';

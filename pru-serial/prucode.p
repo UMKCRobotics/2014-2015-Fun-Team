@@ -29,8 +29,6 @@ INIT:
     // Store data ram address (0) for communication with host.
     MOV RAM_ADDR_REG, 0
 
-    MOV MAIN_COUNT, 4
-
 START:
     // Initialize serial data registers.
     MOV DATA_REG_1, 0
@@ -40,22 +38,45 @@ START:
     WBS r31.SYNC_PIN
     WBC r31.SYNC_PIN
 
-    MOV MAIN_COUNT, 8  // Read 8 bits from serial.
-
-READ:
+    // Store new.
     readByte
+    MOV DATA_REG_3.b3, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_3.b2, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_3.b1, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_3.b0, TEMP_REG.b0
 
-    // Shift data one byte over across both registers.
-    LSL DATA_REG_2, DATA_REG_2, 8
-    MOV DATA_REG_2.b0, DATA_REG_1.b3
-    LSL DATA_REG_1, DATA_REG_1, 8
-    // Store new byte.
+    readByte
+    MOV DATA_REG_2.b3, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_2.b2, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_2.b1, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_2.b0, TEMP_REG.b0
+
+    readByte
+    MOV DATA_REG_1.b3, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_1.b2, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_1.b1, TEMP_REG.b0
+    readByte
     MOV DATA_REG_1.b0, TEMP_REG.b0
 
-    SUB MAIN_COUNT, MAIN_COUNT, 1
-    QBNE READ, MAIN_COUNT, 0
+    readByte
+    MOV DATA_REG_0.b3, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_0.b2, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_0.b1, TEMP_REG.b0
+    readByte
+    MOV DATA_REG_0.b0, TEMP_REG.b0
 
 WRITE:
-    SBBO DATA_REG_1, RAM_ADDR_REG, 0, 8  // Write byte to ram.
+    SBBO DATA_REG_0, RAM_ADDR_REG, 0, 16  // Write to ram.
+
     MOV r31.b0, PRU1_ARM_INTERRUPT+16  // Notify CPU.
     QBA START
