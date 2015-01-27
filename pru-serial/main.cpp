@@ -1,12 +1,16 @@
 #include <iostream>
 #include <sys/mman.h>
 #include <stdint.h>
-
+// prussdrv.h and pruss_intc_mapping.h are installed by am335x-pru-package (on
+// Debian) or similar.
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
 #define PRU_NUM 1
 
+/*
+ * Return a uint16_t pointer to first sensor value received by PRU.
+ */
 uint16_t *getAddr();
 
 int main () {
