@@ -1,1 +1,0 @@
-Program("test", ["main.cpp", "Sensors.cpp"], LIBS=["prussdrv", "pthread"])
