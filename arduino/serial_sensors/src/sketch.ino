@@ -7,8 +7,9 @@
 #define SYNC_PIN 9
 SoftwareSerial bbSerial(7, 8);
 
-unsigned char linePins[] = {6};
-QTRSensorsRC lineSensors(linePins, 1);
+// 14 = left, 15 = center, 16 = right.
+unsigned char linePins[] = {14, 15, 16};
+QTRSensorsRC lineSensors(linePins, 3);
 
 void setup()
 {
@@ -20,31 +21,29 @@ void setup()
 }
 
 void loop() {
-    // FIXME: rewrite so that all sensors are read before sending over serial.
-    // Otherwise serial timing could get screwed up on PRU side.
+    uint16_t distanceValues[5];
+    // Read infrared/distance sensors (front = A3, back right = A7)
+    distanceValues[0] = analogRead(A3);
+    distanceValues[1] = analogRead(A4);
+    distanceValues[2] = analogRead(A5);
+    distanceValues[3] = analogRead(A6);
+    distanceValues[4] = analogRead(A7);
+
+    // Read line sensors.
+    uint16_t lineValues[3];
+    lineSensors.read(lineValues);
 
     // Signal to PRU that next slice of readings are about to be transmitted.
     digitalWrite(SYNC_PIN, HIGH);
     digitalWrite(SYNC_PIN, LOW);
 
-    // Read infrared (distance) sensors (on pins A0-A4) and send to beaglebone.
+    // Send values.
     for (int i = 0; i < 5; i++) {
-        // FIXME: this should be a uint16_t, not int.
-        int value = analogRead(i);
-        bbSerial.write(highByte(value));
-        bbSerial.write(lowByte(value));
+        bbSerial.write(highByte(distanceValues[i]));
+        bbSerial.write(lowByte(distanceValues[i]));
     }
-    // Read line sensors and send to beaglebone.
-    unsigned int values[1] = {0};
-    lineSensors.read(values);
-    bbSerial.write(highByte(values[0]));
-    bbSerial.write(lowByte(values[0]));
-    // Placeholder.
-    for (int i = 0; i < 2; i++) {
-        bbSerial.write(highByte(0));
-        bbSerial.write(lowByte(0));
+    for (int i = 0; i < 3; i++) {
+        bbSerial.write(highByte(lineValues[i]));
+        bbSerial.write(lowByte(lineValues[i]));
     }
-
-    // TODO: remove eventually. This slows everything down for debugging.
-    delay(100);
 }

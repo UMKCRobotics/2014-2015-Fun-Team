@@ -1,15 +1,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/mman.h>
-// prussdrv.h and pruss_intc_mapping.h are installed by am335x-pru-package (on
-// Debian) or similar.
+// prussdrv.h and pruss_intc_mapping.h should be installed by
+// am335x-pru-package (on Debian) or similar.
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 #include "Sensors.h"
 
 Sensors::Sensors() {
     // Enable PRU device cape overlay thing.
-    // FIXME: globbing to replace random numbers.
+    // FIXME: actual system calls instead of this nonsense.
     system("echo bspm_pru > /sys/devices/bone_capemgr.9/slots");
     system("echo bspm_pru > /sys/devices/bone_capemgr.8/slots");
     system("echo bspm_pru > /sys/devices/bone_capemgr.7/slots");
@@ -20,7 +20,7 @@ Sensors::Sensors() {
     system("echo bspm_pru > /sys/devices/bone_capemgr.2/slots");
     system("echo bspm_pru > /sys/devices/bone_capemgr.1/slots");
     system("echo bspm_pru > /sys/devices/bone_capemgr.0/slots");
-    // Wait for cape to load.
+    // Wait for system calls to terminate/cape to load.
     usleep(1000 * 1000);
 
     /* Initialize structure used by prussdrv_pruintc_intc   */
