@@ -8,7 +8,7 @@
 SoftwareSerial bbSerial(7, 8);
 
 // 14 = left, 15 = center, 16 = right.
-unsigned char linePins[] = {14, 15, 16};
+unsigned char linePins[] = {16, 15, 15};
 QTRSensorsRC lineSensors(linePins, 3);
 
 void setup()
@@ -32,6 +32,8 @@ void loop() {
     // Read line sensors.
     uint16_t lineValues[3];
     lineSensors.read(lineValues);
+    // Because left sensor constantly reads too high.
+    lineValues[0] /= 3.15;
 
     // Signal to PRU that next slice of readings are about to be transmitted.
     digitalWrite(SYNC_PIN, HIGH);
@@ -46,4 +48,29 @@ void loop() {
         bbSerial.write(highByte(lineValues[i]));
         bbSerial.write(lowByte(lineValues[i]));
     }
+}
+
+// Temporary code to help with determining line sensor calibration values.
+void average() {
+    const int average_times = 100;
+    unsigned int values[average_times][3];
+
+    for (int i = 0; i < average_times; i++) {
+        lineSensors.read(values[i]);
+    }
+
+    unsigned long sum[3] = {0};
+    for (int i = 0; i < average_times; i++) {
+        sum[0] += values[i][0];
+        sum[1] += values[i][1];
+        sum[2] += values[i][2];
+    }
+    Serial.print("Averages: ");
+    Serial.print(sum[0] / average_times);
+    Serial.print(" ");
+    Serial.print(sum[1] / average_times);
+    Serial.print(" ");
+    Serial.print(sum[2] / average_times);
+    Serial.print(" ");
+    Serial.println("");
 }
