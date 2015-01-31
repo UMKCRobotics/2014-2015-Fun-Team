@@ -19,11 +19,17 @@ struct SensorValues {
 
 class Sensors {
     public:
-        Sensors();
-        ~Sensors();
-        SensorValues read();
+        static SensorValues read();
     private:
         uint16_t *addr;
+	template<typename Func>
+	static void applyToSensorInstance(Func f);
+	Sensors();
+        ~Sensors();
+	static Sensors& getInstance(){
+		static Sensors instance;
+		return instance;
+	}
 };
 
 #endif

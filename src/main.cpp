@@ -20,12 +20,19 @@ bool isPastTime(Configuration*, clock_t);
 int main(void){
 	Logger::standardInit();
 	Configuration* config = ConfigurationFactory::createConfiguration();
+	FunMotorController mc;
+	RobotState r(config);
+	r.currentDirection = NORTH;
+	mc.move(r,NORTH);
+	/*
 	if(config->phase == 1){
 		phase_1(config);
 	}
 	else{
 		phase_2(config);
 	}
+	*/
+	return 0;
 }
 void phase_1(Configuration* config){
 	Navigation nav(config);

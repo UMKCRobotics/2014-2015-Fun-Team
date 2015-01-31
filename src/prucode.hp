@@ -55,6 +55,6 @@
     MOV DELAY_REG, cycles
     SUB DELAY_REG, DELAY_REG, 1  // Account for this + previous instruction.
     DELAY_LOOP:
-        SUB DELAY_REG, DELAY_REG, 1  // Each loop has 2 cycles.
+        SUB DELAY_REG, DELAY_REG, 2  // Each loop has 2 cycles.
         QBNE DELAY_LOOP, DELAY_REG, 0
 .endm

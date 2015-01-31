@@ -1,6 +1,7 @@
 #include "DMCC.h"
 #include "Cardinal.h"
 #include "RobotState.h"
+#include "Sensors.h"
 
 #ifndef FUN_MOTOR_CONTROLLER_H
 #define FUN_MOTOR_CONTROLLER_H
@@ -8,8 +9,8 @@
 class FunMotorController{
 
 	private: 
-		int fd1;
-		int fd2;
+		int backMotorController;
+		int frontMotorController;
 		void moveForwardOneSquare();
 		void turnLeft();
 		void turnRight();
@@ -28,7 +29,16 @@ class FunMotorController{
 		 * Usage is to do something like move forward until all three sensors read true
 		 */
 		template<typename Predicate, typename Func>
-		void applyFuncUntilPredicate(Predicate p, Func f);
+		void applyFuncUntilPredicateAndStop(Predicate p, Func f);
+
+		void setAll(int);
+		void stopAll();
+		void setLeft(int);
+		void setRight(int);
+		void setFrontLeft(int);
+		void setFrontRight(int);
+		void setBackLeft(int);
+		void setBackRight(int);
 	public:
 		FunMotorController();
 		~FunMotorController();

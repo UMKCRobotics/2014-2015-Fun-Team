@@ -59,7 +59,8 @@ class Navigation
 	
 	private:
 	Cardinal map[50];
-	const string fileLocation = "/tmp/robot/navigation.txt";
+	string fileLocation;
+
 	Configuration* config;
 
 	void logNavigationMessage(string);

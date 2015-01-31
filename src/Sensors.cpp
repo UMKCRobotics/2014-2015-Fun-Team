@@ -3,9 +3,17 @@
 #include <sys/mman.h>
 // prussdrv.h and pruss_intc_mapping.h should be installed by
 // am335x-pru-package (on Debian) or similar.
+
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
+
 #include "Sensors.h"
+
+template<typename Func>
+void Sensors::applyToSensorInstance(Func f){
+	Sensors * instance = &Sensors::getInstance();
+	f(instance);
+}
 
 Sensors::Sensors() {
     // Enable PRU device cape overlay thing.
@@ -52,16 +60,19 @@ Sensors::~Sensors() {
 }
 
 SensorValues Sensors::read() {
-    SensorValues values;
+    
+	SensorValues* values = new SensorValues;
 
-    values.irFront = addr[7];
-    values.irFrontLeft = addr[6];
-    values.irFrontRight = addr[5];
-    values.irBackLeft = addr[4];
-    values.irBackRight = addr[3];
-    values.lineLeft = addr[2];
-    values.lineCenter = addr[1];
-    values.lineRight = addr[0];
-
-    return values;
+	applyToSensorInstance([values](Sensors* s){
+    		values->irFront = s->addr[7];
+    		values->irFrontLeft = s->addr[6];
+    		values->irFrontRight = s->addr[5];
+    		values->irBackLeft = s->addr[4];
+    		values->irBackRight = s->addr[3];
+    		values->lineLeft = s->addr[2];
+    		values->lineCenter = s->addr[1];
+    		values->lineRight = s->addr[0];
+    	});
+	return *values;
 }
+

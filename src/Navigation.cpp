@@ -5,6 +5,8 @@
 
 Navigation::Navigation(Configuration* config) : config(config)
 {
+ 
+	fileLocation = "/tmp/navigation.txt";
 	for(int i = 0; i < 50; ++i){
 		map[i] = (Cardinal)-1; //This is because somtimes they will intialize to valid values and we don't want that for pretty printing
 	}

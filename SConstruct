@@ -90,9 +90,13 @@ if GetOption('ocv'):
 	OPENCV_FORMATTED_LIBS = map(lambda a:  a[2:],OPENCV_LIBS.split(" ")[:-2]) + ['tesseract']
 	#openCV hacky linking over
 
+
+pru_libs = ["pthread", "prussdrv"]
+
 if GetOption("clean"):
 	subprocess.check_call(['rm','-rf',bins])
 	subprocess.check_call(['rm','-rf',"build/"])
+
 
 if not GetOption("clean"):
 	print('Building FRAMEWORK...')
@@ -102,8 +106,5 @@ if not GetOption("clean"):
 	print('Building DMCC...')
 	dmcc.build()
 	print('Building PROGRAM...')
-	program.build_link(['framework','gpio','dmcc']+OPENCV_FORMATTED_LIBS)
-
-
-
+	program.build_link(['framework','gpio','dmcc']+OPENCV_FORMATTED_LIBS+pru_libs)
 

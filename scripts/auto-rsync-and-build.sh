@@ -3,8 +3,8 @@
 # Written by Caleb Chase
 # Automatically copy via rsync on modification of files.
 
-LOCAL_DIR="/home/caleb/sync/code/2014-2015-Fun-Team"
-REMOTE_DIR="/root/caleb/"
+LOCAL_DIR="../src/"
+REMOTE_DIR="/root/CHRIS/src"
 IP="root@192.168.7.2"
 
 while inotifywait --recursive --event modify,close_write,move,create,delete $LOCAL_DIR; do
