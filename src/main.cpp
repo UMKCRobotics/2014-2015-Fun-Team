@@ -17,6 +17,7 @@ void phase_1(Configuration*);
 void phase_2(Configuration*);
 bool isPastTime(Configuration*, clock_t);
 
+//Screw KCKAAOS FOR NOT BELIEVING ME
 int main(void){
 	Logger::standardInit();
 	Configuration* config = ConfigurationFactory::createConfiguration();
