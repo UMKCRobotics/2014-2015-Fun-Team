@@ -129,9 +129,11 @@ void FunMotorController::turnLeft(){
 void FunMotorController::turnRight(){
 }
 void FunMotorController::moveForwardOneSquare(){
+
 	Logger::logMessage("Moving Forward one square.");
 	
-	setAll(10000/2);
+	setBackRight(10000/2);
+	setBackLeft(10000/2);
 	usleep(1000);
 	stopAll();
 	
