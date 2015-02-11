@@ -14,9 +14,7 @@ struct Configuration{
 
 class ConfigurationFactory{
 	public:
-		static Configuration* createConfiguration(){
-			return ConfigurationFactory::constructBlankConfig();
-		}
+		static Configuration* createConfiguration();
 		static Configuration* constructBlankConfig();
 };
 #endif
