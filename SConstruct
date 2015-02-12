@@ -9,6 +9,7 @@ AddOption('--r',action='store_true',help='build a release build',default=False)
 AddOption('--g',action='store_true',help='fetch newest from git and build that',default=False)
 AddOption('--ocv',action='store_true',help='build with opencv',default=False)
 
+
 if GetOption('g'):
 	subprocess.check_call(['git','fetch'])
 	subprocess.check_call(['git','submodule','foreach','git','fetch'])
@@ -97,6 +98,8 @@ if GetOption("clean"):
 	subprocess.check_call(['rm','-rf',bins])
 	subprocess.check_call(['rm','-rf',"build/"])
 
+def build_pru_assembly():
+	subprocess.check_call(['pasm','-b','src/prucode.p'])
 
 if not GetOption("clean"):
 	print('Building FRAMEWORK...')
@@ -105,6 +108,8 @@ if not GetOption("clean"):
 	gpio.build()
 	print('Building DMCC...')
 	dmcc.build()
+	print('compiling pru assembly')
+	build_pru_assembly()
 	print('Building PROGRAM...')
 	program.build_link(['framework','gpio','dmcc']+OPENCV_FORMATTED_LIBS+pru_libs)
 

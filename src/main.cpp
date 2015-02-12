@@ -8,6 +8,7 @@
 #include "FunMazeSolver.h"
 #include "WorldSensor.h"
 #include "Vision.h"
+#include "Sensors.h"
 
 #include <ctime>
 using std::cout;
@@ -26,16 +27,15 @@ int main(void){
 	r.currentDirection = NORTH;
 	FunWorldSensor::computeOpenings(r);
 	mc.move(r,NORTH);
-	/*
 	if(config->phase == 1){
 		phase_1(config);
 	}
 	else{
 		phase_2(config);
 	}
-	*/
 	return 0;
 }
+/*
 void phase_1(Configuration* config){
 	Navigation nav(config);
 	RobotState state(config);
@@ -78,4 +78,4 @@ void phase_2(Configuration* config){
 bool isPastTime(Configuration* config, clock_t start){
 	return (double(std::clock() - start) / CLOCKS_PER_SEC * 60) >= config->matchTime;
 }
-
+*/

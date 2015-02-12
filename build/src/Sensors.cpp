@@ -7,7 +7,6 @@
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
-
 #include "Sensors.h"
 
 template<typename Func>
@@ -61,6 +60,7 @@ Sensors::~Sensors() {
 }
 
 SensorValues Sensors::read() {
+    
 	SensorValues values;
 	values.irFront = getInstance().addr[7];
     	values.irFrontLeft = getInstance().addr[6];
@@ -72,3 +72,4 @@ SensorValues Sensors::read() {
     	values.lineRight = getInstance().addr[0];
 	return values;
 }
+

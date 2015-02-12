@@ -17,15 +17,24 @@ void phase_1(Configuration*);
 void phase_2(Configuration*);
 bool isPastTime(Configuration*, clock_t);
 
+//Screw KCKAAOS FOR NOT BELIEVING ME
 int main(void){
 	Logger::standardInit();
 	Configuration* config = ConfigurationFactory::createConfiguration();
+	FunMotorController mc;
+	RobotState r(config);
+	r.currentDirection = NORTH;
+	FunWorldSensor::computeOpenings(r);
+	mc.move(r,NORTH);
+	/*
 	if(config->phase == 1){
 		phase_1(config);
 	}
 	else{
 		phase_2(config);
 	}
+	*/
+	return 0;
 }
 void phase_1(Configuration* config){
 	Navigation nav(config);
@@ -36,7 +45,7 @@ void phase_1(Configuration* config){
 	std::clock_t begin = std::clock();
 	bool visitedFinalNode = false;
 	while(!isPastTime(config,begin)){
-		nextCard = FunMazeSolver::doRightHand(state,FunWorldSensor::computeOpenings());
+		nextCard = FunMazeSolver::doRightHand(state,FunWorldSensor::computeOpenings(state));
 		if(!visitedFinalNode){
 			nav.updateMap(state,nextCard);
 		}
