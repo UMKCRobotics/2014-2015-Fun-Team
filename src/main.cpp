@@ -24,6 +24,7 @@ int main(void){
 	FunMotorController mc;
 	RobotState r(config);
 	r.currentDirection = NORTH;
+	FunWorldSensor::computeOpenings(r);
 	mc.move(r,NORTH);
 	/*
 	if(config->phase == 1){
@@ -44,7 +45,7 @@ void phase_1(Configuration* config){
 	std::clock_t begin = std::clock();
 	bool visitedFinalNode = false;
 	while(!isPastTime(config,begin)){
-		nextCard = FunMazeSolver::doRightHand(state,FunWorldSensor::computeOpenings());
+		nextCard = FunMazeSolver::doRightHand(state,FunWorldSensor::computeOpenings(state));
 		if(!visitedFinalNode){
 			nav.updateMap(state,nextCard);
 		}
