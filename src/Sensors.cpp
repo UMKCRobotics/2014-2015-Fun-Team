@@ -7,8 +7,9 @@
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
-
+#include <fstream>
 #include "Sensors.h"
+#include "Logger.h"
 
 template<typename Func>
 void Sensors::applyToSensorInstance(Func f){
@@ -50,8 +51,12 @@ Sensors::Sensors() {
         addr[i] = 0;
     }
 
+    std::ifstream binfile("./prucode.bin", std::ios::binary);
+    if(!binfile){ Logger::logError("prucode.bin does not exist");}
+    binfile.close();
+
     /* Load and execute binary on PRU */
-    prussdrv_exec_program(PRU_NUM, "/root/CHRIS/prucode.bin");
+    prussdrv_exec_program(PRU_NUM, "./prucode.bin");
 }
 
 Sensors::~Sensors() {
