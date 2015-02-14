@@ -51,7 +51,7 @@ Sensors::Sensors() {
     }
 
     /* Load and execute binary on PRU */
-    prussdrv_exec_program(PRU_NUM, "./prucode.bin");
+    prussdrv_exec_program(PRU_NUM, "/root/CHRIS/prucode.bin");
 }
 
 Sensors::~Sensors() {

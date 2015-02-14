@@ -147,7 +147,6 @@ void FunMotorController::moveForwardOneSquare(){
 		//setLeft(motorMax *((blackMax - v.lineLeft) / 190));
 		//setRight(motorMax * ((blackMax - v.lineRight))/190);
 	});
-*/
 
 
 

@@ -27,12 +27,14 @@ int main(void){
 	r.currentDirection = NORTH;
 	FunWorldSensor::computeOpenings(r);
 	mc.move(r,NORTH);
+	/*
 	if(config->phase == 1){
 		phase_1(config);
 	}
 	else{
 		phase_2(config);
 	}
+	*/
 	return 0;
 }
 /*
