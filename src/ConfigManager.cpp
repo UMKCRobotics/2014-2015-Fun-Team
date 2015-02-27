@@ -12,7 +12,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 {
 	Configuration config;
 	
-	if(getValue(/*Round1*/) == HIGH) {
+	if(getValue(9) == HIGH) {
 		config.round = 1;
 		config.scanForCharacters = false;
 		config.boardXDimension = 5;
@@ -23,7 +23,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 		
 	}
 	else {
-		if(getValue(/*Round2*/) == LOW)  {
+		if(getValue(8) == LOW)  {
 			config.round = 2;
 			config.boardXDimension = 6;
 			config.boardYDimension = 6;
@@ -43,7 +43,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 	}
 	
 	
-	if(getValue(/*Phase*/) == LOW) {
+	if(getValue(81) == LOW) {
 		config.phase = 1;
 		if(config.round != 1)
 			config.scanForCharacters = true;

@@ -16,7 +16,7 @@ using std::endl;
 void phase_1(Configuration*);
 void phase_2(Configuration*);
 bool isPastTime(Configuration*, clock_t);
-
+/*
 //Screw KCKAAOS FOR NOT BELIEVING ME
 int main(void){
 	Logger::standardInit();
@@ -33,8 +33,43 @@ int main(void){
 		phase_2(config);
 	}
 	*/
-	return 0;
+//	return 0;
+//}
+
+//Testing LED and switches
+int main(void) {
+	Logger::standardInit();
+	Configuration* config = ConfigurationFactory::createConfiguration();
+	Notifier note;
+
+	while(bool a = true) {
+		if(config->round == 1) {
+			note.onGreen();
+			if(config->phase == 2)
+				note.onYellow();
+		}
+		
+		if(config->round == 2) {
+			note.onRed();
+			if(config->phase == 2)
+				note.onYellow();
+		}
+		
+		if(config->round == 3) {
+			note.onYellow();
+			if(config->phase == 2) {
+				note.offYellow();
+				note.onRed();
+				note.onGreen();
+			}
+		}
+	}
+		
+	
+	
 }
+
+/*
 void phase_1(Configuration* config){
 	Navigation nav(config);
 	RobotState state(config);
@@ -78,3 +113,4 @@ bool isPastTime(Configuration* config, clock_t start){
 	return (double(std::clock() - start) / CLOCKS_PER_SEC * 60) >= config->matchTime;
 }
 
+*/
