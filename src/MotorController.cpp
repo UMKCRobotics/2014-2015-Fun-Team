@@ -147,8 +147,8 @@ void FunMotorController::moveForwardOneSquare(){
 	        s << "Left: " << v.lineLeft << " Right: " << v.lineRight << " Center: " << v.lineCenter;
 		Logger::logMessage("Moving forward one iteration");
 		Logger::logMessage(s.str());
-		setFrontLeft(motorMax *((blackMax - v.lineLeft) / 190));
-		setFrontRight(motorMax * ((blackMax - v.lineRight))/190);
+		setFrontLeft(motorMax - (blackMax - v.lineLeft));
+		setFrontRight(motorMax - (blackMax - v.lineRight));
 	});
 
 
