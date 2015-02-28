@@ -9,7 +9,9 @@
 #include "WorldSensor.h"
 #include "Vision.h"
 #include "Sensors.h"
+#include <unistd.h>
 
+#include <sstream>
 #include <ctime>
 using std::cout;
 using std::endl;
@@ -24,9 +26,22 @@ int main(void){
 	Configuration* config = ConfigurationFactory::createConfiguration();
 	FunMotorController mc;
 	RobotState r(config);
+	/*
 	r.currentDirection = NORTH;
 	FunWorldSensor::computeOpenings(r);
 	mc.move(r,NORTH);
+	*/
+	while(true){
+		stringstream sout;
+		Sensors	s;
+		LineValues v = s.readLines();
+		sout << v.left << " " << v.center << " " << v.right << " ";
+		DistanceValues d = s.readDistance();
+		sout << d.front << " " << d.frontLeft << " " << d.frontRight <<
+			" " << d.backLeft << " " << d.backRight << "\n";
+		Logger::logMessage(sout.str());
+		usleep(100*1000);
+	}
 	/*
 	if(config->phase == 1){
 		phase_1(config);

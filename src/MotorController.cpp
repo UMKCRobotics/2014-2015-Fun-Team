@@ -132,50 +132,8 @@ void FunMotorController::moveForwardOneSquare(){
 
 	Logger::logMessage("Moving Forward one square.");
 	
-	stopAll();
-	int blackLevel = 130;
-	int blackMax = 190;
-	int motorMax = 10000;
-	SensorValues v = Sensors::read();
-	stringstream s;
-        s << "Left: " << v.lineLeft << " Right: " << v.lineRight << " Center: " << v.lineCenter;
-	Logger::logMessage(s.str());
-
-	/*
-	applyFuncUntilPredicateAndStop(
-	[&](SensorValues v){
-		return (v.lineLeft >= blackLevel && v.lineCenter >= blackLevel && v.lineRight >=blackLevel);
-	},
-	[&](SensorValues v){
-			//setLeft(motorMax *((blackMax - v.lineLeft) / 190));
-		//setRight(motorMax * ((blackMax - v.lineRight))/190);
-	});
-	*/
 
 
 
 }
-/**
- * This is a weird function.
- *
- * Basically it captures the behavior that you want to do something with sensor values until you get some reading from the sensor values. Then you want to stop becuase you've achieved the goal you want.
- * An example usage would be
- *
- * applyfuncuntilpredicateandstop(allAreEqual,goForward);
- *
- * p and f should both be functions with the paramater of one sensorvalue
- * p should return a bool
- * f should be void
- * this function applies f until p is true
- *
- * also stops at end
- */
-template<typename Predicate, typename Func>
-void FunMotorController::applyFuncUntilPredicateAndStop(Predicate p, Func f){
-	while(true) {
-		SensorValues s = Sensors::read();
-		if(p(s)){ break; }
-		f(s);
-	}
-	stopAll();
-}
+

@@ -18,7 +18,7 @@ namespace FunWorldSensor{
 	const int maxValue = 100;
 	set<Cardinal> computeOpenings(RobotState state){
 		set<Cardinal> openings;
-		SensorValues v = Sensors::read();
+		/*
 		bool noFrontWall = v.irFront >= maxValue;
 		bool noRightWall = v.irFrontRight + v.irBackRight / 2 >= maxValue;
 		bool noLeftWall = v.irFrontLeft + v.irBackLeft /2 >= maxValue;
@@ -72,7 +72,7 @@ namespace FunWorldSensor{
 				openings.insert(EAST);
 				break;
 			}
-
+		*/
 		return openings;
 	}
 }
