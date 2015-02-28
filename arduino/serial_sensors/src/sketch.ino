@@ -4,7 +4,7 @@
  * PINS:
  * Lines: D7 (left), A0 (center), D6 (right)
  * Distance: A2 (front), A3 (front left), A1 (front right),
- * A4 (back left), A5 (back right).
+ * A5 (back left), A4 (back right).
  */
 unsigned char linePins[] = {7, 14, 6};
 QTRSensorsRC lineSensors(linePins, 3);
@@ -34,8 +34,8 @@ void loop() {
 	    distanceValues[0] = analogRead(A2);
 	    distanceValues[1] = analogRead(A3);
 	    distanceValues[2] = analogRead(A1);
-	    distanceValues[3] = analogRead(A4);
-	    distanceValues[4] = analogRead(A5);
+	    distanceValues[3] = analogRead(A5);
+	    distanceValues[4] = analogRead(A4);
 
 	    // Send
 	    //for (int i = 0; i < 5; i++) {
