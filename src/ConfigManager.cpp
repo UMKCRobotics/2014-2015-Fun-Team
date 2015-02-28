@@ -10,9 +10,12 @@ Configuration* ConfigurationFactory::constructBlankConfig(){
 
 Configuration* ConfigurationFactory::createConfiguration()
 {
+	GPIO::GPIOManager* gp = GPIO::GPIOManager::getInstance();
 	Configuration config;
 	
-	if(getValue(9) == HIGH) {
+	gp->setDirection(9, GPIO::OUTPUT);
+	
+	if(gp->getValue(9) == GPIO::HIGH) {
 		config.round = 1;
 		config.scanForCharacters = false;
 		config.boardXDimension = 5;
@@ -23,7 +26,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 		
 	}
 	else {
-		if(getValue(8) == LOW)  {
+		if(gp->getValue(8) == GPIO::LOW)  {
 			config.round = 2;
 			config.boardXDimension = 6;
 			config.boardYDimension = 6;
@@ -43,7 +46,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 	}
 	
 	
-	if(getValue(81) == LOW) {
+	if(gp->getValue(81) == GPIO::LOW) {
 		config.phase = 1;
 		if(config.round != 1)
 			config.scanForCharacters = true;
