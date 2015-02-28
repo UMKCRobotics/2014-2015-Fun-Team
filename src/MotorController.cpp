@@ -129,27 +129,28 @@ void FunMotorController::turnLeft(){
 void FunMotorController::turnRight(){
 }
 void FunMotorController::moveForwardOneSquare(){
+
 	Logger::logMessage("Moving Forward one square.");
-	/*
-	setAll(10000/2);
-	usleep(1000);
+	
 	stopAll();
-	*/
 	int blackLevel = 130;
 	int blackMax = 190;
 	int motorMax = 10000;
+	SensorValues v = Sensors::read();
+	stringstream s;
+        s << "Left: " << v.lineLeft << " Right: " << v.lineRight << " Center: " << v.lineCenter;
+	Logger::logMessage(s.str());
+
+	/*
 	applyFuncUntilPredicateAndStop(
 	[&](SensorValues v){
 		return (v.lineLeft >= blackLevel && v.lineCenter >= blackLevel && v.lineRight >=blackLevel);
 	},
 	[&](SensorValues v){
-		stringstream s;
-	        s << "Left: " << v.lineLeft << " Right: " << v.lineRight << " Center: " << v.lineCenter;
-		Logger::logMessage("Moving forward one iteration");
-		Logger::logMessage(s.str());
-		setFrontLeft(motorMax - (blackMax - v.lineLeft));
-		setFrontRight(motorMax - (blackMax - v.lineRight));
+			//setLeft(motorMax *((blackMax - v.lineLeft) / 190));
+		//setRight(motorMax * ((blackMax - v.lineRight))/190);
 	});
+	*/
 
 
 

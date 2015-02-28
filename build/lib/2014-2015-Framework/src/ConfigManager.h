@@ -9,7 +9,6 @@ struct Configuration{
 	int endNode;
 	int boardXDimension;
 	int boardYDimension;
-	double matchTime;
 };
 
 class ConfigurationFactory{

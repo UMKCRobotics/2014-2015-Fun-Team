@@ -8,6 +8,7 @@
 #include "FunMazeSolver.h"
 #include "WorldSensor.h"
 #include "Vision.h"
+#include "Sensors.h"
 
 #include <ctime>
 using std::cout;
@@ -24,6 +25,7 @@ int main(void){
 	FunMotorController mc;
 	RobotState r(config);
 	r.currentDirection = NORTH;
+	FunWorldSensor::computeOpenings(r);
 	mc.move(r,NORTH);
 	/*
 	if(config->phase == 1){
@@ -35,6 +37,7 @@ int main(void){
 	*/
 	return 0;
 }
+/*
 void phase_1(Configuration* config){
 	Navigation nav(config);
 	RobotState state(config);
@@ -44,7 +47,7 @@ void phase_1(Configuration* config){
 	std::clock_t begin = std::clock();
 	bool visitedFinalNode = false;
 	while(!isPastTime(config,begin)){
-		nextCard = FunMazeSolver::doRightHand(state,FunWorldSensor::computeOpenings());
+		nextCard = FunMazeSolver::doRightHand(state,FunWorldSensor::computeOpenings(state));
 		if(!visitedFinalNode){
 			nav.updateMap(state,nextCard);
 		}
@@ -77,4 +80,4 @@ void phase_2(Configuration* config){
 bool isPastTime(Configuration* config, clock_t start){
 	return (double(std::clock() - start) / CLOCKS_PER_SEC * 60) >= config->matchTime;
 }
-
+*/

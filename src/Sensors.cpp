@@ -7,7 +7,9 @@
 #include <prussdrv.h>
 #include <pruss_intc_mapping.h>
 
+#include <fstream>
 #include "Sensors.h"
+#include "Logger.h"
 
 template<typename Func>
 void Sensors::applyToSensorInstance(Func f){
@@ -49,6 +51,10 @@ Sensors::Sensors() {
         addr[i] = 0;
     }
 
+    std::ifstream binfile("./prucode.bin", std::ios::binary);
+    if(!binfile){ Logger::logError("prucode.bin does not exist");}
+    binfile.close();
+
     /* Load and execute binary on PRU */
     prussdrv_exec_program(PRU_NUM, "./prucode.bin");
 }
@@ -60,19 +66,14 @@ Sensors::~Sensors() {
 }
 
 SensorValues Sensors::read() {
-    
-	SensorValues* values = new SensorValues;
-
-	applyToSensorInstance([values](Sensors* s){
-    		values->irFront = s->addr[7];
-    		values->irFrontLeft = s->addr[6];
-    		values->irFrontRight = s->addr[5];
-    		values->irBackLeft = s->addr[4];
-    		values->irBackRight = s->addr[3];
-    		values->lineLeft = s->addr[2];
-    		values->lineCenter = s->addr[1];
-    		values->lineRight = s->addr[0];
-    	});
-	return *values;
+	SensorValues values;
+	values.irFront = getInstance().addr[7];
+    	values.irFrontLeft = getInstance().addr[6];
+    	values.irFrontRight = getInstance().addr[5];
+    	values.irBackLeft = getInstance().addr[4];
+    	values.irBackRight = getInstance().addr[3];
+    	values.lineLeft = getInstance().addr[2];
+    	values.lineCenter = getInstance().addr[1];
+    	values.lineRight = getInstance().addr[0];
+	return values;
 }
-
