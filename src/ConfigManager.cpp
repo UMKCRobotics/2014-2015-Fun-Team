@@ -20,7 +20,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 		config.scanForCharacters = false;
 		config.boardXDimension = 5;
 		config.boardYDimension = 5;
-		config.matchTime 180;
+		config.matchTime = 180;
 		config.startNode = 48;
 		config.endNode = 9;
 		
@@ -30,7 +30,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 			config.round = 2;
 			config.boardXDimension = 6;
 			config.boardYDimension = 6;
-			config.matchTime 240;
+			config.matchTime = 240;
 			config.startNode = 48;
 			config.endNode = 1;
 		}
@@ -56,5 +56,5 @@ Configuration* ConfigurationFactory::createConfiguration()
 		config.scanForCharacters = false;
 	}	
 	
-	return new Configuration = &config;
+	return &config;
 }

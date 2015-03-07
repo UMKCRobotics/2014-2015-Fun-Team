@@ -4,71 +4,77 @@
 #include "GPIOManager.h"
 #include "GPIOConst.h"
 #include "Logger.h"
+#include <sstream>
 
 
 class Notifier
 {
 	private:
-	GPIO::GPIOManager gp;
+	GPIO::GPIOManager* gp;
 	
+	int RED_PIN;
+	int YELLOW_PIN;
+	int GREEN_PIN;
+
 	public:
 	
-	static Notifier& getInstance()
-	{
-		static Notifier instance;
-		return instance;
+	Notifier(){
+		gp = GPIO::GPIOManager::getInstance();
+		RED_PIN = 86;
+		//RED_PIN = GPIO::GPIOConst::getInstance()->getGpioByKey("P8_27");
+		GREEN_PIN=10;
+		YELLOW_PIN=87;
+		gp->setDirection(RED_PIN,GPIO::OUTPUT);
+		gp->setDirection(GREEN_PIN,GPIO::OUTPUT);
+		gp->setDirection(YELLOW_PIN,GPIO::OUTPUT);
+		//gp->exportPin(RED_PIN);
 	}
 
+	
+	~Notifier(){
+		gp->~GPIOManager();
+	}
 
-	static void onRed()
+	void onRed()
 	{
-		Notifier::getInstance().gp.setDirection(86, GPIO::OUTPUT);
-		Notifier::getInstance().gp.setValue(86, GPIO::HIGH);
+		gp->setValue(RED_PIN, GPIO::HIGH);
 		Logger::logMessage("turned on red LED");
 	}
 	
-	static void offRed()
+	void offRed()
 	{
-		Notifier::getInstance().gp.setDirection(86, GPIO::OUTPUT);
-		Notifier::getInstance().gp.setValue(86, GPIO::LOW);
+		gp->setValue(RED_PIN, GPIO::LOW);
 		Logger::logMessage("turned off red LED");
 	}
 	
-	static void onGreen()
+	void onGreen()
 	{
-		Notifier::getInstance().gp.setDirection(10, GPIO::OUTPUT);
-		Notifier::getInstance().gp.setValue(10, GPIO::HIGH);
+		gp->setValue(GREEN_PIN, GPIO::HIGH);
 		Logger::logMessage("turned on green LED");
 	}
 	
-	static void offGreen()
+	void offGreen()
 	{
-		Notifier::getInstance().gp.setDirection(10, GPIO::OUTPUT);
-		Notifier::getInstance().gp.setValue(10, GPIO::LOW);
+		gp->setValue(GREEN_PIN, GPIO::LOW);
 		Logger::logMessage("turned off green LED");
 	}
 	
-	static void onYellow()
+	void onYellow()
 	{
-		Notifier::getInstance().gp.setDirection(87, GPIO::OUTPUT);
-		Notifier::getInstance().gp.setValue(87, GPIO::HIGH);
+		gp->setValue(YELLOW_PIN, GPIO::HIGH);
 		Logger::logMessage("turned on yellow LED");
 	}
 	
-	static void offYellow()
+	void offYellow()
 	{
-		Notifier::getInstance().gp.setDirection(87, GPIO::OUTPUT);
-		Notifier::getInstance().gp.setValue(87, GPIO::LOW);
+		gp->setValue(YELLOW_PIN, GPIO::LOW);
 		Logger::logMessage("turned off yellow LED");
 	}
-	static void  mazeComplete(){
+	void  mazeComplete(){
 		Notifier::onRed();
+		sleep(5);
 		Notifier::offRed();
 	}
-			
-			
-
-	
 };
 
 

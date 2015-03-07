@@ -37,11 +37,39 @@ int main(void){
 //}
 
 //Testing LED and switches
-int main(void) {
+/*int main(void) {
 	Logger::standardInit();
-	Configuration* config = ConfigurationFactory::createConfiguration();
+	//Configuration* config = ConfigurationFactory::createConfiguration();
+	
 	Notifier note;
+	while(true) {
+		note.onRed();
+		sleep(5);
+		note.offRed();
+		sleep(5);
+	}
+*/
 
+int main() {
+  GPIO::GPIOManager* gp = GPIO::GPIOManager::getInstance();
+  int pin = GPIO::GPIOConst::getInstance()->getGpioByKey("P8_10");
+ 
+  gp->setDirection(pin, GPIO::OUTPUT);
+ 
+  while(true){
+      gp->setValue(pin, GPIO::HIGH);
+      sleep(5);
+      gp->setValue(pin, GPIO::LOW);
+      sleep(5);
+  }
+ 
+  gp->~GPIOManager();
+ 
+  return 0;
+}
+
+
+/*
 	while(bool a = true) {
 		if(config->round == 1) {
 			note.onGreen();
@@ -64,7 +92,7 @@ int main(void) {
 			}
 		}
 	}
-		
+*/		
 	
 	
 }
