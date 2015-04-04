@@ -3,7 +3,8 @@
 #include "Logger.h"
 #include "RobotState.h"
 #include <sstream>
-
+#include "Arduino.h"
+#include "Pins.h"
 using std::set;
 
 
@@ -15,13 +16,15 @@ namespace FunWorldSensor{
 	 * Uses the IR sensors to compute what walls around the
 	 * robot are open
 	 */
-	const int maxValue = 100;
+	const int minValue = 250; //Sensor values get higher as you get closer
 	set<Cardinal> computeOpenings(RobotState state){
 		set<Cardinal> openings;
-		/*
-		bool noFrontWall = v.irFront >= maxValue;
-		bool noRightWall = v.irFrontRight + v.irBackRight / 2 >= maxValue;
-		bool noLeftWall = v.irFrontLeft + v.irBackLeft /2 >= maxValue;
+		int frontIR = analogRead(FRONT_IR);
+		int backRightIR =analogRead(BACKWARD_RIGHT_IR);
+		int frontRightIR = analogRead(FORWARD_RIGHT_IR);
+
+		bool noFrontWall = frontIR >= minValue;
+		bool noRightWall = ((backRightIR + frontRightIR) / 2) >= minValue;
 		switch(state.currentDirection){
 			case NORTH:
 				if(noFrontWall){
@@ -30,10 +33,12 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.insert(EAST);
 				}
+				/*
 				if(noLeftWall){
 					openings.insert(WEST);
 				}
-				openings.insert(SOUTH);
+				*/
+				//openings.insert(SOUTH);
 				break;
 			case SOUTH:
 				if(noFrontWall){
@@ -42,10 +47,12 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.insert(WEST);
 				}
+				/*
 				if(noLeftWall){
 					openings.insert(EAST);
 				}
-				openings.insert(NORTH);
+				*/
+				//openings.insert(NORTH);
 				break;
 			case EAST:
 				if(noFrontWall){
@@ -54,10 +61,12 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.insert(SOUTH);
 				}
+				/*
 				if(noLeftWall){
 					openings.insert(NORTH);
 				}
-				openings.insert(WEST);
+				*/
+				//openings.insert(WEST);
 				break;
 			case WEST:
 				if(noFrontWall){
@@ -66,13 +75,15 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.insert(NORTH);
 				}
+				/*
 				if(noLeftWall){
 					openings.insert(SOUTH);
 				}
-				openings.insert(EAST);
+				*/
+				//openings.insert(EAST);
 				break;
 			}
-		*/
+		
 		return openings;
 	}
 }
