@@ -16,9 +16,9 @@ class Notifier
 	
 	Notifier() {
 		
-		RED_PIN = 86;
-		GREEN_PIN = 10;
-		YELLOW_PIN = 87;
+		RED_PIN = A5;
+		GREEN_PIN = 11;
+		YELLOW_PIN = 10;
 		pinMode(RED_PIN, OUTPUT);
 		pinMode(GREEN_PIN, OUTPUT);
 		pinMode(YELLOW_PIN, OUTPUT);
