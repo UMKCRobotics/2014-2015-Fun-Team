@@ -9,8 +9,8 @@ Configuration* ConfigurationFactory::createConfiguration()
 {
 	Configuration config;
 	
-	int roundPin = ;
-	int phasePin = ;
+	int roundPin = 3;
+	int phasePin = 9;
 	
 	pinMode(roundPin, INPUT);
 	pinMode(phasePin, INPUT);
