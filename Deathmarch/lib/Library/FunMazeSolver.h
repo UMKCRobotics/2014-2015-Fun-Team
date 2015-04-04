@@ -1,6 +1,5 @@
-#include <set>
 #include "RobotState.h"
-using std::set;
+#include "WorldSensor.h"
 #ifndef FUN_MAZE_SOLVER_H
 #define FUN_MAZE_SOLVER_H
 
@@ -10,7 +9,7 @@ namespace FunMazeSolver{
 	 * return what direction the robot should turn to face.
 	 * Should always turn to the right.
 	 */
-	Cardinal doRightHand(RobotState r,set<Cardinal> openings);
+	Cardinal doRightHand(RobotState r,Openings openings);
 }
 
 #endif

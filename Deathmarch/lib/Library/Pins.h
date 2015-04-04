@@ -1,6 +1,6 @@
 #include "Arduino.h"
 
-#define RED_SWITCH 9
+#define RIGHT_SWITCH 9
 #define LEFT_SWITCH 3
 #define BUTTON 11
 

@@ -1,4 +1,6 @@
 #include "ConfigManager.h"
+#include "Pins.h"
+#include "Arduino.h"
 
 
 Configuration* ConfigurationFactory::constructBlankConfig(){
@@ -12,11 +14,11 @@ Configuration* ConfigurationFactory::createConfiguration()
 	int roundPin = 3;
 	int phasePin = 9;
 	
-	pinMode(roundPin, INPUT);
-	pinMode(phasePin, INPUT);
+	pinMode(LEFT_SWITCH, INPUT);
+	pinMode(RIGHT_SWITCH, INPUT);
 	
 	
-	if(digitalRead(roundPin) == HIGH) {
+	if(digitalRead(LEFT_SWITCH) == HIGH) {
 		config.round = 1;
 		config.boardXDimension = 5;
 		config.boardYDimension = 5;
@@ -36,7 +38,7 @@ Configuration* ConfigurationFactory::createConfiguration()
 	}
 	
 	
-	if(digitalRead(phasePin) == HIGH) {
+	if(digitalRead(RIGHT_SWITCH) == HIGH) {
 		config.phase = 1;
 	}
 	else {

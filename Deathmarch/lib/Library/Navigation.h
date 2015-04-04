@@ -3,9 +3,8 @@
 #include "RobotState.h"
 #include "Cardinal.h"
 #include "ConfigManager.h"
-#include <string>
+#include <string.h>
 
-using std::string;
 
 
 
@@ -46,14 +45,12 @@ class Navigation
 	/*
 	 * Returns a pretty printed version of the array. Very useful for debugging
 	 */
-	string toString();
+	String toString();
 	
 	private:
 	Cardinal map[50];
 	Configuration* config;
 
-	void logNavigationMessage(string);
-	void logNavigationError(string);
 
 	
 };

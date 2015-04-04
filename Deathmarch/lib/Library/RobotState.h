@@ -18,6 +18,10 @@ struct RobotState{
 	 * The node the robot is currently in
 	 */
 	int currentNode;
+	RobotState(){
+		currentNode = 0;
+		currentDirection = NORTH;
+	}
 	/**
 	 * Construct a new robot state from a given configuration
 	 */

@@ -1,14 +1,15 @@
 #ifndef CARDINAL_H
 #define CARDINAL_H
 
-#include <string>
-#include "Logger.h"
-using std::string;
+#include "Arduino.h"
+#include <string.h>
 
 enum Cardinal { NORTH,
 		SOUTH,
 		EAST,
-		WEST};
-string cardinalToString(Cardinal);
-Cardinal stringToCardinal(string);
+		WEST,
+		NONE
+};
+String cardinalToString(Cardinal);
+Cardinal stringToCardinal(String);
 #endif

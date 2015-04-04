@@ -1,13 +1,8 @@
 #include "MotorController.h"
-#include <sstream>
 
 FunMotorController::FunMotorController(){
-	backMotorController = DMCCstart(0); //Back
-	frontMotorController = DMCCstart(1); //Front
 }
 FunMotorController::~FunMotorController(){
-	DMCCend(backMotorController);
-	DMCCend(frontMotorController);
 }
 
 RobotState FunMotorController::move(RobotState state, Cardinal c){
@@ -91,16 +86,12 @@ void FunMotorController::turn(Cardinal current, Cardinal toFace){
 }
 
 void FunMotorController::setBackRight(int amount){
-	setMotorPower(backMotorController,1,-amount);
 }
 void FunMotorController::setBackLeft(int amount){
-	setMotorPower(backMotorController,2,amount);
 }
 void FunMotorController::setFrontRight(int amount){
-	setMotorPower(frontMotorController,1,-amount);
 }
 void FunMotorController::setFrontLeft(int amount){
-	setMotorPower(frontMotorController,2,amount);
 }
 void FunMotorController::setRight(int amount){
 	setBackRight(amount);
@@ -118,7 +109,6 @@ void FunMotorController::setAll(int amount){
 }
 
 void FunMotorController::stopAll(){
-	Logger::logMessage("Stopping all motors");
 	setAll(0);
 }
 
@@ -129,10 +119,6 @@ void FunMotorController::turnLeft(){
 void FunMotorController::turnRight(){
 }
 void FunMotorController::moveForwardOneSquare(){
-
-	Logger::logMessage("Moving Forward one square.");
-	
-
 
 
 }

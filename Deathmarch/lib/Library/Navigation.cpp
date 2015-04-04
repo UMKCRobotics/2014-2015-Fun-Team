@@ -1,13 +1,11 @@
 #include "Navigation.h"
-#include <sstream>
-#include <fstream>
 
 Navigation::Navigation(Configuration* config) : config(config)
 {
 	for(int i = 0; i < 50; ++i){
 		map[i] = (Cardinal)-1; //This is because somtimes they will intialize to valid values and we don't want that for pretty printing
 	}
-	map[config->startNode] = Cardinal::NORTH;
+	map[config->startNode] = NORTH;
 
 }
 
@@ -37,6 +35,7 @@ bool Navigation::inFinalNode(RobotState state)
 	return state.currentNode == config->endNode;
 }
 
+/*
 string Navigation::toString(){
 	stringstream ss;
 	string tmp;
@@ -65,6 +64,7 @@ string Navigation::toString(){
 	}
 	return ss.str();
 }
+*/
 /*
 void Navigation::logNavigationError(string s){
 	Logger::logError("Navigation: " + s);

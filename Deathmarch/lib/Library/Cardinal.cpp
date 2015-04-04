@@ -1,7 +1,7 @@
-#include <string>
+#include <string.h>
 #include "Cardinal.h"
 
-std::string cardinalToString(Cardinal c){
+String cardinalToString(Cardinal c){
 	switch(c){
 		case NORTH:
 			return "NORTH";
@@ -12,17 +12,17 @@ std::string cardinalToString(Cardinal c){
 		case EAST:
 			return "EAST";
 	}
-	Logger::logError("Cardinal to string cast failed!");
+	//Logger::logError("Cardinal to string cast failed!");
 	return "";
 }
 
-Cardinal stringToCardinal(std::string s){
+Cardinal stringToCardinal(String s){
 	//the person who wrote string comparison is a goofball
-	if(s.compare("NORTH") == 0) return NORTH;
-	if(s.compare("SOUTH") == 0) return SOUTH;
-	if(s.compare("EAST") == 0) return EAST;
-	if(s.compare("WEST") == 0) return WEST;
+	if(s == ("NORTH")) return NORTH;
+	if(s == ("SOUTH")) return SOUTH;
+	if(s == ("EAST")) return EAST;
+	if(s == ("WEST")) return WEST;
 
-	Logger::logError("String to Cardinal cast failed, returning north to avoid errors");
+//	Logger::logError("String to Cardinal cast failed, returning north to avoid errors");
 	return NORTH;
 }
