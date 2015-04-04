@@ -1,14 +1,32 @@
 #include "Cardinal.h"
 #include "RobotState.h"
+#include "RedBot.h"
 
 #ifndef FUN_MOTOR_CONTROLLER_H
 #define FUN_MOTOR_CONTROLLER_H
 
 class FunMotorController{
+	
+	SoftwareSerial backSerialCom;
+	/*
+	 * Serial works as in a 2 byte fashion. If the first byte is 0 a special command is desired
+	 * if the first byte is not 0 then a motor speed is desired, first byte is right second byte is left
+	 * 244 is max forward, 1 is max backward with 127 being 'stop' (the special stop command should be used instead
+	 *
+	 * if the first byte is 0 then the next byte is the selector byte
+	 * 1 - stop both motors
+	 * 2 - red LED ON
+	 * 3 - yellow LED ON
+	 * 4 - green LED ON
+	 * 5 - red LED OFF
+	 * 6 - yellow LED OFF
+	 * 7 - green LED OFF
+	 */
 
+
+	RedBotMotor frontMotors;
 	private: 
-		int backMotorController;
-		int frontMotorController;
+
 		void moveForwardOneSquare();
 		void turnLeft();
 		void turnRight();

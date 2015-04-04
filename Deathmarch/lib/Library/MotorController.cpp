@@ -1,6 +1,7 @@
 #include "MotorController.h"
 
 FunMotorController::FunMotorController(){
+
 }
 FunMotorController::~FunMotorController(){
 }
@@ -90,6 +91,7 @@ void FunMotorController::setBackRight(int amount){
 void FunMotorController::setBackLeft(int amount){
 }
 void FunMotorController::setFrontRight(int amount){
+
 }
 void FunMotorController::setFrontLeft(int amount){
 }
@@ -109,10 +111,14 @@ void FunMotorController::setAll(int amount){
 }
 
 void FunMotorController::stopAll(){
-	setAll(0);
+	motors.break();
+	serial.write(0);
+	serial.write(0);
 }
 
 void FunMotorController::turnAround(){
+	turnRight();
+	turnRight();
 }
 void FunMotorController::turnLeft(){
 }

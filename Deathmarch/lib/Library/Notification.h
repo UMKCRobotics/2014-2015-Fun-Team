@@ -1,8 +1,8 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
 
-#include <sstream>
-
+#include "Arduino.h"
+#include "Pins.h"
 
 class Notifier
 {
@@ -61,20 +61,11 @@ class Notifier
 	void  mazeComplete() {
 		Notifier::offGreen();
 		Notifier::onRed();
-		sleep(5);
+		delay(5);
 		Notifier::offRed();
 		Notifier::onYellow();
 	}
 };
-
-
-
-
-
-
-
-
-
 
 
 #endif
