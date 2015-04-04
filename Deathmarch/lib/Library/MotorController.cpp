@@ -1,4 +1,8 @@
 #include "MotorController.h"
+#include "Pins.h"
+#include "Arduino.h"
+#include "RedBot.h"
+
 
 FunMotorController::FunMotorController(){
 
@@ -86,34 +90,10 @@ void FunMotorController::turn(Cardinal current, Cardinal toFace){
 	}
 }
 
-void FunMotorController::setBackRight(int amount){
-}
-void FunMotorController::setBackLeft(int amount){
-}
-void FunMotorController::setFrontRight(int amount){
-
-}
-void FunMotorController::setFrontLeft(int amount){
-}
-void FunMotorController::setRight(int amount){
-	setBackRight(amount);
-	setFrontRight(amount);
-}
-void FunMotorController::setLeft(int amount){
-	setFrontLeft(amount);
-	setBackLeft(amount);
-}
-void FunMotorController::setAll(int amount){
-	setFrontLeft(amount);
-	setFrontRight(amount);
-	setBackLeft(amount);
-	setBackRight(amount);
-}
 
 void FunMotorController::stopAll(){
-	motors.break();
-	serial.write(0);
-	serial.write(0);
+	frontMotors.stop();
+	backSerialCom.write(1);
 }
 
 void FunMotorController::turnAround(){
@@ -121,11 +101,41 @@ void FunMotorController::turnAround(){
 	turnRight();
 }
 void FunMotorController::turnLeft(){
+	frontMotors.leftDrive(MAX_SPEED);
+	frontMotors.rightDrive(-MAX_SPEED);
+	backSerialCom.write(10);
+	delay(50);
+	while(!allLineSensorsOnBlack()){} //this is why i miss frp
+	stopAll();
+	
 }
 void FunMotorController::turnRight(){
+	frontMotors.leftDrive(-MAX_SPEED);
+	frontMotors.rightDrive(MAX_SPEED);
+	backSerialCom.write(9);
+	delay(50); 
+	while(!allLineSensorsOnBlack()){} //this is why i miss frp
+	stopAll();
 }
 void FunMotorController::moveForwardOneSquare(){
-
-
+	backSerialCom.write(8);
+	frontMotors.drive(MAX_SPEED);
+	delay(50);
+	while(!allLineSensorsOnBlack()){
+		int nextRightValue = MAX_SPEED - rightLineRead();
+		int nextLeftValue = MAX_SPEED - leftLineRead();
+	}
 }
-
+bool FunMotorController::allLineSensorsOnBlack(){
+	int blackMin = 500;
+	return rightLineRead() > blackMin &&  leftLineRead() > blackMin && centerLineRead() > blackMin;
+}
+int FunMotorController::rightLineRead(){
+	return analogRead(RIGHT_LINE);
+}
+int FunMotorController::leftLineRead(){
+	return analogRead(LEFT_LINE);
+}
+int FunMotorController::centerLineRead(){
+	return analogRead(CENTER_LINE);
+}

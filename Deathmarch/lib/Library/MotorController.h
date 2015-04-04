@@ -6,14 +6,7 @@
 #define FUN_MOTOR_CONTROLLER_H
 
 class FunMotorController{
-	
-	SoftwareSerial backSerialCom;
 	/*
-	 * Serial works as in a 2 byte fashion. If the first byte is 0 a special command is desired
-	 * if the first byte is not 0 then a motor speed is desired, first byte is right second byte is left
-	 * 244 is max forward, 1 is max backward with 127 being 'stop' (the special stop command should be used instead
-	 *
-	 * if the first byte is 0 then the next byte is the selector byte
 	 * 1 - stop both motors
 	 * 2 - red LED ON
 	 * 3 - yellow LED ON
@@ -21,10 +14,14 @@ class FunMotorController{
 	 * 5 - red LED OFF
 	 * 6 - yellow LED OFF
 	 * 7 - green LED OFF
+	 * 8 - Both Motors full forward
+	 * 9 - both Motors right Turn
+	 * 10 - both motors left turn
 	 */
+	RedBotSoftwareSerial backSerialCom;
+	
 
-
-	RedBotMotor frontMotors;
+	RedBotMotors frontMotors;
 	private: 
 
 		void moveForwardOneSquare();
@@ -39,14 +36,12 @@ class FunMotorController{
 		 * @param: toFace - The direction which the robot should turn to face
 		 */
 		void turn(Cardinal current,Cardinal toFace);
-		void setAll(int);
 		void stopAll();
-		void setLeft(int);
-		void setRight(int);
-		void setFrontLeft(int);
-		void setFrontRight(int);
-		void setBackLeft(int);
-		void setBackRight(int);
+		bool allLineSensorsOnBlack();
+		int rightLineRead();
+		int leftLineRead();
+		int centerLineRead();
+		const int MAX_SPEED = 127;
 	public:
 		FunMotorController();
 		~FunMotorController();

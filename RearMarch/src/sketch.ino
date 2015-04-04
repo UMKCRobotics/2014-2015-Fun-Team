@@ -1,16 +1,18 @@
 #include <RedBot.h>
 #include <RedBotSoftwareSerial.h>
 
-RedBotSoftwareSerial mySerial = SoftwareSerial(A0, A1); // RX, TX
+//RedBotSoftwareSerial mySerial = RedBotSoftwareSerial(A0, A1); // RX, TX
+RedBotSoftwareSerial mySerial;
 //Receiver Board - Just gets motor commands
+
+int RED, YELLOW, GREEN;
+RedBotMotors motor;
 
 void setup()  
 {
-  int RED, YELLOW, GREEN;
   RED = A5;
   YELLOW = 10;
   GREEN = 11;
-  RedBotMotors motor;
   // Open serial communications and wait for port to open:
   mySerial.begin(38400);
   pinMode(YELLOW, OUTPUT);
@@ -21,7 +23,7 @@ void setup()
 void loop() // run over and over
 {
 
-  int incoming = mySerial.available;
+  int incoming = mySerial.available();
 
   if (incoming > 0)
   {
@@ -29,7 +31,7 @@ void loop() // run over and over
        case 1:
        {
          //FullStop
-         motor.stop;
+         motor.stop();
          break;
        }
        case 2:
