@@ -1,4 +1,9 @@
+#include <Arduino.h>
 #include "MotorController.h"
+void setup();
+void loop();
+#line 1 "src/sketch.ino"
+//#include "MotorController.h"
 
 FunMotorController mc;
 RobotState state;

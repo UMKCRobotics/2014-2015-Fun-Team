@@ -1,26 +1,12 @@
 #include "Cardinal.h"
 #include "RobotState.h"
-#include "RedBot.h"
+#include "SerialCom.h"
 
 #ifndef FUN_MOTOR_CONTROLLER_H
 #define FUN_MOTOR_CONTROLLER_H
 
 class FunMotorController{
-	/*
-	 * 1 - stop both motors
-	 * 2 - red LED ON
-	 * 3 - yellow LED ON
-	 * 4 - green LED ON
-	 * 5 - red LED OFF
-	 * 6 - yellow LED OFF
-	 * 7 - green LED OFF
-	 * 8 - Both Motors full forward
-	 * 9 - both Motors right Turn
-	 * 10 - both motors left turn
-	 */
-	RedBotSoftwareSerial backSerialCom;
 	
-
 	RedBotMotors frontMotors;
 	private: 
 
@@ -41,7 +27,8 @@ class FunMotorController{
 		int rightLineRead();
 		int leftLineRead();
 		int centerLineRead();
-		const int MAX_SPEED = 127;
+		const int MAX_SPEED = 140;
+		const int MAX_TURN_SPEED = MAX_SPEED - 50;
 	public:
 		FunMotorController();
 		~FunMotorController();

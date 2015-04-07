@@ -3,9 +3,7 @@
 #include "Arduino.h"
 #include "RedBot.h"
 
-
 FunMotorController::FunMotorController(){
-
 }
 FunMotorController::~FunMotorController(){
 }
@@ -92,8 +90,8 @@ void FunMotorController::turn(Cardinal current, Cardinal toFace){
 
 
 void FunMotorController::stopAll(){
-	frontMotors.stop();
-	backSerialCom.write(1);
+	frontMotors.brake();
+	SerialCom::stopBothMotors();
 }
 
 void FunMotorController::turnAround(){
@@ -101,33 +99,38 @@ void FunMotorController::turnAround(){
 	turnRight();
 }
 void FunMotorController::turnLeft(){
-	frontMotors.leftDrive(MAX_SPEED);
-	frontMotors.rightDrive(-MAX_SPEED);
-	backSerialCom.write(10);
-	delay(50);
+	frontMotors.leftDrive(-MAX_TURN_SPEED);
+	frontMotors.rightDrive(MAX_TURN_SPEED);
+	SerialCom::motorsLeftTurn();
+	delay(800);
 	while(!allLineSensorsOnBlack()){} //this is why i miss frp
 	stopAll();
 	
 }
 void FunMotorController::turnRight(){
-	frontMotors.leftDrive(-MAX_SPEED);
-	frontMotors.rightDrive(MAX_SPEED);
-	backSerialCom.write(9);
-	delay(50); 
+	frontMotors.leftDrive(MAX_TURN_SPEED);
+	frontMotors.rightDrive(-MAX_TURN_SPEED);
+	SerialCom::motorsRightTurn();
+	delay(800); 
 	while(!allLineSensorsOnBlack()){} //this is why i miss frp
 	stopAll();
 }
 void FunMotorController::moveForwardOneSquare(){
-	backSerialCom.write(8);
-	frontMotors.drive(MAX_SPEED);
-	delay(50);
-	while(!allLineSensorsOnBlack()){
-		int nextRightValue = MAX_SPEED - rightLineRead();
-		int nextLeftValue = MAX_SPEED - leftLineRead();
+	SerialCom::motorsFullForward();
+	frontMotors.drive(MAX_SPEED-50);
+	delay(800);
+	while(!allLineSensorsOnBlack() && analogRead(FRONT_IR) < 650){
+		int potentialNextRightValue = MAX_SPEED - rightLineRead();
+		int potentialNextLeftValue = MAX_SPEED - leftLineRead();
+		int nextRightValue = (potentialNextRightValue >0)? potentialNextRightValue : 20;
+		int nextLeftValue = (potentialNextLeftValue > 0) ? potentialNextLeftValue : 20;
+		frontMotors.leftDrive(nextLeftValue);
+		frontMotors.rightDrive(nextRightValue);
 	}
+	stopAll();
 }
 bool FunMotorController::allLineSensorsOnBlack(){
-	int blackMin = 500;
+	int blackMin = 800;
 	return rightLineRead() > blackMin &&  leftLineRead() > blackMin && centerLineRead() > blackMin;
 }
 int FunMotorController::rightLineRead(){

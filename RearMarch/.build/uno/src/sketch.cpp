@@ -14,6 +14,7 @@ RedBotSoftwareSerial mySerial;
 int RED, YELLOW, GREEN;
 RedBotMotors motor;
 
+int speed;
 void setup()  
 {
   RED = A5;
@@ -24,6 +25,7 @@ void setup()
   pinMode(YELLOW, OUTPUT);
   pinMode(RED, OUTPUT);
   pinMode(GREEN, OUTPUT);
+  speed = 127 - 50;
 }
 
 void loop() // run over and over
@@ -37,7 +39,7 @@ void loop() // run over and over
        case 1:
        {
          //FullStop
-         motor.stop();
+         motor.brake();
          break;
        }
        case 2:
@@ -79,21 +81,21 @@ void loop() // run over and over
        case 8:
        {
          //GoForward
-         motor.drive(255);
+         motor.drive(speed);
          break;
        }
        case 9:
        {
          //TurnRight
-         motor.leftDrive(255);
-         motor.rightDrive(-255);
+         motor.leftDrive(speed);
+         motor.rightDrive(-speed);
          break;
        }
        case 10:
        {
          //TurnLeft
-         motor.leftDrive(-255);
-         motor.rightDrive(255);
+         motor.leftDrive(-speed);
+         motor.rightDrive(speed);
          break;
        }
       }
