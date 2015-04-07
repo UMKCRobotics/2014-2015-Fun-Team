@@ -1,8 +1,0 @@
-round switch up = 9 (P8_33)
-round switch down = 8 (P8_35)
-
-"phase" switch up = 81 (P8_34)
-
-Red = 86 (P8_27)
-Green = 10 (P8_31)
-Yellow = 87 (P8_29)
