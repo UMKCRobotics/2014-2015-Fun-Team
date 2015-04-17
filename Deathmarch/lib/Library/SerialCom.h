@@ -29,7 +29,6 @@ namespace SerialCom{
 	void motorsLeftTurn();
 	bool testSerial();
 
-	Serial* getScreenSerial();
 
 	const int SERIAL_SPEED = 9600;
 	static RedBotSoftwareSerial serial;

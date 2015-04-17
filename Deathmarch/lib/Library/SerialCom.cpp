@@ -55,11 +55,6 @@ void SerialCom::rawWriteValue(char value){
 
 }
 
-Serial* getScreenSerial(){
-  initializeScreenSerialIfNeeded();
-  return &Serial;
-}
-
 
 void SerialCom::initializeScreenSerialIfNeeded(){
   if(!SerialCom::screenIsInitialized){Serial.begin(9600);}
