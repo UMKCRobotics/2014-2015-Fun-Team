@@ -3,75 +3,59 @@
 
 Cardinal FunMazeSolver::doRightHand(RobotState r,Openings openings){
 	if(openings.NoneOpen) return NONE;
-	Cardinal direction;
 	switch(r.currentDirection){
 		case NORTH:
 			if(openings.EastOpen) {
-				direction = EAST;
+				return EAST;
 				break;
 			}
 			if(openings.NorthOpen) {
-				direction = NORTH;
-				break;
+				return NORTH;
 			}
 			if(openings.WestOpen) {
-				direction = WEST;
-				break;
+				return WEST;
 			}
 			if(openings.SouthOpen) {
-				direction = SOUTH;
-				break;
+				return SOUTH;
 			}
 		case EAST:
 			if(openings.SouthOpen) {
-				direction = SOUTH;
-				break;
+				return SOUTH;
 			}
 			if(openings.EastOpen) {
-				direction = EAST;	
-				break;
+				return EAST;	
 			}
 			if(openings.NorthOpen) {
-				direction = NORTH;
-				break;
+				return NORTH;
 			}
 			if(openings.WestOpen){
-			       	direction = WEST;
-				break;
+			       	return WEST;
 			}
 		case SOUTH:
 			if(openings.WestOpen) {
-				direction = WEST;
-				break;
+				return WEST;
 			}
 			if(openings.SouthOpen) {
-				direction = SOUTH;
-				break;
+				return SOUTH;
 			}
 			if(openings.EastOpen){
-				direction = EAST;
-				break;
+				return EAST;
 			}
 			if(openings.NorthOpen){
-				direction = NORTH;
-				break;
+				return NORTH;
 			}
 		case WEST:
 			if(openings.NorthOpen){
-				direction = NORTH;
-				break;
+				return NORTH;
 			}
 			if(openings.WestOpen){
-				direction = WEST;
-				break;
+				return WEST;
 			}
 			if(openings.SouthOpen){
-				direction = SOUTH;
-				break;
+				return SOUTH;
 			}
 			if(openings.EastOpen){
-				direction = EAST;
-				break;
+				return EAST;
 			}
 		}
 		/*
@@ -79,5 +63,4 @@ Cardinal FunMazeSolver::doRightHand(RobotState r,Openings openings){
 		ss << "Robot is currently facing " << cardinalToString(r.currentDirection) << " therefore it should be turned to " << cardinalToString(direction);
 		logMazeSolverMessage(ss.str());
 		*/
-		return direction;
 }

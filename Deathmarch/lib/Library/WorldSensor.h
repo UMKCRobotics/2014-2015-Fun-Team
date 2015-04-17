@@ -2,7 +2,6 @@
 #include "Arduino.h"
 #include "Pins.h"
 
-
 #ifndef FunWorldSensor
 #define FunWorldSensor
 
@@ -12,30 +11,8 @@ struct Openings{
 	bool EastOpen;
 	bool WestOpen;
 	bool NoneOpen;
-	Openings(){
-		bool NorthOpen = false;
-		bool SouthOpen = false;
-		bool EastOpen = false;
-		bool WestOpen = false;
-		bool NoneOpen = false;
-	}
-
-	void open(Cardinal card){
-		switch(card){
-			case NORTH:
-				NorthOpen = true;
-				break;
-			case SOUTH:
-				SouthOpen = true;
-				break;
-			case EAST:
-				EastOpen = true;
-				break;
-			case WEST:
-				WestOpen = true;
-				break;
-		}
-	}
+	Openings();
+	void open(Cardinal card);
 };
 
 namespace FunWorldSensor{
@@ -43,18 +20,46 @@ namespace FunWorldSensor{
 	 * Uses the IR sensors to compute what walls around the
 	 * robot are open
 	 */
-	const int minValue = 250; //Sensor values get higher as you get closer
+	const int maxValueR = 200; //Sensor values get higher as you get closer
+	const int maxValueF = 400;
+	const int timesToReadSensors = 25;
+	
+	inline int avg(int x, int y){
+		return ((x+y)/2);
+	}
+
 	Openings computeOpenings(RobotState state){
-		int frontIR = analogRead(FRONT_IR);
-		int backRightIR =analogRead(BACKWARD_RIGHT_IR);
-		int frontRightIR = analogRead(FORWARD_RIGHT_IR);
+		unsigned int frontIRSum = 0;
+		unsigned int backRightIRSum = 0;
+		unsigned int frontRightIRSum = 0;
+
+		for(int i = 0; i < timesToReadSensors; ++i){
+			frontIRSum += analogRead(FRONT_IR);
+			backRightIRSum += analogRead(BACKWARD_RIGHT_IR);
+			frontRightIRSum += analogRead(FORWARD_RIGHT_IR);
+			delay(5);
+		}
+
+		int frontIR = frontIRSum / timesToReadSensors;
+		int backRightIR = backRightIRSum / timesToReadSensors;
+		int frontRightIR = frontRightIRSum / timesToReadSensors;
 		
-		bool noFrontWall = frontIR >= minValue;
-		bool noRightWall = ((backRightIR + frontRightIR) / 2) >= minValue;
+		Serial* s = SerialCom::getScreenSerial();
+		SerialCom::getScreenSerial()->print("test");
+		SerialCom::getScreenSerial()->print("\n Front: ");
+		SerialCom::getScreenSerial()->print(frontIR);
+		SerialCom::getScreenSerial()->print("\n BackR: ");
+		SerialCom::getScreenSerial()->print(backRightIR);
+		SerialCom::getScreenSerial()->print("\n FrontR: ");
+		SerialCom::getScreenSerial()->print(frontRightIR);
+	
+		bool noFrontWall = frontIR <= maxValueF;
+		bool noRightWall = avg(backRightIR,frontRightIR) <= maxValueR;
+
 
 		Openings openings;
 
-		if(noFrontWall && noRightWall){
+		if(!noFrontWall && !noRightWall){
 			openings.NoneOpen = true;
 			return openings;
 		}
@@ -67,12 +72,6 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.open(EAST);
 				}
-				/*
-				if(noLeftWall){
-					openings.open(WEST);
-				}
-				*/
-				//openings.open(SOUTH);
 				break;
 			case SOUTH:
 				if(noFrontWall){
@@ -81,12 +80,6 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.open(WEST);
 				}
-				/*
-				if(noLeftWall){
-					openings.open(EAST);
-				}
-				*/
-				//openings.open(NORTH);
 				break;
 			case EAST:
 				if(noFrontWall){
@@ -95,12 +88,6 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.open(SOUTH);
 				}
-				/*
-				if(noLeftWall){
-					openings.open(NORTH);
-				}
-				*/
-				//openings.open(WEST);
 				break;
 			case WEST:
 				if(noFrontWall){
@@ -109,16 +96,13 @@ namespace FunWorldSensor{
 				if(noRightWall){
 					openings.open(NORTH);
 				}
-				/*
-				if(noLeftWall){
-					openings.open(SOUTH);
-				}
-				*/
-				//openings.open(EAST);
 				break;
-			}
+		}
 		
+		openings.NoneOpen = false;
 		return openings;
-	}
+	
+	}	
+
 }
 #endif

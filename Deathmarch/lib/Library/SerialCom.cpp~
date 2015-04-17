@@ -1,0 +1,67 @@
+#include "SerialCom.h"
+
+void SerialCom::stopBothMotors(){
+	if (! SerialCom::isInitialized) SerialCom::init();
+	SerialCom::serial.write(1);
+	blockUntilGoodWrite();
+}
+void SerialCom::redLedOn(){
+	if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(2);
+	blockUntilGoodWrite();
+}
+void SerialCom::yellowLedOn(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(3);
+	blockUntilGoodWrite();
+}
+void SerialCom::greenLedOn(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(4);
+	blockUntilGoodWrite();
+}
+void SerialCom::redLedOff(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(5);
+	blockUntilGoodWrite();
+}
+void SerialCom::yellowLedOff(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(6);
+	blockUntilGoodWrite();
+}
+void SerialCom::greenLedOff(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(7);
+	blockUntilGoodWrite();
+}
+void SerialCom::motorsFullForward(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(8);
+	blockUntilGoodWrite();
+}
+void SerialCom::motorsRightTurn(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(9);
+	blockUntilGoodWrite();
+}
+void SerialCom::motorsLeftTurn(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(10);
+	blockUntilGoodWrite();
+}
+void SerialCom::blockUntilConnected(){
+if (! SerialCom::isInitialized) SerialCom::init();
+	serial.write(11);
+	blockUntilGoodWrite();
+}
+void SerialCom::blockUntilGoodWrite(){
+	/*
+	while(true){
+		if(serial.available() != 0){
+			return;
+		}
+	}
+	*/
+}
+

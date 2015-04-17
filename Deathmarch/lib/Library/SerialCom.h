@@ -1,9 +1,9 @@
 #include "RedBot.h"
+#include "Arduino.h"
 
 #ifndef SerialCom_h
 #define SerialCom_h
 
-#define SERIAL_SPEED 38400
 /*
 	 * 1 - stop both motors
 	 * 2 - red LED ON
@@ -16,32 +16,40 @@
 	 * 9 - both Motors right Turn
 	 * 10 - both motors left turn
 	 */
-class SerialCom{
+namespace SerialCom{
+	void stopBothMotors();
+	void redLedOn();
+	void yellowLedOn();
+	void greenLedOn();
+	void redLedOff();
+	void yellowLedOff();
+	void greenLedOff();
+	void motorsFullForward();
+	void motorsRightTurn();
+	void motorsLeftTurn();
+	bool testSerial();
 
-    public:
-	static void stopBothMotors(){getInstance().serial.write(1);}
-	static void redLedOn(){getInstance().serial.write(2);}
-	static void yellowLedOn(){getInstance().serial.write(3);}
-	static void greenLedOn(){getInstance().serial.write(4);}
-	static void redLedOff(){getInstance().serial.write(5);}
-	static void yellowLedOff(){getInstance().serial.write(6);}
-	static void greenLedOff(){getInstance().serial.write(7);}
-	static void motorsFullForward(){getInstance().serial.write(8);}
-	static void motorsRightTurn(){getInstance().serial.write(9);}
-	static void motorsLeftTurn(){getInstance().serial.write(10);}
-        
-    private:
-	static SerialCom& getInstance()
-        {
-            static SerialCom  instance; // Guaranteed to be destroyed.
-                                  // Instantiated on first use.
-            return instance;
-        }
+	Serial* getScreenSerial();
 
-	RedBotSoftwareSerial serial;
-        SerialCom() {
-		serial.begin(SERIAL_SPEED);
-	};                   
+	const int SERIAL_SPEED = 9600;
+	static RedBotSoftwareSerial serial;
+	static bool isInitialized = false;
+	static bool screenIsInitialized = false;
+	const int DELAY_AFTER_WRITE = 10;
+
+	static void init(){
+		SerialCom::serial.begin(SerialCom::SERIAL_SPEED);
+	 	//blockUntilConnected();
+		SerialCom::isInitialized = true;
+	}
+	
+	void initializeIfNeeded();
+	void initializeScreenSerialIfNeeded();
+	
+	void rawWriteValue(char value);
+
+	void blockUntilGoodWrite();
+
 };
 
 #endif

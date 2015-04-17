@@ -1,0 +1,60 @@
+#define BIT_COUNT r1
+#define TEMP_REG r2
+#define DELAY_REG r3
+#define READ_REG r4
+
+#define RAM_ADDR_REG r29
+#define DATA_REG_3 r28
+#define DATA_REG_2 r27
+#define DATA_REG_1 r26
+#define DATA_REG_0 r25
+
+// Arduino serial tx plugs into P8_41, which is PRU register r31.t4
+#define RX_PIN t4
+// Arduino sync pin plugs into P8_39, which is PRU register r31.t6
+#define SYNC_PIN t6
+
+// 115200 bps = 8681 nanoseconds per bit / 5 nanoseconds clock tick / 2
+// instructions per loop iteration.
+#define DELAY_PER_BIT 868
+// 1.5x as long to get from beginning of start bit to middle of first data bit.
+#define DELAY_AFTER_START 1302
+
+// Magic constants from TI wiki -- interrupt values for ARM (Linux) CPU.
+#define PRU0_ARM_INTERRUPT 19
+#define PRU1_ARM_INTERRUPT 20
+
+// ***********
+// MACROS
+// ***********
+// UART serial protocol overview (Google for more info):
+// - 1 start bit (low)
+// - 8 data bits
+// - 1 stop bit (high)
+// Falling edge of stop bit = beginning of start bit.
+.macro readByte
+    MOV BIT_COUNT, 0  // Initialize data loop counter.
+    MOV TEMP_REG, 0  // Reset byte storage.
+    START_BIT:
+        QBBS START_BIT, r31.RX_PIN  // Wait for beginning of start bit (high -> low).
+        delay DELAY_AFTER_START  // Delay until middle of first data bit.
+    DATA_BIT:
+        // Only set TEMP_REG bit if DATA_PIN is high.
+        QBBC DATA_BIT_2, r31.RX_PIN
+        SET TEMP_REG, BIT_COUNT
+    DATA_BIT_2:
+        // Delay and loop while more data bits remain.
+        // Reminder: delay still happens after final data bit (before stop bit).
+        delay DELAY_PER_BIT
+        ADD BIT_COUNT, BIT_COUNT, 1
+        QBNE DATA_BIT, BIT_COUNT, 8
+.endm
+
+.macro delay
+.mparam cycles
+    MOV DELAY_REG, cycles
+    SUB DELAY_REG, DELAY_REG, 1  // Account for this + previous instruction.
+    DELAY_LOOP:
+        SUB DELAY_REG, DELAY_REG, 1  // Each loop has 2 cycles.
+        QBNE DELAY_LOOP, DELAY_REG, 0
+.endm
