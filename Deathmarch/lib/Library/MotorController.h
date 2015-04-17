@@ -7,11 +7,10 @@
 
 class FunMotorController{
 	
-	RedBotMotors frontMotors;
 	private: 
 
+		RedBotMotors frontMotors;
 		void moveForwardOneSquare();
-		void turnLeft();
 		void turnRight();
 		void turnAround();
 		/*
@@ -22,17 +21,21 @@ class FunMotorController{
 		 * @param: toFace - The direction which the robot should turn to face
 		 */
 		void turn(Cardinal current,Cardinal toFace);
-		void stopAll();
 		bool allLineSensorsOnBlack();
 		int rightLineRead();
 		int leftLineRead();
 		int centerLineRead();
-		const int MAX_SPEED = 140;
-		const int MAX_TURN_SPEED = MAX_SPEED - 50;
+		const int MAX_SPEED_L = 120;
+		const int MAX_SPEED_R = 140;
+		const int MAX_TURN_SPEED =80;
+		const int MAX_REVERSE_TURN_SPEED = -100;
+		const int MIN_SPEED = 30;
 	public:
+		void turnLeft();
 		FunMotorController();
 		~FunMotorController();
 
+		void stopAll();
 		/**
 		 * Given a robot state with a current position and a direction which to move in
 		 * phsyically move the robot and return the updated robot state

@@ -99,34 +99,65 @@ void FunMotorController::turnAround(){
 	turnRight();
 }
 void FunMotorController::turnLeft(){
-	frontMotors.leftDrive(-MAX_TURN_SPEED);
+  frontMotors.leftDrive(MAX_REVERSE_TURN_SPEED);
 	frontMotors.rightDrive(MAX_TURN_SPEED);
-	SerialCom::motorsLeftTurn();
-	delay(800);
-	while(!allLineSensorsOnBlack()){} //this is why i miss frp
+	SerialCom::motorsRightTurn();
+	delay(720); 
+	//while(!allLineSensorsOnBlack()){} //this is why i miss frp
 	stopAll();
+
+	SerialCom::motorsFullForward();
+
+	frontMotors.rightDrive(MAX_SPEED_R-50);
+	frontMotors.leftDrive(MAX_SPEED_L-50);
+
+	delay(100);
+	stopAll();
+
+
 	
 }
 void FunMotorController::turnRight(){
 	frontMotors.leftDrive(MAX_TURN_SPEED);
-	frontMotors.rightDrive(-MAX_TURN_SPEED);
+	frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
 	SerialCom::motorsRightTurn();
-	delay(800); 
-	while(!allLineSensorsOnBlack()){} //this is why i miss frp
+	delay(720); 
+	//while(!allLineSensorsOnBlack()){} //this is why i miss frp
 	stopAll();
+
+	SerialCom::motorsFullForward();
+
+	frontMotors.rightDrive(MAX_SPEED_R-50);
+	frontMotors.leftDrive(MAX_SPEED_L-50);
+
+	delay(100);
+	stopAll();
+
 }
 void FunMotorController::moveForwardOneSquare(){
+  if(analogRead(FRONT_IR) > 400){
+    SerialCom::yellowLedOn();
+    SerialCom::greenLedOn();
+    turnRight();
+    turnRight();
+    turnRight();
+    return;
+  }
 	SerialCom::motorsFullForward();
-	frontMotors.drive(MAX_SPEED-50);
-	delay(800);
-	while(!allLineSensorsOnBlack() && analogRead(FRONT_IR) < 650){
-		int potentialNextRightValue = MAX_SPEED - rightLineRead();
-		int potentialNextLeftValue = MAX_SPEED - leftLineRead();
-		int nextRightValue = (potentialNextRightValue >0)? potentialNextRightValue : 20;
-		int nextLeftValue = (potentialNextLeftValue > 0) ? potentialNextLeftValue : 20;
+
+	frontMotors.rightDrive(MAX_SPEED_R-50);
+	frontMotors.leftDrive(MAX_SPEED_L-50);
+
+	delay(200);
+	while(!allLineSensorsOnBlack()){
+		int potentialNextRightValue = MAX_SPEED_R - rightLineRead();
+		int potentialNextLeftValue = MAX_SPEED_L - leftLineRead();
+		int nextRightValue = (potentialNextRightValue > 0)? potentialNextRightValue : MIN_SPEED;
+		int nextLeftValue = (potentialNextLeftValue > 0) ? potentialNextLeftValue : MIN_SPEED;
 		frontMotors.leftDrive(nextLeftValue);
 		frontMotors.rightDrive(nextRightValue);
 	}
+	//frontMotors.drive(-100);
 	stopAll();
 }
 bool FunMotorController::allLineSensorsOnBlack(){

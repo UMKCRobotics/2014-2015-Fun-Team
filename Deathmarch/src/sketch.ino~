@@ -1,0 +1,41 @@
+#include "MotorController.h"
+#include "FunMazeSolver.h"
+#include "WorldSensor.h"
+#include "Cardinal.h"
+
+FunMotorController mc;
+RobotState state;
+
+void setup()
+{
+	mc.stopAll();
+	SerialCom::init();
+	state.currentDirection = NORTH;
+	delay(500);
+	//Serial.begin(9600);
+
+}
+
+void loop()
+{
+	Openings openings = FunWorldSensor::computeOpenings(state);
+	if(openings.NoneOpen){
+		SerialCom::yellowLedOn();
+	}
+	else{
+		SerialCom::yellowLedOff();
+	}
+	Cardinal nextCard = FunMazeSolver::doRightHand(state,openings);
+	if(nextCard==NONE){
+		SerialCom::greenLedOff();
+		SerialCom::redLedOn();
+
+	}	
+	else{
+		SerialCom::redLedOff();
+		SerialCom::greenLedOn();
+	}
+	mc.move(state,nextCard);
+	state.currentDirection = nextCard;
+	delay(400);
+}

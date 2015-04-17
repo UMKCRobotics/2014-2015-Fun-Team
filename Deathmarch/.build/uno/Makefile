@@ -52,6 +52,12 @@ include .build/uno/Library/MotorController.d
 	@/usr/share/arduino/hardware/tools/avr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=105 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -Ilib/Library -Ilib/RedBot -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/cores/arduino/avr-libc -fno-exceptions  -o $@ -c lib/Library/WorldSensor.cpp
 include .build/uno/Library/WorldSensor.d
 
+.build/uno/Library/SerialCom.o : lib/Library/SerialCom.cpp
+	@echo [93mLibrary/SerialCom.cpp[0m
+	@mkdir -p .build/uno/Library
+	@/usr/share/arduino/hardware/tools/avr/bin/avr-g++ -mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=105 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -Ilib/Library -Ilib/RedBot -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/hardware/arduino/cores/arduino/avr-libc -fno-exceptions  -o $@ -c lib/Library/SerialCom.cpp
+include .build/uno/Library/SerialCom.d
+
 .build/uno/Library/ConfigManager.o : lib/Library/ConfigManager.cpp
 	@echo [93mLibrary/ConfigManager.cpp[0m
 	@mkdir -p .build/uno/Library
@@ -60,7 +66,7 @@ include .build/uno/Library/ConfigManager.d
 
 
 
-.build/uno/Library/libLibrary.a : .build/uno/Library/FunMazeSolver.o .build/uno/Library/Cardinal.o .build/uno/Library/Navigation.o .build/uno/Library/MotorController.o .build/uno/Library/WorldSensor.o .build/uno/Library/ConfigManager.o
+.build/uno/Library/libLibrary.a : .build/uno/Library/FunMazeSolver.o .build/uno/Library/Cardinal.o .build/uno/Library/Navigation.o .build/uno/Library/MotorController.o .build/uno/Library/WorldSensor.o .build/uno/Library/SerialCom.o .build/uno/Library/ConfigManager.o
 	@echo [92mLinking libLibrary.a[0m
 	@/usr/share/arduino/hardware/tools/avr/bin/avr-ar rcs $@ $^
 
