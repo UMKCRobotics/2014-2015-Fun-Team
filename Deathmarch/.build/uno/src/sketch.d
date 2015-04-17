@@ -14,4 +14,5 @@
  lib/Library/SerialCom.h lib/RedBot/RedBot.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/Stream.h \
  lib/Library/FunMazeSolver.h lib/Library/WorldSensor.h lib/Library/Pins.h \
- lib/Library/WorldSensor.h lib/Library/Cardinal.h lib/Library/Pins.h
+ lib/Library/WorldSensor.h lib/Library/Cardinal.h \
+ lib/Library/ConfigManager.h lib/Library/Navigation.h lib/Library/Pins.h

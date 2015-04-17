@@ -79,7 +79,7 @@ namespace FunWorldSensor{
 	}
 
 	Openings computeOpenings(RobotState state){
-	  IRSensorReadings readings = median(3);
+	        IRSensorReadings readings = median(3);
 	  	bool noFrontWall = readings.frontIR <= maxValueF;
 		bool noRightWall = avg(readings.backRightIR,readings.frontRightIR) <= maxValueR;
 

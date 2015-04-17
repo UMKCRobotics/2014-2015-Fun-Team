@@ -28,7 +28,10 @@ struct RobotState{
 	RobotState(Configuration* config){
 		currentNode = config->startNode;
 		currentDirection = NORTH;
-
 	}
+  void init(Configuration* config){
+    currentNode = config->startNode;
+    currentDirection = NORTH;
+  }
 };
 #endif

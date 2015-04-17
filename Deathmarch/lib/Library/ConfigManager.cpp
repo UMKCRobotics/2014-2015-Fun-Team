@@ -10,10 +10,7 @@ Configuration* ConfigurationFactory::constructBlankConfig(){
 Configuration* ConfigurationFactory::createConfiguration()
 {
 	Configuration config;
-	
-	int roundPin = 3;
-	int phasePin = 9;
-	
+
 	pinMode(LEFT_SWITCH, INPUT);
 	pinMode(RIGHT_SWITCH, INPUT);
 	
@@ -25,8 +22,8 @@ Configuration* ConfigurationFactory::createConfiguration()
 		config.matchTime = 180;
 		config.startNode = 48;
 		config.endNode = 9;
-		
-	}
+	}	
+	
 	else {
 		config.round = 2;
 		config.boardXDimension = 6;
