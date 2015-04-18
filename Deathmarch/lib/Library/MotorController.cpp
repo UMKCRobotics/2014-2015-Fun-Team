@@ -100,41 +100,45 @@ void FunMotorController::turnAround(){
 }
 void FunMotorController::turnLeft(){
   frontMotors.leftDrive(MAX_REVERSE_TURN_SPEED);
-	frontMotors.rightDrive(MAX_TURN_SPEED);
-	SerialCom::motorsRightTurn();
-	delay(720); 
-	//while(!allLineSensorsOnBlack()){} //this is why i miss frp
-	stopAll();
+  frontMotors.rightDrive(MAX_TURN_SPEED);
+  SerialCom::motorsLeftTurn();
+  delay(TURN_DELAY_L);
+  //while(!allLineSensorsOnBlack()){} //this is why i miss frp
+  stopAll();
 
-	SerialCom::motorsFullForward();
-
-	frontMotors.rightDrive(MAX_SPEED_R-50);
-	frontMotors.leftDrive(MAX_SPEED_L-50);
-
-	delay(100);
-	stopAll();
-
+  delay(100);
 
 	
 }
 void FunMotorController::turnRight(){
-	frontMotors.leftDrive(MAX_TURN_SPEED);
-	frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
-	SerialCom::motorsRightTurn();
-	delay(720); 
-	//while(!allLineSensorsOnBlack()){} //this is why i miss frp
-	stopAll();
+  
 
-	SerialCom::motorsFullForward();
+  frontMotors.leftDrive(MAX_TURN_SPEED);
+  frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
+  SerialCom::motorsRightTurn();
+  delay(TURN_DELAY_R/2 + 20); 
+  stopAll();
 
-	frontMotors.rightDrive(MAX_SPEED_R-50);
-	frontMotors.leftDrive(MAX_SPEED_L-50);
+  delay(75);
 
-	delay(100);
-	stopAll();
+  frontMotors.leftDrive(MAX_TURN_SPEED);
+  frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
+  SerialCom::motorsRightTurn();
+  delay(TURN_DELAY_R/2 + 20); 
+
+  // while(!allLineSensorsOnBlack()){} //this is why i miss frp:wa
+  stopAll();
+  delay(100);
+
+  SerialCom::motorsFullForward();
+  frontMotors.rightDrive(MAX_SPEED_R-50);
+  frontMotors.leftDrive(MAX_SPEED_L-50);
+  delay(100);
+
 
 }
 void FunMotorController::moveForwardOneSquare(){
+  /*
   if(analogRead(FRONT_IR) > 400){
     SerialCom::yellowLedOn();
     SerialCom::greenLedOn();
@@ -143,6 +147,7 @@ void FunMotorController::moveForwardOneSquare(){
     turnRight();
     return;
   }
+  */
 	SerialCom::motorsFullForward();
 
 	frontMotors.rightDrive(MAX_SPEED_R-50);
@@ -173,3 +178,9 @@ int FunMotorController::leftLineRead(){
 int FunMotorController::centerLineRead(){
 	return analogRead(CENTER_LINE);
 }
+/*
+void FunMotorController::alignToLine(){
+  bool goRight;
+  while(!analogRead())
+}
+*/

@@ -11,7 +11,6 @@ class FunMotorController{
 
 		RedBotMotors frontMotors;
 		void moveForwardOneSquare();
-		void turnRight();
 		void turnAround();
 		/*
 		 * Given a current direction and a direction in which to
@@ -25,12 +24,15 @@ class FunMotorController{
 		int rightLineRead();
 		int leftLineRead();
 		int centerLineRead();
-		const int MAX_SPEED_L = 120;
-		const int MAX_SPEED_R = 140;
+		const int MAX_SPEED_L = 100;
+		const int MAX_SPEED_R = 120;
 		const int MAX_TURN_SPEED =80;
 		const int MAX_REVERSE_TURN_SPEED = -100;
-		const int MIN_SPEED = 30;
-	public:
+		const int MIN_SPEED = 0;
+		const int TURN_DELAY_R = 800;
+		const int TURN_DELAY_L = 820;
+ public:		
+		void turnRight();
 		void turnLeft();
 		FunMotorController();
 		~FunMotorController();

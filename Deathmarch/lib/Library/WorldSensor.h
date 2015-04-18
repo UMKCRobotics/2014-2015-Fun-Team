@@ -30,7 +30,7 @@ namespace FunWorldSensor{
 	 * robot are open
 	 */
 	const int maxValueR = 200; //Sensor values get higher as you get closer
-	const int maxValueF = 400;
+	const int maxValueF = 200;
 	const int timesToReadSensors = 25;
 	
 	inline int avg(int x, int y){
@@ -77,20 +77,56 @@ namespace FunWorldSensor{
 	  readings.frontRightIR = backRightReadings[timesToReadSensors/2];
 	  return readings;
 	}
-	IRSensorReadings medianThreeSensors(int delayTime){
+	IRSensorReadings medianThreeSensors(int delayTime = 10){
 	  int irFront1 = analogRead(FRONT_IR);
 	  int irBackRight1 = analogRead(BACKWARD_RIGHT_IR);
 	  int irFrontRight1 = analogRead(FORWARD_RIGHT_IR);
 	  delay(delayTime);
 	  int irFront2 = analogRead(FRONT_IR);
-	  int irBackRight1 = analogRead()
+	  int irBackRight2 = analogRead(BACKWARD_RIGHT_IR);
+	  int irFrontRight2 = analogRead(FORWARD_RIGHT_IR);
+	  delay(delayTime);
+	  int irFront3 = analogRead(FRONT_IR);
+	  int irBackRight3 = analogRead(BACKWARD_RIGHT_IR);
+	  int irFrontRight3 = analogRead(FORWARD_RIGHT_IR);
 	  IRSensorReadings readings; 
+	  if (irFront1 > irFront2 && irFront1 > irFront3){
+	    readings.frontIR = irFront1;
+	  }
+	  else if (irFront2 > irFront1 && irFront2 > irFront3){
+	    readings.frontIR = irFront2;
+	  }
+	  else{
+	    readings.frontIR = irFront3;
+	  }
+	  if (irBackRight1 > irBackRight2 && irBackRight1 > irBackRight3){
+	    readings.backRightIR = irBackRight1;
+	  }
+	  else if (irBackRight2 > irBackRight1 && irBackRight2 > irBackRight3){
+	    readings.backRightIR = irBackRight2;
+	  }
+	  else{
+	    readings.backRightIR = irBackRight3;
+	  }
+	  if(irFrontRight1 > irFrontRight2 && irFrontRight1 > irFrontRight3){
+	    readings.frontRightIR = irFrontRight1;
+	  }
+	  else if( irFrontRight2 > irFrontRight1 && irFrontRight2 > irFrontRight3){
+	    readings.frontRightIR = irFrontRight2;
+	  }
+	  else{
+	    readings.frontRightIR = irFrontRight3;
+	  }
+	  return readings;
 	}
 	Openings computeOpenings(RobotState state){
-	        IRSensorReadings readings = median(3);
-	  	bool noFrontWall = readings.frontIR <= maxValueF;
-		bool noRightWall = avg(readings.backRightIR,readings.frontRightIR) <= maxValueR;
+	        IRSensorReadings readings = medianThreeSensors();
+		IRSensorReadings readings1 = medianThreeSensors(10);
+		int backRightIR = readings.backRightIR;
+		int frontRightIR = readings.frontRightIR;
 
+	  	bool noFrontWall = (readings.frontIR <= maxValueF) && ();
+		bool noRightWall = frontRightIR <= maxValueR;
 
 		Openings openings;
 

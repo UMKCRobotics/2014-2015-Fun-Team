@@ -13,11 +13,15 @@ Navigation nav(conf);
 
 void setup()
 {
+  
 	mc.stopAll();
 	SerialCom::init();
 	delay(500);
 }
 void phase1(){
+  int leftTurns = 0;
+  nav.updateMap(state,NORTH);
+  state = mc.move(state,NORTH);
   while(!nav.inFinalNode(state)){
     Openings openings = FunWorldSensor::computeOpenings(state);
     if(openings.NoneOpen){
@@ -30,15 +34,45 @@ void phase1(){
     if(nextCard==NONE){
       SerialCom::greenLedOff();
       SerialCom::redLedOn();
+      mc.turnLeft();
+      leftTurns++;
+      switch(state.currentDirection){
+	  case NORTH:
+	    state.currentDirection = WEST;
+	    break;
+          case SOUTH:
+	    state.currentDirection = EAST;
+	    break;
+          case EAST:
+	    state.currentDirection = NORTH;
+	    break;
+          case WEST:
+	    state.currentDirection = SOUTH;
+	    break;
+      }
+     
+       IRSensorReadings readings = FunWorldSensor::medianThreeSensors();
+      if (readings.frontIR < 200){
+	mc.move(state,state.currentDirection);
+	//CHANGE STATE HERE
+      }
+      
+
+      if(leftTurns == 2){	
+	nav.updateMap(state,state.currentDirection);
+	state = mc.move(state,state.currentDirection);
+	leftTurns = 0;
+      }
     }	
     else{
       SerialCom::redLedOff();
       SerialCom::greenLedOn();
-    }	
-    nav.updateMap(state,nextCard);
-    mc.move(state,nextCard);
-    state.currentDirection = nextCard;
-    delay(200);
+    	
+      nav.updateMap(state,nextCard);
+      mc.move(state,nextCard);
+      state.currentDirection = nextCard;
+      delay(200);
+    }
   }
   
 }
@@ -53,6 +87,14 @@ void loop()
 {
   //while(!SerialCom::testSerial){}
   while(digitalRead(BUTTON)==LOW){}
+ 
+  for(int i = 0; i < 10; ++i){
+    analogRead(FRONT_IR);
+    analogRead(FORWARD_RIGHT_IR);
+    analogRead(BACKWARD_RIGHT_IR);
+    delay(35);
+  }
+  delay(200);
   state.init(conf);
   phase1();
   //Reset the configuration between rounds
