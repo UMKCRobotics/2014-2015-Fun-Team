@@ -20,8 +20,12 @@ void setup()
 }
 void phase1(){
   int leftTurns = 0;
+  /*
   nav.updateMap(state,NORTH);
   state = mc.move(state,NORTH);
+  */
+  Cardinal prevCard;
+  int moves = 0;
   while(!nav.inFinalNode(state)){
     Openings openings = FunWorldSensor::computeOpenings(state);
     if(openings.NoneOpen){
@@ -30,8 +34,21 @@ void phase1(){
     else{
       SerialCom::yellowLedOff();
     }
-    Cardinal nextCard = FunMazeSolver::doRightHand(state,openings);
-    if(nextCard==NONE){
+    Cardinal nextCard = FunMazeSolver::doRightHand(state,openings,*conf);
+    if (nextCard == EAST && moves == 0){
+      //DON'T FUCKING DO THIS YOU PIECE OF SHIT ROB
+      prevCard = NORTH;
+      nav.updateMap(state,state.currentDirection);
+      state = mc.move(state,state.currentDirection);
+
+    }
+    else if(nextCard == prevCard){
+      //ROB PLEASE STOP DON'TING SHIT 
+      nav.updateMap(state,state.currentDirection);
+      state = mc.move(state,state.currentDirection);
+      prevCard == NONE;
+    }
+    else if(nextCard==NONE){
       SerialCom::greenLedOff();
       SerialCom::redLedOn();
       mc.turnLeft();
@@ -39,7 +56,6 @@ void phase1(){
       switch(state.currentDirection){
 	  case NORTH:
 	    state.currentDirection = WEST;
-	    break;
           case SOUTH:
 	    state.currentDirection = EAST;
 	    break;
@@ -51,11 +67,14 @@ void phase1(){
 	    break;
       }
      
+      prevCard = state.currentDirection;
+      /*
        IRSensorReadings readings = FunWorldSensor::medianThreeSensors();
       if (readings.frontIR < 200){
 	mc.move(state,state.currentDirection);
 	//CHANGE STATE HERE
       }
+      */
       
 
       if(leftTurns == 2){	
@@ -67,13 +86,13 @@ void phase1(){
     else{
       SerialCom::redLedOff();
       SerialCom::greenLedOn();
-    	
       nav.updateMap(state,nextCard);
-      mc.move(state,nextCard);
-      state.currentDirection = nextCard;
-      delay(200);
+      state = mc.move(state,nextCard);
+      prevCard = state.currentDirection;
+      delay(50);
     }
   }
+  moves++;
   
 }
 void phase2(){

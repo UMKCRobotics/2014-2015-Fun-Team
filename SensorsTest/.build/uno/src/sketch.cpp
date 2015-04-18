@@ -56,12 +56,10 @@ rswitchState = digitalRead(rswitch);
 buttonState = digitalRead(buttonPin);
 if (buttonState == HIGH) {
 buttonVal = 1;
-delay(5);
 Serial.print("Button Val: ");
 Serial.println(buttonVal);
 }
 else {
-delay(5);
 Serial.print("Button Val: ");
 buttonVal = 0;
 Serial.println(buttonVal);
@@ -76,11 +74,8 @@ Serial.println(lswitchState);
 
 // Sensor Reads and serial prints
 fr = analogRead(frsensor);
-delay(5);
 ff = analogRead(ffsensor);
-delay(5);
 br = analogRead(brsensor);
-delay(5);
 Serial.print("Front sensor: ");
 Serial.println(ff);
 Serial.print("Forward R Sensor: ");
@@ -91,11 +86,8 @@ Serial.println(br);
 // Line Sensor Values and Prints
 
 rline = rlinesensor.read();
-delay(5);
 cline = rlinesensor.read();
-delay(5);
 tline = rlinesensor.read();
-delay(5);
 
 
 Serial.print("Right Line : ");
@@ -107,6 +99,7 @@ Serial.println(tline);
 
 // space.. the final frontier
 Serial.println(" ");
-delay(200);
+ Serial.read();
+ while(digitalRead(buttonPin) == LOW){}
 //delay(25);
 }

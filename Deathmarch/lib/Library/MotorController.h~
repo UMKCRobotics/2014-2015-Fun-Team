@@ -30,8 +30,7 @@ class FunMotorController{
 		const int MAX_REVERSE_TURN_SPEED = -100;
 		const int MIN_SPEED = 0;
 		const int TURN_DELAY_R = 800;
-		const int TURN_DELAY_L = 790;
-		void alignToIRs();
+		const int TURN_DELAY_L = 820;
  public:		
 		void turnRight();
 		void turnLeft();

@@ -13,7 +13,7 @@
  lib/Library/RobotState.h lib/Library/ConfigManager.h \
  lib/Library/SerialCom.h lib/RedBot/RedBot.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/Stream.h \
- lib/Library/Pins.h
+ lib/Library/Pins.h lib/Library/WorldSensor.h
 .build/uno/Library/WorldSensor.d .build/uno/Library/WorldSensor.o: lib/Library/WorldSensor.cpp lib/Library/WorldSensor.h \
  lib/Library/RobotState.h lib/Library/Cardinal.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/Arduino.h \

@@ -2,7 +2,6 @@
 #include "Pins.h"
 #include "Arduino.h"
 #include "RedBot.h"
-#include "WorldSensor.h"
 
 FunMotorController::FunMotorController(){
   justTurnedLeft=false;
@@ -101,25 +100,16 @@ void FunMotorController::turnAround(){
   turnLeft();
 }
 void FunMotorController::turnLeft(){
-  alignToIRs();
   justTurnedLeft = true;
   frontMotors.leftDrive(MAX_REVERSE_TURN_SPEED);
   frontMotors.rightDrive(MAX_TURN_SPEED);
   SerialCom::motorsLeftTurn();
-  delay(TURN_DELAY_L/2+20);
-  //while(!allLineSensorsOnBlack()){} //this is why i miss frp
-  stopAll();
-  delay(75);
-
-  frontMotors.leftDrive(MAX_REVERSE_TURN_SPEED);
-  frontMotors.rightDrive(MAX_TURN_SPEED);
-  SerialCom::motorsLeftTurn();
-  delay(TURN_DELAY_L/2+20);
+  delay(TURN_DELAY_L);
   //while(!allLineSensorsOnBlack()){} //this is why i miss frp
   stopAll();
 
-  delay(10);
-  alignToIRs();
+  delay(100);
+
 	
 }
 void FunMotorController::turnRight(){
@@ -145,17 +135,17 @@ void FunMotorController::turnRight(){
 
   // while(!allLineSensorsOnBlack()){} //this is why i miss frp:wa
   stopAll();
-  delay(10);
+  delay(100);
 
   SerialCom::motorsFullForward();
   frontMotors.rightDrive(MAX_SPEED_R-50);
   frontMotors.leftDrive(MAX_SPEED_L-50);
-  delay(10);
+  delay(100);
 
-  stopAll();
 
 }
 void FunMotorController::moveForwardOneSquare(){
+  /*
   if(analogRead(FRONT_IR) > 400){
     SerialCom::yellowLedOn();
     SerialCom::greenLedOn();
@@ -164,6 +154,7 @@ void FunMotorController::moveForwardOneSquare(){
     turnRight();
     return;
   }
+  */
   justTurnedLeft = false;
 	SerialCom::motorsFullForward();
 
@@ -174,8 +165,8 @@ void FunMotorController::moveForwardOneSquare(){
 	while(!allLineSensorsOnBlack()){
 		int potentialNextRightValue = MAX_SPEED_R - rightLineRead();
 		int potentialNextLeftValue = MAX_SPEED_L - leftLineRead();
-		int nextRightValue = (potentialNextRightValue > MIN_SPEED)? potentialNextRightValue : MIN_SPEED;
-		int nextLeftValue = (potentialNextLeftValue > MIN_SPEED) ? potentialNextLeftValue : MIN_SPEED;
+		int nextRightValue = (potentialNextRightValue > 0)? potentialNextRightValue : MIN_SPEED;
+		int nextLeftValue = (potentialNextLeftValue > 0) ? potentialNextLeftValue : MIN_SPEED;
 		frontMotors.leftDrive(nextLeftValue);
 		frontMotors.rightDrive(nextRightValue);
 	}
@@ -201,33 +192,3 @@ void FunMotorController::alignToLine(){
   while(!analogRead())
 }
 */
-void FunMotorController::alignToIRs(){
-  IRSensorReadings readings = FunWorldSensor::medianThreeSensors();
-  if (readings.frontRightIR > 200 && readings.backRightIR > 200 && (readings.frontRightIR - readings.backRightIR > 40)) {
-
-    if(readings.frontRightIR < readings.backRightIR){
-      //adjust left 
-      frontMotors.leftDrive(MAX_TURN_SPEED);
-      frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
-      SerialCom::motorsRightTurn();
-      delay(200); 
-      stopAll();
-      SerialCom::yellowLedOn();
-      delay(10);
-      SerialCom::yellowLedOff();
-    }
-    else{
-      //adjust right
-      frontMotors.leftDrive(MAX_REVERSE_TURN_SPEED);
-      frontMotors.rightDrive(MAX_TURN_SPEED);
-      SerialCom::motorsLeftTurn();
-      delay(200); 
-      stopAll();
-      SerialCom::yellowLedOn();
-      delay(10);
-      SerialCom::yellowLedOff();
-
-    }
-  }
-  
-}
