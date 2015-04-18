@@ -32,12 +32,7 @@ void setup()
 	delay(500);
 }
 void phase1(){
-  int leftTurns = 0;
-  /*
-  nav.updateMap(state,NORTH);
-  state = mc.move(state,NORTH);
-  */
-  Cardinal prevCard;
+  Cardinal prevCard = NONE;
   int moves = 0;
   while(!nav.inFinalNode(state)){
     Openings openings = FunWorldSensor::computeOpenings(state);
@@ -48,24 +43,17 @@ void phase1(){
       SerialCom::yellowLedOff();
     }
     Cardinal nextCard = FunMazeSolver::doRightHand(state,openings,*conf);
-    if (nextCard == EAST && moves == 0){
+    if (nextCard == EAST && (moves == 1 || moves == 0)){
       //DON'T FUCKING DO THIS YOU PIECE OF SHIT ROB
       prevCard = NORTH;
       nav.updateMap(state,state.currentDirection);
       state = mc.move(state,state.currentDirection);
 
     }
-    else if(nextCard == prevCard){
-      //ROB PLEASE STOP DON'TING SHIT 
-      nav.updateMap(state,state.currentDirection);
-      state = mc.move(state,state.currentDirection);
-      prevCard == NONE;
-    }
     else if(nextCard==NONE){
       SerialCom::greenLedOff();
       SerialCom::redLedOn();
       mc.turnLeft();
-      leftTurns++;
       switch(state.currentDirection){
 	  case NORTH:
 	    state.currentDirection = WEST;
@@ -79,23 +67,17 @@ void phase1(){
 	    state.currentDirection = SOUTH;
 	    break;
       }
-     
       prevCard = state.currentDirection;
-      /*
-       IRSensorReadings readings = FunWorldSensor::medianThreeSensors();
-      if (readings.frontIR < 200){
-	mc.move(state,state.currentDirection);
-	//CHANGE STATE HERE
-      }
-      */
-      
-
-      if(leftTurns == 2){	
-	nav.updateMap(state,state.currentDirection);
-	state = mc.move(state,state.currentDirection);
-	leftTurns = 0;
-      }
-    }	
+    }
+    else if(nextCard == prevCard){
+      //ROB PLEASE STOP DON'TING SHIT 
+      SerialCom::yellowLedOn();
+      SerialCom::greenLedOn();
+      nav.updateMap(state,state.currentDirection);
+      state = mc.move(state,state.currentDirection);
+      prevCard == NORTH;
+      delay(500);
+    }
     else{
       SerialCom::redLedOff();
       SerialCom::greenLedOn();
@@ -104,9 +86,11 @@ void phase1(){
       prevCard = state.currentDirection;
       delay(50);
     }
+    SerialCom::redLedOff();
+    SerialCom::yellowLedOff();
+    SerialCom::greenLedOff();
+    moves++;
   }
-  moves++;
-  
 }
 void phase2(){
   while(!nav.inFinalNode(state)){
@@ -120,6 +104,7 @@ void loop()
   //while(!SerialCom::testSerial){}
   while(digitalRead(BUTTON)==LOW){}
  
+ 
   for(int i = 0; i < 10; ++i){
     analogRead(FRONT_IR);
     analogRead(FORWARD_RIGHT_IR);
@@ -127,10 +112,12 @@ void loop()
     delay(35);
   }
   delay(200);
+  conf = ConfigurationFactory::createConfiguration();
   state.init(conf);
   phase1();
   //Reset the configuration between rounds
   while(digitalRead(BUTTON)==LOW){}
+  conf = ConfigurationFactory::createConfiguration();
   state.init(conf);
   phase2();
 }

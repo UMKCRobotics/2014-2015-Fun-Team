@@ -129,6 +129,7 @@ void FunMotorController::turnRight(){
     SerialCom::greenLedOn();
     return;
   }
+  alignToIRs();
   justTurnedLeft = false;
   frontMotors.leftDrive(MAX_TURN_SPEED);
   frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
@@ -153,17 +154,18 @@ void FunMotorController::turnRight(){
   delay(10);
 
   stopAll();
+  alignToIRs();
 
 }
 void FunMotorController::moveForwardOneSquare(){
-  if(analogRead(FRONT_IR) > 400){
+  
+  if(analogRead(FRONT_IR) > 200){
     SerialCom::yellowLedOn();
     SerialCom::greenLedOn();
-    turnRight();
-    turnRight();
-    turnRight();
+    turnLeft();
     return;
   }
+  
   justTurnedLeft = false;
 	SerialCom::motorsFullForward();
 
@@ -203,17 +205,16 @@ void FunMotorController::alignToLine(){
 */
 void FunMotorController::alignToIRs(){
   IRSensorReadings readings = FunWorldSensor::medianThreeSensors();
-  if (readings.frontRightIR > 200 && readings.backRightIR > 200 && (readings.frontRightIR - readings.backRightIR > 40)) {
+  if (readings.frontRightIR > 200 && readings.backRightIR > 200 && (abs(readings.frontRightIR - readings.backRightIR) > 40)) {
 
     if(readings.frontRightIR < readings.backRightIR){
       //adjust left 
       frontMotors.leftDrive(MAX_TURN_SPEED);
       frontMotors.rightDrive(MAX_REVERSE_TURN_SPEED);
-      SerialCom::motorsRightTurn();
-      delay(200); 
-      stopAll();
       SerialCom::yellowLedOn();
-      delay(10);
+      SerialCom::motorsRightTurn();
+      delay(100); 
+      stopAll();
       SerialCom::yellowLedOff();
     }
     else{
@@ -221,10 +222,9 @@ void FunMotorController::alignToIRs(){
       frontMotors.leftDrive(MAX_REVERSE_TURN_SPEED);
       frontMotors.rightDrive(MAX_TURN_SPEED);
       SerialCom::motorsLeftTurn();
-      delay(200); 
-      stopAll();
       SerialCom::yellowLedOn();
-      delay(10);
+      delay(100); 
+      stopAll();
       SerialCom::yellowLedOff();
 
     }

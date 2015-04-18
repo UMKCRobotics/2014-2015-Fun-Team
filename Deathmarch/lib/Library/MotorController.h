@@ -24,8 +24,8 @@ class FunMotorController{
 		int rightLineRead();
 		int leftLineRead();
 		int centerLineRead();
-		const int MAX_SPEED_L = 100;
-		const int MAX_SPEED_R = 120;
+		const int MAX_SPEED_L = 90;
+		const int MAX_SPEED_R = 110;
 		const int MAX_TURN_SPEED =80;
 		const int MAX_REVERSE_TURN_SPEED = -100;
 		const int MIN_SPEED = 0;

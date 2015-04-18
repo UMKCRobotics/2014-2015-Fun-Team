@@ -29,7 +29,7 @@ namespace FunWorldSensor{
 	 * Uses the IR sensors to compute what walls around the
 	 * robot are open
 	 */
-	const int maxValueR = 100; //Sensor values get higher as you get closer
+        const int maxValueR = 100; //Sensor values get higher as you get closer
 	const int maxValueF = 200;
 	const int timesToReadSensors = 25;
 	
