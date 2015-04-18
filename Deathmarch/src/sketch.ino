@@ -51,7 +51,7 @@ void phase2(){
 }
 void loop()
 {
-  while(!SerialCom::testSerial){}
+  //while(!SerialCom::testSerial){}
   while(digitalRead(BUTTON)==LOW){}
   state.init(conf);
   phase1();

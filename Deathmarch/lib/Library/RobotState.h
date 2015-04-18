@@ -10,25 +10,25 @@
 #define ROBOT_STATE_H
 
 struct RobotState{
-	/*
-	 * The current direction the robot is facing
-	 */
-	Cardinal currentDirection;
-	/**
-	 * The node the robot is currently in
-	 */
-	int currentNode;
-	RobotState(){
-		currentNode = 0;
-		currentDirection = NORTH;
-	}
-	/**
-	 * Construct a new robot state from a given configuration
-	 */
-	RobotState(Configuration* config){
-		currentNode = config->startNode;
-		currentDirection = NORTH;
-	}
+  /*
+   * The current direction the robot is facing
+   */
+  Cardinal currentDirection;
+  /**
+   * The node the robot is currently in
+   */
+  int currentNode;
+  RobotState(){
+    currentNode = 0;
+    currentDirection = NORTH;
+  }
+  /**
+   * Construct a new robot state from a given configuration
+   */
+  RobotState(Configuration* config){
+    currentNode = config->startNode;
+    currentDirection = NORTH;
+  }
   void init(Configuration* config){
     currentNode = config->startNode;
     currentDirection = NORTH;

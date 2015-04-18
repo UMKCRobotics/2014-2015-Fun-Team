@@ -66,7 +66,7 @@ namespace FunWorldSensor{
 	    frontReadings[i] = analogRead(FRONT_IR);
 	    backRightReadings[i] = analogRead(BACKWARD_RIGHT_IR);
 	    frontRightReadings[i] = analogRead(FORWARD_RIGHT_IR);
-	    delay(5);
+	    delay(delayTime);
 	  }
 	  qsort(frontReadings,timesToReadSensors,sizeof(int),compareInts);
 	  qsort(backRightReadings,timesToReadSensors,sizeof(int),compareInts);
@@ -77,7 +77,15 @@ namespace FunWorldSensor{
 	  readings.frontRightIR = backRightReadings[timesToReadSensors/2];
 	  return readings;
 	}
-
+	IRSensorReadings medianThreeSensors(int delayTime){
+	  int irFront1 = analogRead(FRONT_IR);
+	  int irBackRight1 = analogRead(BACKWARD_RIGHT_IR);
+	  int irFrontRight1 = analogRead(FORWARD_RIGHT_IR);
+	  delay(delayTime);
+	  int irFront2 = analogRead(FRONT_IR);
+	  int irBackRight1 = analogRead()
+	  IRSensorReadings readings; 
+	}
 	Openings computeOpenings(RobotState state){
 	        IRSensorReadings readings = median(3);
 	  	bool noFrontWall = readings.frontIR <= maxValueF;
