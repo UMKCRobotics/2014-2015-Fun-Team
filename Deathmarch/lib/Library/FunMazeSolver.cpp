@@ -19,6 +19,7 @@ bool legitNode(int node, Configuration c)
 		}
 		return true;
 	}	
+	return (c.round ==3);
 	
 	
 	

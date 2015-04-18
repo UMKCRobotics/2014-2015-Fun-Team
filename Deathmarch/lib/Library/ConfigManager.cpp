@@ -16,12 +16,12 @@ Configuration* ConfigurationFactory::createConfiguration()
 	
 	
 	if(digitalRead(LEFT_SWITCH) == HIGH) {
-		config.round = 1;
-		config.boardXDimension = 5;
-		config.boardYDimension = 5;
+		config.round = 2;
+		config.boardXDimension = 7;
+		config.boardYDimension = 7;
 		config.matchTime = 180;
-		config.startNode = 48;
-		config.endNode = 9;
+		config.startNode = 49;
+		config.endNode = 1;
 	}	
 	
 	else {

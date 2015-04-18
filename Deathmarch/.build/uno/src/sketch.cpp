@@ -91,6 +91,7 @@ void phase1(){
     SerialCom::greenLedOff();
     moves++;
   }
+
 }
 void phase2(){
   while(!nav.inFinalNode(state)){
@@ -101,6 +102,7 @@ void phase2(){
 }
 void loop()
 {
+  SerialCom::greenLedOn();
   //while(!SerialCom::testSerial){}
   while(digitalRead(BUTTON)==LOW){}
  
@@ -111,12 +113,14 @@ void loop()
     analogRead(BACKWARD_RIGHT_IR);
     delay(35);
   }
-  delay(200);
   conf = ConfigurationFactory::createConfiguration();
   state.init(conf);
   phase1();
-  //Reset the configuration between rounds
+  SerialCom::redLedOn();
+  delay(1000);
+  SerialCom::greenLedOn();
   while(digitalRead(BUTTON)==LOW){}
+
   conf = ConfigurationFactory::createConfiguration();
   state.init(conf);
   phase2();
