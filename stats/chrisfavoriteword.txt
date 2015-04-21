@@ -1,0 +1,8 @@
+Binary file .git/objects/pack/pack-0811403d47f39f5d732e293bfe2bd4b94cda70e8.pack matches
+stats/log.txt:    FUCK EM FUCK EM FUCK EM
+stats/log.txt:    fuck
+stats/log.txt:    New branch for RedBot, fuck it
+stats/log.txt:    maybe i unfucked the repo?
+Deathmarch/.build/uno/src/sketch.cpp:      //DON'T FUCKING DO THIS YOU PIECE OF SHIT ROB
+Deathmarch/src/sketch.ino~:      //DON'T FUCKING DO THIS YOU PIECE OF SHIT ROB
+Deathmarch/src/sketch.ino:      //DON'T FUCKING DO THIS YOU PIECE OF SHIT ROB

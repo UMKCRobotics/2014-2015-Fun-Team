@@ -1,0 +1,1226 @@
+commit 6e595649bffddd564adbe7167b7655c544025fc5
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Apr 18 09:06:29 2015 -0500
+
+    UPDATING THIS MOTHER FATHER TRAIN FOR MOTHER FATRHERIN ROUND 3 LETS BREAK THIS SHIT
+
+commit 363e79108526b121b786b8a2634d114415e43526
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Apr 18 05:08:01 2015 -0500
+
+    FUCK EM FUCK EM FUCK EM
+
+commit f68c69289b912ff2f3da57b341f89d3e6040ef67
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Apr 18 04:10:01 2015 -0500
+
+    incremtenal save
+
+commit 829b70acdc5fe83a3e4fa7f88d9a3b08580eecc0
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Apr 18 01:01:36 2015 -0500
+
+    CHASE IS A fun guy
+
+commit b44e684d235da1710e245cea869d65c0a81f435e
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Apr 17 20:32:12 2015 -0500
+
+    chase is a punk bitch
+
+commit c02f2d96eccf0c8c6200e4c0e6759ae4c5dfbcf3
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Apr 17 14:24:32 2015 -0500
+
+    added configuration
+
+commit 5b11187b85242a52d97f9e8bf9ebdd4144464c31
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Apr 17 09:31:12 2015 -0500
+
+    added median
+
+commit 72c05f1795edeae78a4759f7980d2e131eadff78
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Apr 17 08:55:48 2015 -0500
+
+    taking out the trash at night
+
+commit 6f587f9837385403b21b4cc9186487e2b2072860
+Merge: 042b392 873fe4c
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Apr 17 08:54:46 2015 -0500
+
+    Merge pull request #6 from UMKCRobotics/dev
+    
+    Dev
+
+commit 873fe4c1dffaeeb9d8a4abced371b55efd6b4827
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Thu Apr 16 19:50:51 2015 -0500
+
+    man im stupid
+
+commit 1b4575efa4b5ebca8b610b6a08c48e9fb28d64e0
+Merge: 090ece1 042b392
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Tue Apr 7 14:29:21 2015 -0500
+
+    Merge branch 'master' into dev
+    
+    Conflicts:
+
+commit 042b39225fb215635fffd6424974a80c1885589e
+Merge: a780a3f f5879b8
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Tue Apr 7 14:28:57 2015 -0500
+
+    Merge branch 'frenchdonutsareworthit'
+    
+    Conflicts:
+    	Deathmarch/lib/Library/ConfigManager.h
+    	Deathmarch/lib/Library/FunMazeSolver.h
+    	Deathmarch/lib/Library/MotorController.cpp
+    	Deathmarch/lib/Library/MotorController.h
+    	Deathmarch/lib/Library/Navigation.cpp
+    	Deathmarch/lib/Library/Navigation.h
+    	Deathmarch/lib/Library/RobotState.h
+
+commit 090ece155dbdb909fb1082253a6ddf2bd7e5226f
+Merge: 5744cdd a780a3f
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Tue Apr 7 14:26:17 2015 -0500
+
+    Merge branch 'master' into dev
+    
+    Conflicts:
+    	SConstruct
+    	arduino/serial_sensors/src/sketch.ino
+    	build/lib/2014-2015-Framework/src/ConfigManager.cpp
+    	build/lib/2014-2015-Framework/src/ConfigManager.h
+    	build/src/MotorController.cpp
+    	build/src/MotorController.h
+    	build/src/Navigation.cpp
+    	build/src/Navigation.h
+    	build/src/WorldSensor.h
+    	build/src/main.cpp
+    	lib/2014-2015-Framework
+    	scripts/auto-rsync-and-build.sh
+    	src/MotorController.cpp
+    	src/MotorController.h
+    	src/Navigation.cpp
+    	src/Navigation.h
+    	src/Notification.h
+    	src/Sensors.cpp
+    	src/Sensors.h
+    	src/WorldSensor.h
+    	src/main.cpp
+    	src/prucode.hp
+
+commit 5744cdd425c20f6f6db0bfd7ee11a3bc908163c1
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Tue Apr 7 14:25:20 2015 -0500
+
+    cleaned
+
+commit a780a3fa5f8681c343318c1db2870c0b0e291ed5
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Tue Apr 7 14:23:53 2015 -0500
+
+    deleted it all
+
+commit f5879b8f8b843c0e6edc860b717f68ce23cb6f0e
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Tue Apr 7 14:23:01 2015 -0500
+
+    official changeover
+
+commit 37f1458d418c6c3f5002a691e2d1da6a458b3711
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Sat Apr 4 17:01:20 2015 -0500
+
+    so close ;)
+
+commit 807989af3011a148b015c4e031489074b3529e37
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Apr 4 16:22:06 2015 -0500
+
+    rear arduino code YO
+
+commit c70bf8e513127ecc75151f12029ca10d99969401
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Sat Apr 4 15:25:48 2015 -0500
+
+    updated motor controller with newer stuff
+
+commit 9f3d31fdcfda8cb0645d38d2b58161d2f4620e85
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Apr 4 14:56:59 2015 -0500
+
+    Main to check for compilation
+
+commit cb3891874d7499c2eae418b2e9834ff711328e93
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Sat Apr 4 14:52:24 2015 -0500
+
+    it compiles
+
+commit 8b65ee2074b0770fca5cf2c9ec14ca763eb2c874
+Merge: 9d0df04 5911141
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Apr 4 14:03:06 2015 -0500
+
+    Merge branch 'frenchdonutsareworthit' of https://github.com/UMKCRobotics/2014-2015-Fun-Team into frenchdonutsareworthit
+
+commit 9d0df04e6e1acf982a7e4c31dfcb0b222e157ba8
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Apr 4 14:00:33 2015 -0500
+
+    phase 1 in progress
+
+commit 5911141c5772243ea5df9d7485d6708fadc6b213
+Merge: fed367d d1c9db7
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Sat Apr 4 13:52:11 2015 -0500
+
+    Merge branch 'frenchdonutsareworthit' of https://github.com/UMKCRobotics/2014-2015-Fun-Team into frenchdonutsareworthit
+
+commit fed367d13a19e9b258a4107fcb4fa84ea7df1e12
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Sat Apr 4 13:51:59 2015 -0500
+
+    added worldsensor
+
+commit d1c9db7b1fbdbfde21e45640045a4c3b53f7c76f
+Merge: 950b184 39a37bf
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Apr 4 13:49:18 2015 -0500
+
+    Merge branch 'frenchdonutsareworthit' of https://github.com/UMKCRobotics/2014-2015-Fun-Team into frenchdonutsareworthit
+
+commit 950b184151166d8a6363d2f57b35f69df5ed6faa
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Apr 4 13:47:58 2015 -0500
+
+    Added pins to ConfigManager and Notification
+
+commit 39a37bf5e725097abe66af13c570dc85e7063a58
+Author: The rock <octopuscabbage@gmail.com>
+Date:   Sat Apr 4 13:36:31 2015 -0500
+
+    added pin header header
+
+commit 99ec42902dc671a4287f70c4cfc792db9e09771c
+Merge: 1b0825f 8f630a9
+Author: Chase <cvp21594@yahoo.com>
+Date:   Tue Mar 31 16:14:05 2015 -0500
+
+    fuck
+
+commit 1b0825f508a74753e6e8b34d77333abd125b2529
+Author: Chase <cvp21594@yahoo.com>
+Date:   Tue Mar 31 16:09:15 2015 -0500
+
+    New branch for RedBot, fuck it
+
+commit 8f630a97749f623c7d314c52cacdc63f105dc63b
+Author: cvp21594 <cvp45@mail.umkc.edu>
+Date:   Sat Mar 7 13:16:24 2015 -0600
+
+    Create PINS.txt
+    
+    Keep track of pins here.
+
+commit 7bc96b8c4b0e70840dbf5442ae0bec79b765a3ae
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Feb 28 17:34:17 2015 -0600
+
+    WE DID IT
+
+commit ee4eaab1253d5cbdc91eab7872dd15b17619c07d
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Feb 28 17:32:32 2015 -0600
+
+    Fixed swapped pins.
+
+commit 34da783c2fe31fb8cb830ae490378a53d759e48a
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Feb 28 16:40:41 2015 -0600
+
+    Arduino serial code
+
+commit 13269ba7c9ca3743f289d9a7c6e8a957aa25354e
+Merge: cb7394b bc33cfd
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Feb 28 14:32:21 2015 -0600
+
+    Merge branch 'dev' of https://github.com/UMKCRobotics/2014-2015-Fun-Team into dev
+    
+    Conflicts:
+    	lib/2014-2015-Framework
+    	src/MotorController.cpp
+
+commit cb7394b000ef6eed9197d1d954e44e9e06325941
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Feb 28 14:31:03 2015 -0600
+
+    changed motorcontroller
+
+commit 605718cfd0c8c7da4775e2d1ef6664d102cc5456
+Merge: ef080b6 bdc9000
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Feb 28 14:30:21 2015 -0600
+
+    changed framework
+
+commit bc33cfda49d0e02bcdcfce8cdc035238b40d31ef
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Sat Feb 21 16:46:26 2015 -0600
+
+    were switching arudino
+
+commit 1e72df768e5f1e6e5e45cbdeaf0a9ba2743ef454
+Author: chris denniston <cdrm4@mail.umkc.edu>
+Date:   Sat Feb 14 13:27:00 2015 -0600
+
+    trying to figure out problems
+
+commit 3548ef69a5398f06a512706783261b5c0d865e25
+Author: chris denniston <cdrm4@mail.umkc.edu>
+Date:   Sat Feb 14 12:57:44 2015 -0600
+
+    fixed syntax errors
+
+commit 1376d1a26e94874fc1619422062787d963e810e6
+Merge: e9c2e92 de16b17
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Thu Feb 12 17:12:48 2015 -0600
+
+    merged config
+
+commit e9c2e9239c80dadb77ffdaa7086d244dfc4545a8
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Thu Feb 12 16:44:27 2015 -0600
+
+    SHOULD BE WORKING
+
+commit cd52d58949678abc773ccf4611a31cfcf81b8cdf
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Thu Feb 12 14:59:10 2015 -0600
+
+    modified code to build worldsensor
+
+commit de16b170f766d82726d7e704fc25d9ece5cd2027
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Wed Feb 11 15:32:38 2015 -0600
+
+    moved config manager
+
+commit 43e3e6c46376c0809acbfc1ce2bf7d16ef1a2539
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Wed Feb 11 15:19:49 2015 -0600
+
+    trying to figure out what's wrong with sensors
+
+commit bdc900050d13dffcd9ee532b18c2b6a5a51368f8
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Feb 5 14:47:37 2015 -0600
+
+    updated framework
+
+commit ef080b65e60fe13b0f52b6baea738c0156569e77
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Tue Feb 3 21:30:56 2015 -0600
+
+    see i told you
+
+commit 6376e742e3cf2f14837f705903a609f44759e52c
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Sat Jan 31 17:14:40 2015 -0600
+
+    added motor and sensor code
+
+commit 4b6a09f149105a2933d20333f52876436193d248
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Jan 31 16:52:08 2015 -0600
+
+    Swapped incorrect left/right line sensor pins, calibrated left.
+
+commit bd54032f4bdef0a08d6e18e7c1bb58a9ae8c5671
+Merge: df360ea 4df787d
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Tue Jan 27 19:41:43 2015 -0600
+
+    Merge branch 'pru' into dev
+
+commit df360ea46aaf985bf2b2b9f3ecf53e0acebe56a1
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Tue Jan 27 19:27:22 2015 -0600
+
+    updated framework
+
+commit bca666ba1d65fe896ceeb882b583f5873510f012
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Tue Jan 27 19:25:12 2015 -0600
+
+    added pru code
+
+commit 4df787dc60d9046725ba89a047890bd27a10d81d
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Tue Jan 27 18:24:02 2015 -0600
+
+    Moved code into src/. NEED TO ADD PRU ASM TO SCONS STILL.
+    
+    See pru-serial/Makefile to figure out commands.
+    I don't know how Scons works, so yeah. Somehow it needs to be used
+    to invoke the pasm compiler, which should create prucode.bin.
+
+commit ba5a6dc14a414137e689dd2747b63962be694669
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Tue Jan 27 18:15:00 2015 -0600
+
+    Refactored arduino code and cleaned stuff up.
+
+commit 9cf51b2e43ea9b841ab1e60822b05e14049e0332
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Tue Jan 27 17:18:03 2015 -0600
+
+    Turned sensor code into class.
+
+commit 329b87bbfeac628fd2ef01ea37bb1b8c5abc50fe
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Mon Jan 26 20:54:57 2015 -0600
+
+    Removed old code.
+
+commit 37d861dfe97592f4c3c60035959bacca561b26d2
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Mon Jan 26 20:54:04 2015 -0600
+
+    Updated documentation/comments.
+
+commit b6bceacaaba3e519a88755fc9b28903c332e9fb7
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Mon Jan 26 19:59:22 2015 -0600
+
+    Arduino + PRU serial sensors work now.
+    
+    Using arduino/serial_sensors and pru-serial/ folders.
+    Cleanup and documentation to follow.
+
+commit 2e48c92f6b118680e559fd7cc96eb3af6b47b3d5
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Jan 17 15:27:02 2015 -0600
+
+    it all compiles now!"
+
+commit 0a0c705364688e11b096f85f16fbf8718b24f566
+Merge: afdd638 13748ee
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Jan 17 14:45:59 2015 -0600
+
+    Merge branch 'master' into skeleton
+
+commit 13748ee0e575bf42bc010daa688b85edff15d80d
+Author: root <root@beaglebone.(none)>
+Date:   Sat Jan 17 20:41:37 2015 +0000
+
+    fixed weird issues in c++11 compilation on bbb
+
+commit afdd6382a9c5ddea7b3d47fa6ad826017d1b0dd2
+Merge: e66144a a684ce3
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Jan 17 13:52:50 2015 -0600
+
+    Merge branch 'master' into skeleton
+
+commit a684ce3da0c6bddbbaec7696c5dc3ae87eb2bad6
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Jan 17 13:52:21 2015 -0600
+
+    dmcc fixed
+
+commit 783a50680641ccf915f05d94f68d66035b36899a
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Jan 17 13:50:14 2015 -0600
+
+    updated sconscript
+
+commit e66144a4b7bbecf4ccafdc9997a0ace00b24a6be
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Jan 17 13:32:27 2015 -0600
+
+    implemented all skeleton functions
+
+commit f51b7d42ec2bb57863e02b909bb20c215e5d1fa4
+Merge: 4816bd2 074b347
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Sat Dec 20 12:16:55 2014 -0600
+
+    Merge branch 'pru' into dev
+
+commit 4816bd2cbc26b06acbae7af397050d84d23710a7
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Nov 22 17:00:31 2014 -0600
+
+    Notification testing for LED
+
+commit 074b3477540d943a799e468d5553bc833fd3d16e
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Nov 22 16:18:41 2014 -0600
+
+    Rewrote to use a sync/start pin and 16-bit values.
+
+commit 41814b9e5744a88f4a0e1b35ace13565ea494fa4
+Merge: 8c9d65e c64a7a4
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Nov 22 15:28:09 2014 -0600
+
+    Merge remote-tracking branch 'origin/dev' into notification
+
+commit 2fbf7dce4637030103a2dca20398af19dda9e123
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Nov 22 15:17:16 2014 -0600
+
+    Using 8 bit integer values instead of strings.
+
+commit c64a7a439c725e1c024558011bc2dcd7af88a1a2
+Merge: fe1c7ee 7d4bf14
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 22 15:10:15 2014 -0600
+
+    Merge branch 'motor_controller' into dev
+
+commit 0d057d680ab25a010b8a95eeb4b1ad49670855ff
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Nov 22 15:07:53 2014 -0600
+
+    Added arduino version of serial test. Working. Yay.
+
+commit fe1c7ee767de1c0fcdd6c184d40620c9d31b3d02
+Merge: 39b67bc e238ee9
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 22 15:02:43 2014 -0600
+
+    Merge branch 'dev' into navigation
+
+commit 7d4bf14e9930608ef3f4f37b3d5a672e7577013a
+Merge: 71b16eb e238ee9
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 22 15:02:09 2014 -0600
+
+    Merge branch 'dev' into motor_controller
+
+commit e238ee9b960c0fd9c672553321e0f38f3db19031
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 22 15:01:23 2014 -0600
+
+    updated lib files
+
+commit 8c9d65ea6a017c39ff857d4f2d5913de7d152892
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Nov 22 14:49:45 2014 -0600
+
+    Confirmed test map algorithms work
+
+commit b02d33134edfb0111b9c9af26803b0ab60cdf794
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Nov 22 14:28:45 2014 -0600
+
+    Read/write 4-byte values with proper output.
+
+commit 4e011d9c74bc8083fa633955e16098bea8612730
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Nov 22 14:24:33 2014 -0600
+
+    Created read macro. Read 4 bytes at a time in a loop now.
+
+commit 71b16eb7f27462cec44929e3d8c76491c04f046f
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Mon Nov 17 13:48:11 2014 -0600
+
+    added a higher order function we might need later
+
+commit cae29cd39485c8e0c92b74c8659e5e7acbdb2e80
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sun Nov 16 21:31:07 2014 -0600
+
+    Proof-of-concept for PRU serial communication.
+
+commit eca3f08a59917982192ef77ff63ab1090df5912b
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sun Nov 16 14:25:51 2014 -0600
+
+    Added folder for PRU serial work.
+
+commit c3133f1216d7c1f7790f77b6192cb8c53c4e1ee7
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Nov 15 14:53:43 2014 -0600
+
+    This should work but it doesn't, so... yeah.
+
+commit 1d19bbbafa7ca403623571416443d465c27b29f1
+Merge: e72490e 67950f2
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Nov 14 19:41:59 2014 -0600
+
+    Merge branch 'dev' into documentation
+
+commit e72490e4857c9237af0dfc620563edd2e73419a4
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Nov 14 19:41:52 2014 -0600
+
+    updated documentation in framework
+
+commit 67950f236249d10a902fce5b11d23bb4437a01de
+Merge: ac8d7f6 83563f0
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Nov 14 19:21:36 2014 -0600
+
+    Merge branch 'dev' of https://github.com/UMKCRobotics/2014-2015-Fun-Team into dev
+
+commit ac8d7f620a416c5d62f153319834dfcd3acdd77e
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Fri Nov 14 19:20:49 2014 -0600
+
+    moved turn from being a public function to private
+
+commit e85b66d185d0a11cfd44b6b4c283552930674b74
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Fri Nov 14 18:55:32 2014 -0600
+
+    Progress in RAM-based sensor usage
+
+commit fd4950278534a6c0f7b387c0b8736fafdad7fb53
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Fri Nov 14 17:52:01 2014 -0600
+
+    Revert "Reverted back to RAM addressing (need to use a single pin as I/O)."
+    
+    This reverts commit bb80d23a8016da7602f88a47e421a4770f1eaa30.
+
+commit bb80d23a8016da7602f88a47e421a4770f1eaa30
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Fri Nov 14 17:48:34 2014 -0600
+
+    Reverted back to RAM addressing (need to use a single pin as I/O).
+
+commit 271891b8f249a48bd458767f0c24c1291ac5dd78
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Thu Nov 13 23:21:08 2014 -0600
+
+    Deleted example files.
+
+commit b5bbcb54f719e55e40f30f7a68c6d7e251960d54
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Thu Nov 13 22:26:22 2014 -0600
+
+    Added macros and header file.
+
+commit 0274288bbfc0079d0c9edd660bb89c95214630dd
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Thu Nov 13 21:28:28 2014 -0600
+
+    Working GPIO toggle and input demo using memory mapping.
+
+commit 61ef7f84bc1c02dbf6e78d93bccda6a613b8116d
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Tue Nov 11 20:55:45 2014 -0600
+
+    Stupid script is less stupid.
+
+commit 41c1a5521395c658234600c69e0a498e7e16dab9
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Tue Nov 11 19:41:43 2014 -0600
+
+    Added device-tree overlay files, improved docs.
+
+commit 39b67bc8f157a05d239a8fa9f4d3455e36c82548
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 22:41:03 2014 -0600
+
+    added readability test
+
+commit b1643d8dd7758f5a3d96a8e1962517af33259a87
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Mon Nov 10 22:27:03 2014 -0600
+
+    Working PRU assembly demo
+    
+    Ultra basic C + PASM code demonstrating communication via
+    memory mapping.
+
+commit 83563f087620e6242d3b061059732d336aa35705
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 12:14:13 2014 -0600
+
+    added to string to test output
+
+commit cf7ebd1c4b58edec75bbf6a1f1d906172d759fc5
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 12:14:13 2014 -0600
+
+    added to string to test output
+
+commit 61f3524096e6739737853e65e3eec58052d7c5fe
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 12:13:31 2014 -0600
+
+    added documentation
+
+commit 2753c1a6d9394ce69594d29aea192fe0393b6619
+Merge: 396fe45 82a7095
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 12:11:00 2014 -0600
+
+    Merge branch 'master' into maze_solver
+
+commit 396fe45554c0467c13a91651fd299eada4954e09
+Merge: aaafc05 8d4c798
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 12:10:27 2014 -0600
+
+    Merge branch 'navigation' into maze_solver
+
+commit aaafc05f95de9f53186a65067fc9efb94b753285
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Mon Nov 10 11:44:12 2014 -0600
+
+    finished maze solver
+
+commit 82a7095cbb82ac46d021bf8645254c44c0a1f87d
+Merge: 07223f7 d2659e7
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:23:09 2014 -0600
+
+    Merge branch 'documentation' into dev
+
+commit d2659e7ca40f1aa6189ecf9f35daf7eff5fe1dfa
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:22:48 2014 -0600
+
+    documented robotstate
+
+commit 8a4488b1f538bb05dbfb20d80d0a114aa6b933aa
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:22:28 2014 -0600
+
+    documented navigation
+
+commit c2fa1c49893b99f39cc99a5707d711b40a720e3b
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:15:21 2014 -0600
+
+    documented motor controller
+
+commit 07223f7c936fec5e3350e2236302408024a4f69c
+Merge: 8d4c798 8591ecd
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:06:35 2014 -0600
+
+    Merge branch 'dev' of https://github.com/UMKCRobotics/2014-2015-Fun-Team into dev
+
+commit 8d4c7980b6c21cc211d25a2824c7687205307c11
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:05:37 2014 -0600
+
+    updated sconstruct because it doesn't handle switches right
+
+commit fef6c54bb71f18b4cef00863a912b0de26304a53
+Merge: 2cfac8f 9c98c64
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:03:10 2014 -0600
+
+    Merge branch 'navigation'
+
+commit 8591ecd5b86acf7ee55b1277dce97efb0804a41c
+Merge: 096ed2e 9c98c64
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 23:02:16 2014 -0600
+
+    Merge branch 'navigation' into dev
+
+commit 9c98c64b1d86704bac35085ad7b383c408fe75b5
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 22:42:41 2014 -0600
+
+    rolled back navigation changes
+
+commit 7c3c58de6ea9fc09e24ba5a6692396a46b43c123
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 22:32:58 2014 -0600
+
+    removed navigation and promoted to library code
+
+commit 48e5ff470fae5f9fbacc73cb1c096ccd9efd90ff
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 22:31:25 2014 -0600
+
+    finished navigation
+
+commit dcf8855d9617abd79ce3c6f6adb185b7f6545ac6
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 20:54:54 2014 -0600
+
+    worked on navigation
+
+commit 464b3a4bdee2e92aeb029135f96dea1196c73975
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 20:35:02 2014 -0600
+
+    updating framework to include new logger
+
+commit 2cfac8ff222dd5e9aba8fe91864deffd1c4d279b
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sun Nov 9 17:49:41 2014 -0600
+
+    Fixed stupid typo.
+
+commit a516ee396e9935edeab21a16c7f874b28690ace2
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sun Nov 9 17:20:19 2014 -0600
+
+    Updated/cleaned-up scripts for new Beaglebone distro.
+
+commit 2ee7bb42794e433166564c375a48039b084d6378
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sun Nov 9 16:10:50 2014 -0600
+
+    worked on navigation code
+
+commit 59fefb2adf18be8ea2911b015278abcc40a3aaa2
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 17:01:38 2014 -0600
+
+    updated framework
+
+commit 096ed2ec5a337cb51d41d66c11c0048d97575934
+Merge: 385e497 ba9b646
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 16:18:48 2014 -0600
+
+    Merge branch 'navigation' into dev
+
+commit ba9b646176cb051a1d90dcd619e34b1c3d9b0e84
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 16:18:33 2014 -0600
+
+    finished navigation
+
+commit 38422cb8d5f7ad52bb4ca82fd379dd65889c2163
+Merge: 8b4fe47 bd85a2d
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 15:05:50 2014 -0600
+
+    updating from master
+
+commit 385e497a9badc2e398e878453692318251f4f29c
+Merge: dac7f0a bd85a2d
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 15:05:17 2014 -0600
+
+    updating dev
+
+commit 8b4fe475ef5d753bb19f0a49aefa97c2249aab15
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 15:02:46 2014 -0600
+
+    modified gitignore to work better
+
+commit 7584adf94cf3178d482b9ebfd25ef0b1bfc0029a
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 15:01:49 2014 -0600
+
+    cleaned up arduino folder
+
+commit bd85a2da2e670a2f1afe3423a818dddc245ad549
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 14:59:15 2014 -0600
+
+    simplified build dir
+
+commit 2e370b1338bef848379da0f82b6bd1bfde87deca
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 14:28:57 2014 -0600
+
+    updated framework
+
+commit a931b83666185124bb5da3463e5b367deccd570c
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Nov 8 14:27:31 2014 -0600
+
+    added that lambda function
+
+commit 1517bea2e31ee41871ebfb708f123b1443228103
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Mon Oct 27 14:28:23 2014 -0500
+
+    updated navigation headers to properly commit
+    
+    needs testing
+
+commit 02c5294262d3a511cc2abd22a69a54d7fad3b0e0
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Oct 25 16:24:39 2014 -0500
+
+    began work on navigation
+
+commit 098d321f8d8d239882c07e5b86b84db292ae3e6f
+Author: Chase <cvp21594@yahoo.com>
+Date:   Sat Oct 25 14:26:31 2014 -0500
+
+    fixed library
+
+commit 7a743e36e04299de985d7573682e85a01ad19c9d
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Oct 18 17:01:15 2014 -0500
+
+    Magical development scripts (half-working).
+
+commit 58c2f7e207dfc396c2581613bf45a78f99822111
+Merge: d5d1ee2 892eb51
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Oct 18 17:00:08 2014 -0500
+
+    Merge branch 'master' of https://github.com/UMKCRobotics/2014-2015-Fun-Team
+
+commit d5d1ee26500baf35dd9f48d9344a846ce5254efa
+Author: Caleb Chase <caleb@chasecaleb.com>
+Date:   Sat Oct 18 16:59:29 2014 -0500
+
+    Added analog read test function.
+
+commit 892eb51e192cec279976a74664423c0ed3506a03
+Merge: 6cae6fb 4409653
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Oct 18 16:44:05 2014 -0500
+
+    Merge pull request #5 from UMKCRobotics/motorcontroller
+    
+    Motorcontroller
+
+commit 6cae6fb4230e2fc0dde4d08e1a1792adf0e3092a
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Sat Oct 18 16:43:24 2014 -0500
+
+    fixed stuff
+
+commit 8a67a22792f20665df1c7516016945a2ffbd0bb0
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Sat Oct 18 14:33:37 2014 -0500
+
+    added dummy as submodule
+
+commit 6cadd26c73a810fcd347546616588e402d3dcc16
+Merge: d3614c2 b561202
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Oct 18 14:05:52 2014 -0500
+
+    Merge pull request #4 from UMKCRobotics/arduino_averager
+    
+    added arduino averager
+
+commit b56120283fd37a09d2ac4d29a5c36e9e4d190c4e
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Sat Oct 18 14:04:53 2014 -0500
+
+    added arduino averager
+
+commit d3614c290273ebbc289a9115fef41a033f0e8dc3
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Fri Oct 17 22:09:02 2014 -0500
+
+    updated to blacklib
+
+commit d64084a8218a78f681aa78ee1cb7ee36223bf3fa
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Fri Oct 17 21:54:55 2014 -0500
+
+    changed to blacklib, should work a lot better
+
+commit fa1aa539bbe253c19f0119afb2e214865bb4e9bb
+Author: Chase Peterson <cvp21594@yahoo.com>
+Date:   Fri Oct 17 20:22:17 2014 -0500
+
+    testing analog
+
+commit 440965395c7c933dc7b2f0012b8ba1563473af83
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sun Oct 5 14:43:16 2014 -0500
+
+    made it compile
+
+commit 9cf9638e016119f1e247caccb7f48177ec27a3a6
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sun Oct 5 14:23:41 2014 -0500
+
+    added outline for what we'll need
+
+commit 5431acc8ac18ae34e1dc0f1f03ec2fdd3d347519
+Author: ergh3 <ergh3@robotdevel2>
+Date:   Thu Sep 25 15:55:32 2014 -0500
+
+    made opencv work
+
+commit 0f3a10fd807bf821f333c0fbdbc65e720b419305
+Merge: 707418d 18e129e
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Sep 20 13:11:40 2014 -0500
+
+    Merge branch 'master' of https://github.com/UMKCRobotics/2014-2015-Fun-Team
+
+commit 707418d63545df5320453b1aaea40a1854617ff0
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Sep 20 13:10:28 2014 -0500
+
+    updated parts list
+
+commit 18e129efc4c24abff01271606fe41a7770800f47
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 21:03:44 2014 -0500
+
+    oops, forogt to remove debugging stuff
+
+commit dac7f0a0873da98343870cef4959a428df747b60
+Merge: a8a437d b675cd7
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 21:01:48 2014 -0500
+
+    Merge pull request #3 from UMKCRobotics/master
+    
+    update dev
+
+commit b675cd7f8795ed7fe1a186ce7402d985b2bda72d
+Merge: 264be82 7106ddf
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 21:00:41 2014 -0500
+
+    Merge pull request #2 from UMKCRobotics/oop_build_system
+    
+    Oop build system
+
+commit 7106ddf9e138063872fe6e14b1066fcc7e9d0010
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 21:00:17 2014 -0500
+
+    build system is considerably easier to use
+
+commit d9b381caa32b3bcc6c487d5b4491ee57bc531abd
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 16:52:07 2014 -0500
+
+    began work on a cleaner oop build system
+
+commit a8a437d328fbcf14aa70075c91d44ae51c2bae03
+Merge: 1f3c1f2 264be82
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 16:48:10 2014 -0500
+
+    Merge pull request #1 from UMKCRobotics/master
+    
+    pulling in master because i'm dumb
+
+commit 264be8217abf842e81eb1fc30300ebc4b03b334b
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 16:37:25 2014 -0500
+
+    changed gitignore
+
+commit db6a22b278a7bfe022835bb1661d511c44090c20
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 18 16:34:13 2014 -0500
+
+    parts list updated
+
+commit 678a44b2cae029ce6e68dd7239768087e8ba6653
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Sep 13 14:40:51 2014 -0500
+
+    added parts list
+
+commit 7a960a70656d7c5727980b424e88362251a91635
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Sep 13 13:02:46 2014 -0500
+
+    added parts list
+
+commit 9e7389b0d8e7a5beef6fd31442d06155f273987b
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Wed Sep 10 23:11:13 2014 -0500
+
+    made minor change to sconsctruct regarding a function name
+
+commit 43eb90bf5027006a764eacb226ec3c57ceeab29b
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Wed Sep 10 22:52:49 2014 -0500
+
+    made it work with c++
+
+commit 24a9ace2bfc49b6d53a5c0af312ea72cea825717
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Wed Sep 10 22:47:50 2014 -0500
+
+    made dmcc work with c++
+
+commit 03ae4a95c94dcfc245296d7f9ad13a570c6872a0
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Wed Sep 10 22:21:48 2014 -0500
+
+    ived mucked up git againt
+
+commit 923389a4f612248f5229d65b10133aa893e5676a
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Wed Sep 10 22:19:21 2014 -0500
+
+    added motor controller library
+
+commit 55d9e680e0389c273df2bf996e053deae13cefab
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Tue Sep 9 10:22:34 2014 -0500
+
+    will ignore scons files now
+
+commit 55441c1f7adfa83dcb69499ae6df884e3ca9d775
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Tue Sep 9 10:21:24 2014 -0500
+
+    added --g option and fixed build directories
+
+commit 1b4e188ee53dfbfd432d66879bd4bb49ef8b4a68
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Sep 8 20:34:35 2014 -0500
+
+    added beagleboneblack
+
+commit 50252113e2529c5daf5197a6463b59c6de04f155
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Sep 8 20:31:00 2014 -0500
+
+    changed to beaglebone black library
+
+commit a425a8e805fd4aac9b84112c35ebef87c63b18de
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Sep 8 13:18:10 2014 -0500
+
+    trying to get things to link
+
+commit 3fdcc248e465039e5fd3a3f9b014fc395b8f7961
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Sep 6 16:49:33 2014 -0500
+
+    made beaglebone work righ
+
+commit c6fb27f336f9da90a410f6ecd0ffd8884917acfd
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Sep 6 16:48:17 2014 -0500
+
+    added gpio
+
+commit 2f9046f42cbd1470455d69554f5ae49ecc6a2504
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Sep 6 16:42:14 2014 -0500
+
+    added beaglebone
+
+commit 4e752736183a17337e9e7965f159be65826375e5
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Sep 6 16:23:15 2014 -0500
+
+    maybe i unfucked the repo?
+
+commit 728f7e1a63d45d102f974616dbc6257fbbf30a15
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Sep 6 15:50:25 2014 -0500
+
+    uhhhhhh
+
+commit 9bb3c27ca156e1c40c5754179c5ad6ab93005e5b
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Fri Sep 5 18:20:46 2014 -0500
+
+    added wiringPi
+
+commit 46677f53bd73d5f43a613f52ebb889971ed4f8c7
+Merge: faf690a 790a16f
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 23:16:02 2014 -0500
+
+    Merge branch 'master' of https://github.com/UMKCRobotics/2014-2015-Fun-Team
+
+commit faf690a0d6eec7a629642c6f8e036e3cb7cd2252
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 23:15:21 2014 -0500
+
+    added build recursion
+
+commit 790a16fe62f4c013b5febd9e033f96af924d314e
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 19:42:14 2014 -0500
+
+    fixed formatting on readme again
+
+commit 722c8f75125ced8ca616cce24e8fc5ea8737562b
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 19:41:43 2014 -0500
+
+    formatted song better
+
+commit 87e72cbf0a551f8f4e1da7c38f9da078ca88e1c7
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 19:32:54 2014 -0500
+
+    added sconscript
+
+commit 7e97a4b1cc4cd188d27669cf99fa59f11476b27b
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 18:27:12 2014 -0500
+
+    fixed submodule problems
+
+commit 4641aa93e9dd568728e7d04ca92da8b7bac13de2
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 18:23:28 2014 -0500
+
+    moved framework
+
+commit 47d92a5f9d3795db44851ff52d22a7c8f5ab417d
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Thu Sep 4 18:21:59 2014 -0500
+
+    added gitmodules
+
+commit 843fa847564b04b315e620fb05d0d9a9cf4ec76d
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Mon Sep 1 16:16:11 2014 -0500
+
+    updated build system
+
+commit d249239b46278cc8cc030a444db91f8258670b4f
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sun Aug 31 08:36:29 2014 -0500
+
+    Update README.md
+
+commit 1f3c1f2aee40ce8763786768f00e2e766abb03de
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Aug 30 23:50:01 2014 -0500
+
+    Update README.md
+
+commit e56880bc5c3332b661f2868cbf80aa5712722b63
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Aug 30 23:41:01 2014 -0500
+
+    added a build system
+
+commit 3f6a3b520f7443180bb1157290f3e183830b9133
+Author: octopuscabbage <octopuscabbage@gmail.com>
+Date:   Sat Aug 30 18:21:18 2014 -0500
+
+    added framework sub repo
+
+commit 2c2a9ce2baa9b89a648b2749025139ce7de84e8c
+Author: Chris Denniston <octopuscabbage@gmail.com>
+Date:   Sat Aug 30 18:19:42 2014 -0500
+
+    Initial commit

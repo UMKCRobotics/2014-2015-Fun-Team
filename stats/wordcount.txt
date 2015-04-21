@@ -1,0 +1,42 @@
+wc: Deathmarch: Is a directory
+      0 Deathmarch
+wc: Deathmarch/lib: Is a directory
+      0 Deathmarch/lib
+wc: Deathmarch/lib/Library: Is a directory
+      0 Deathmarch/lib/Library
+     28 Deathmarch/lib/Library/Cardinal.cpp
+     15 Deathmarch/lib/Library/Cardinal.h
+     46 Deathmarch/lib/Library/ConfigManager.cpp
+     19 Deathmarch/lib/Library/ConfigManager.h
+    101 Deathmarch/lib/Library/FunMazeSolver.cpp
+     15 Deathmarch/lib/Library/FunMazeSolver.h
+    233 Deathmarch/lib/Library/MotorController.cpp
+     52 Deathmarch/lib/Library/MotorController.h
+     75 Deathmarch/lib/Library/Navigation.cpp
+     58 Deathmarch/lib/Library/Navigation.h
+     71 Deathmarch/lib/Library/Notification.h
+     17 Deathmarch/lib/Library/Pins.h
+     37 Deathmarch/lib/Library/RobotState.h
+     62 Deathmarch/lib/Library/SerialCom.cpp
+     54 Deathmarch/lib/Library/SerialCom.h
+     27 Deathmarch/lib/Library/WorldSensor.cpp
+    177 Deathmarch/lib/Library/WorldSensor.h
+wc: Deathmarch/src: Is a directory
+      0 Deathmarch/src
+    114 Deathmarch/src/sketch.ino
+wc: RearMarch: Is a directory
+      0 RearMarch
+wc: RearMarch/lib: Is a directory
+      0 RearMarch/lib
+wc: RearMarch/src: Is a directory
+      0 RearMarch/src
+     88 RearMarch/src/sketch.ino
+wc: SensorsTest: Is a directory
+      0 SensorsTest
+wc: SensorsTest/lib: Is a directory
+      0 SensorsTest/lib
+wc: SensorsTest/src: Is a directory
+      0 SensorsTest/src
+     99 SensorsTest/src/sketch.ino
+   1388 total
+
